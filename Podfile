@@ -18,6 +18,8 @@ pod 'Kingfisher', '~> 3.0'
 pod 'GoogleMaps'
 pod 'SwiftyJSON'
 pod 'SkyFloatingLabelTextField', '~> 2.0.0'
+pod 'NVActivityIndicatorView'
+
 
 
 

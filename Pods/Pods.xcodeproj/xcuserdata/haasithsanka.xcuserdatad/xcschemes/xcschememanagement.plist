@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>NVActivityIndicatorView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-RestaurantTinder.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -77,7 +82,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>01FA5AC626035F613E48C67F366C407E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EDFE4052B5DE7D509935AC0774CB135</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,12 +102,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4C6A076CE723EA405EE16EC145C193CE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7E81BC377670502585E66E8C0BC2FBE5</key>
+		<key>72BA34CAF6BC59207EAB9AA576129505</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +132,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DC7DA5235B146C67690122710966923B</key>
+		<key>D4F3571F4AEE9C490A79E5DB77C247E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

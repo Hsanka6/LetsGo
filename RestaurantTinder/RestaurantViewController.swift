@@ -11,12 +11,34 @@ import Alamofire
 import SwiftyJSON
 import GoogleMaps
 import CoreLocation
+import MessageUI
 
-class RestaurantViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class RestaurantViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,MFMessageComposeViewControllerDelegate {
     
     var restId:String!
     var storeLat:Double!
     var storeLon:Double!
+    
+    var top = [Restaurant]()
+    
+    @IBAction func sendMessage(_ sender: Any)
+    {
+        
+        var messageVC = MFMessageComposeViewController()
+        
+        messageVC.body = "Enter a message";
+        messageVC.recipients = ["Enter tel-nr"]
+        messageVC.messageComposeDelegate = self;
+        
+        self.present(messageVC, animated: false, completion: nil)
+        
+    }
+    
+    
+    
+    
+    
     
     var currentLat:Double!
     var currentLon:Double!
@@ -177,6 +199,25 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        
+        if segue.identifier == "back"
+        {
+            if let destination = segue.destination as? TopRestaurantsController
+            {
+                destination.topRestaurants = top
+                print("sender \(sender)")
+            }
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult)
+    {
+        print(result)
+    }
+
+
+
 }

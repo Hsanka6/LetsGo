@@ -17,10 +17,16 @@ class ViewController: UIViewController
 
     var loginButton = FBSDKLoginButton()
     
+    @IBOutlet var indicator: UIActivityIndicatorView!
     
     @IBAction func fbButton(_ sender: Any) {
         
+        
+        indicator.isHidden = false
+        indicator.startAnimating()
+        
         let facebook = FBSDKLoginManager()
+        
         
         facebook.logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self) { (result,error) in
             if error != nil{
@@ -31,12 +37,14 @@ class ViewController: UIViewController
             }
             else
             {
+                
                 print("logged in")
                 self.performSegue(withIdentifier: "ToSearch", sender: self)
                 
                 
                 let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 self.firebaseAuth(credential)
+                self.indicator.stopAnimating()
             }
             
             
@@ -49,6 +57,7 @@ class ViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         print("ugh")
+        indicator.isHidden = true
         
         
     }

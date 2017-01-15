@@ -21,10 +21,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     var lat:Double!
     var lon:Double!
     var searchQuery:String!
-    var foodArray = ["Pizza", "Thai", "Chinese", "Soup", "Mexican", "Persian", "Burger","Indian", "Italian"]
+    var foodArray = ["Pizza", "Chinese food", "Soup", "Mexican", "Burger","indian", "Italian","tacos"]
     var pics = [String]()
     var restaurants = [String]()
     @IBOutlet var searchBar: SkyFloatingLabelTextField!
+    @IBOutlet var indicator: UIActivityIndicatorView!
     func checkSearchBar()
     {
         
@@ -46,6 +47,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet var searchRestaurantsButton: UIButton!
     
     @IBAction func searchRestaurantsButton(_ sender: Any) {
+        indicator.isHidden = false
+        indicator.startAnimating()
         searchQuery = searchBar.text
         if searchBar.text?.isEmpty == true
         {
@@ -116,8 +119,9 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
             DispatchQueue.main.asyncAfter(deadline: .now() + 2)
             {
-            
+                self.indicator.stopAnimating()
                 self.performSegue(withIdentifier: "swipe", sender: self.pics)
+                
             
             }
         
@@ -145,6 +149,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         scheduledTimerWithTimeInterval()
+        indicator.isHidden = true
         //LOCATION CRAP
         locationManager = CLLocationManager()
         locationManager.delegate = self

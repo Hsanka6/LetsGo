@@ -421,6 +421,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 destination.storeLon = storeLon
                 destination.currentLat = currentLat
                 destination.currentLon = currentLon
+                destination.top = topRestaurants
                 print("sender \(sender)")
             }
         }
