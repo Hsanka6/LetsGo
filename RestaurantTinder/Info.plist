@@ -16,10 +16,44 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb224670101314770</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>224670101314770</string>
+	<key>FacebookDisplayName</key>
+	<string>RestaurantTinder</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+		<string>comgooglemaps</string>
+		<string>comgooglemaps-x-callback</string>
+		<string>comgooglemapsurl</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Need location to find stores</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Need location to make a profile</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need photo access</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -31,8 +65,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -40,48 +72,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-    </array>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb224670101314770</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>224670101314770</string>
-    <key>FacebookDisplayName</key>
-    <string>RestaurantTinder</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbapi</string>
-        <string>fb-messenger-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-        <string>comgooglemaps</string>
-        <string>comgooglemaps-x-callback</string>
-        
-        <string>comgooglemapsurl</string>
-        
-    </array>
-    
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>Need photo access</string>
-    
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-    </dict>
-    
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Need location to find stores</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Need location to make a profile</string>
-    
-    
-    
+	</array>
 </dict>
 </plist>
