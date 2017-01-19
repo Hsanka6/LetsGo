@@ -13,6 +13,7 @@ import CoreLocation
 import FirebaseDatabase
 import Firebase
 import SkyFloatingLabelTextField
+import FontAwesome_swift
 
 
 class SearchPageController: UIViewController,CLLocationManagerDelegate {
@@ -24,7 +25,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     var foodArray = ["Pizza", "Chinese food", "Soup", "Mexican", "Burger","indian", "Italian","tacos"]
     var pics = [String]()
     var restaurants = [String]()
-    @IBOutlet var searchBar: SkyFloatingLabelTextField!
+    @IBOutlet var searchBar: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet var indicator: UIActivityIndicatorView!
     func checkSearchBar()
     {
@@ -153,6 +154,9 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         //LOCATION CRAP
         locationManager = CLLocationManager()
         locationManager.delegate = self
+        
+        
+        
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -160,6 +164,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
+        
+        searchBar.iconFont = UIFont.fontAwesome(ofSize: 15)
+        searchBar.iconText = String.fontAwesomeIcon(name: .cutlery)
+
         searchQuery = searchBar.text
         
     }

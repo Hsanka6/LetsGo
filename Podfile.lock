@@ -39,6 +39,7 @@ PODS:
   - FirebaseDatabase (3.1.1):
     - FirebaseAnalytics (~> 3.5)
   - FirebaseInstanceID (1.0.8)
+  - FontAwesome.swift (1.0.0)
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleMaps (2.1.1):
@@ -59,7 +60,6 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
   - GTMSessionFetcher/Core (1.1.7)
   - Kingfisher (3.2.4)
-  - NVActivityIndicatorView (3.2)
   - SkyFloatingLabelTextField (2.0.0)
   - SwiftyJSON (3.1.3)
 
@@ -72,9 +72,9 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - FontAwesome.swift (~> 1.0.0)
   - GoogleMaps
   - Kingfisher (~> 3.0)
-  - NVActivityIndicatorView
   - SkyFloatingLabelTextField (~> 2.0.0)
   - SwiftyJSON
 
@@ -91,16 +91,16 @@ SPEC CHECKSUMS:
   FirebaseCore: 03da1cb32615569bbc2830a22f9ad753d9a02ef5
   FirebaseDatabase: 6de92187481ff0e8e124064f21742e95ee883b02
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
+  FontAwesome.swift: 2d32a3d62195343c2004b7c9043294ed2948553a
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
-  NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
   SkyFloatingLabelTextField: a81a0eaed2785d1599f11484c6ebc1c4eb5d1228
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 0f0a602faab959411c3bcad2302fdcff2d25ffa5
+PODFILE CHECKSUM: b22724a7fe5a34520a6d52bbbebd83485e968212
 
 COCOAPODS: 1.1.1
