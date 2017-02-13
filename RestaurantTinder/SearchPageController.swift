@@ -102,6 +102,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                             if((response.result.value) != nil) {
                                 secondJSON = JSON(response.result.value!)
                             }
+                            else
+                            {
+                                print("0 images")
+                            }
+                            
                             for (_,subJson):(String, JSON) in secondJSON["response"]["photos"]["items"]
                             {
                                 var url: String = subJson["prefix"].stringValue
@@ -111,6 +116,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                 self.pics.append(url)
                                 
                             }
+                            
                             self.pics.append(id)
                             self.restaurants.append(id)
                         }
