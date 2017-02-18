@@ -87,50 +87,100 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                 print(error.localizedDescription)
         }
             Alamofire.request("https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=5&radius=10000").responseJSON { response in
+                
+                
                 if((response.result.value) != nil)
                 {
                     let json = JSON(response.result.value!)
-                    for (_,subJson):(String, JSON) in json["response"]["venues"]
+                    
+                    if json["response"]["venues"].isEmpty
                     {
-                        var storeNum:Int = 0
-                        let id: String = subJson["id"].stringValue
-                        print(id)
-                        print(subJson["name"].stringValue)
-                        Alamofire.request("https://api.foursquare.com/v2/venues/\(id)/photos?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&limit=4").responseJSON { response in
-                            
-                            var secondJSON:JSON!
-                            if((response.result.value) != nil) {
-                                secondJSON = JSON(response.result.value!)
-                            }
-                            else
-                            {
-                                print("0 images")
-                            }
-                            
-                            for (_,subJson):(String, JSON) in secondJSON["response"]["photos"]["items"]
-                            {
-                                var url: String = subJson["prefix"].stringValue
+                        let a = UIAlertView()
+                        a.message = "No Restaurants found"
+                        a.title = "Alert"
+                        a.addButton(withTitle: "ok")
+                        
+                        a.show()
+                        self.indicator.stopAnimating()
+                        
+                    }
+                    else
+                    {
+                        for (_,subJson):(String, JSON) in json["response"]["venues"]
+                        {
+                            var storeNum:Int = 0
+                            let id: String = subJson["id"].stringValue
+                            print(id)
+                            print(subJson["name"].stringValue)
+                            Alamofire.request("https://api.foursquare.com/v2/venues/\(id)/photos?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&limit=3").responseJSON { response in
                                 
-                                url += "250x250"
-                                url += subJson["suffix"].stringValue
-                                self.pics.append(url)
+                                var secondJSON:JSON!
+                                if((response.result.value) != nil)
+                                {
+                                    secondJSON = JSON(response.result.value!)
+                                    
+                                    if secondJSON["response"]["photos"]["items"].isEmpty
+                                    {
+                                        print("No images found for this restaurant")
+                                    }
+                                    else
+                                    {
+                                        for (_,subJson):(String, JSON) in secondJSON["response"]["photos"]["items"]
+                                        {
+                                            var url: String = subJson["prefix"].stringValue
+                                            
+                                            url += "250x250"
+                                            url += subJson["suffix"].stringValue
+                                            self.pics.append(url)
+                                            
+                                        }
+                                        
+                                        self.pics.append(id)
+                                        self.restaurants.append(id)
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2)
+                                        {
+                                            self.indicator.stopAnimating()
+                                            self.performSegue(withIdentifier: "swipe", sender: self.pics)
+                                            
+                                            
+                                        }
+                                        
+                                        
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                }
+                                else
+                                {
+                                    let a = UIAlertView()
+                                    a.message = "Failed"
+                                    a.title = "Alert"
+                                    a.addButton(withTitle: "ok")
+                                    
+                                    a.show()
+                                    
+                                    self.indicator.stopAnimating()
+                                    
+                                }
+                                
+                                
                                 
                             }
-                            
-                            self.pics.append(id)
-                            self.restaurants.append(id)
                         }
                     }
+                    
+                    
+                    
                 }
+                
+                
+                
         }
         
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2)
-            {
-                self.indicator.stopAnimating()
-                self.performSegue(withIdentifier: "swipe", sender: self.pics)
-                
-            
-            }
+        
         
     }
     var locationManager: CLLocationManager!
