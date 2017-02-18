@@ -33,6 +33,18 @@ class TopRestaurantTableViewCell: UITableViewCell {
     }
     
     func setUp(restaurantName: String, Rating: Double, MilesAway: Double, CheckIns: Int, ImageUrl:String) {
+        
+        
+        var color1 = hexStringToUIColor(hex: "#03A9F4")
+
+        
+        rating.layer.cornerRadius = 20
+        rating.layer.borderWidth = 3.0
+        rating.layer.backgroundColor = color1.cgColor
+        rating.layer.borderColor = color1.cgColor
+        
+        
+        
         name.text = restaurantName
         rating.text = String(Rating)
         checkIns.text = "Visits: " + String(CheckIns)
@@ -46,8 +58,31 @@ class TopRestaurantTableViewCell: UITableViewCell {
         
         
     }
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.characters.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
     
     
     
 
 }
+
+

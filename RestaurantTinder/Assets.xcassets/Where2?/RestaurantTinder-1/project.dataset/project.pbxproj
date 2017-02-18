@@ -1,0 +1,783 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4CFDBF4F1947EA09AAB390C7 /* Pods_RestaurantTinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E292770AF2C1489ADF06B83 /* Pods_RestaurantTinder.framework */; };
+		52676025D536B2F5B0BCB5A3 /* Pods_RestaurantTinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC9089FDD15DB40767AC91B6 /* Pods_RestaurantTinderUITests.framework */; };
+		7037BCD21E2ADBBB00541877 /* TipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */; };
+		771BFFC31E14B3F500CD53F6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */; };
+		771BFFC41E14B3F500CD53F6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */; };
+		771BFFC51E14B3F500CD53F6 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC21E14B3F500CD53F6 /* FBSDKShareKit.framework */; };
+		771BFFCB1E1509C300CD53F6 /* SearchPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771BFFCA1E1509C300CD53F6 /* SearchPageController.swift */; };
+		772310BF1E14AF96003539BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772310BE1E14AF96003539BA /* AppDelegate.swift */; };
+		772310C11E14AF96003539BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772310C01E14AF96003539BA /* ViewController.swift */; };
+		772310C41E14AF96003539BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772310C21E14AF96003539BA /* Main.storyboard */; };
+		772310C61E14AF96003539BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 772310C51E14AF96003539BA /* Assets.xcassets */; };
+		772310C91E14AF96003539BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 772310C71E14AF96003539BA /* LaunchScreen.storyboard */; };
+		772310D41E14AF96003539BA /* RestaurantTinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772310D31E14AF96003539BA /* RestaurantTinderTests.swift */; };
+		772310DF1E14AF96003539BA /* RestaurantTinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772310DE1E14AF96003539BA /* RestaurantTinderUITests.swift */; };
+		778108DD1E17D54A00301F1C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 778108DC1E17D54A00301F1C /* GoogleService-Info.plist */; };
+		778270761E1BB667008F6E34 /* TopRestaurantsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 778270751E1BB667008F6E34 /* TopRestaurantsController.swift */; };
+		779973601E20F63C0039B958 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7799735F1E20F63C0039B958 /* RestaurantViewController.swift */; };
+		77BF8BC21E1DB103005969E3 /* TopRestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BF8BC11E1DB103005969E3 /* TopRestaurantTableViewCell.swift */; };
+		77F84F0E1E15B230000B3531 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F84F0D1E15B230000B3531 /* Restaurant.swift */; };
+		77F84F101E15C6A2000B3531 /* SwipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F84F0F1E15C6A2000B3531 /* SwipeViewController.swift */; };
+		CA652B64D0C203C99030E1DB /* Pods_RestaurantTinderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD2268BAC0DBDBE75DAC0A2 /* Pods_RestaurantTinderTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		772310D01E14AF96003539BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 772310B31E14AF95003539BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 772310BA1E14AF95003539BA;
+			remoteInfo = RestaurantTinder;
+		};
+		772310DB1E14AF96003539BA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 772310B31E14AF95003539BA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 772310BA1E14AF95003539BA;
+			remoteInfo = RestaurantTinder;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1011A12ABB17F52813EE70EB /* Pods-RestaurantTinderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinderTests/Pods-RestaurantTinderTests.debug.xcconfig"; sourceTree = "<group>"; };
+		389D56C85EBDCA6D276F210B /* Pods-RestaurantTinderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinderUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinderUITests/Pods-RestaurantTinderUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipTableViewCell.swift; sourceTree = "<group>"; };
+		771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		771BFFC21E14B3F500CD53F6 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		771BFFCA1E1509C300CD53F6 /* SearchPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPageController.swift; sourceTree = "<group>"; };
+		772310BB1E14AF96003539BA /* RestaurantTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		772310BE1E14AF96003539BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		772310C01E14AF96003539BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		772310C31E14AF96003539BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		772310C51E14AF96003539BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		772310C81E14AF96003539BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		772310CA1E14AF96003539BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		772310CF1E14AF96003539BA /* RestaurantTinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RestaurantTinderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		772310D31E14AF96003539BA /* RestaurantTinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTinderTests.swift; sourceTree = "<group>"; };
+		772310D51E14AF96003539BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		772310DA1E14AF96003539BA /* RestaurantTinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RestaurantTinderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		772310DE1E14AF96003539BA /* RestaurantTinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTinderUITests.swift; sourceTree = "<group>"; };
+		772310E01E14AF96003539BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		778108DC1E17D54A00301F1C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		778270751E1BB667008F6E34 /* TopRestaurantsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRestaurantsController.swift; sourceTree = "<group>"; };
+		7799735F1E20F63C0039B958 /* RestaurantViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantViewController.swift; sourceTree = "<group>"; };
+		77BF8BC11E1DB103005969E3 /* TopRestaurantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopRestaurantTableViewCell.swift; sourceTree = "<group>"; };
+		77DA19CED7896D9585F845BA /* Pods-RestaurantTinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinder/Pods-RestaurantTinder.debug.xcconfig"; sourceTree = "<group>"; };
+		77F84F0D1E15B230000B3531 /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		77F84F0F1E15C6A2000B3531 /* SwipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeViewController.swift; sourceTree = "<group>"; };
+		77F84F131E15CEDC000B3531 /* RestaurantTinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RestaurantTinder.entitlements; sourceTree = "<group>"; };
+		9E292770AF2C1489ADF06B83 /* Pods_RestaurantTinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantTinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A48972BE1E32052FE2B2A99D /* Pods-RestaurantTinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinder/Pods-RestaurantTinder.release.xcconfig"; sourceTree = "<group>"; };
+		AC9089FDD15DB40767AC91B6 /* Pods_RestaurantTinderUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantTinderUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBD2268BAC0DBDBE75DAC0A2 /* Pods_RestaurantTinderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantTinderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4754501495133C31FF88701 /* Pods-RestaurantTinderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinderUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinderUITests/Pods-RestaurantTinderUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E9AF9D51EFD0CF8C827A8123 /* Pods-RestaurantTinderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinderTests/Pods-RestaurantTinderTests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		772310B81E14AF95003539BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4CFDBF4F1947EA09AAB390C7 /* Pods_RestaurantTinder.framework in Frameworks */,
+				771BFFC31E14B3F500CD53F6 /* FBSDKCoreKit.framework in Frameworks */,
+				771BFFC41E14B3F500CD53F6 /* FBSDKLoginKit.framework in Frameworks */,
+				771BFFC51E14B3F500CD53F6 /* FBSDKShareKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		772310CC1E14AF96003539BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA652B64D0C203C99030E1DB /* Pods_RestaurantTinderTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		772310D71E14AF96003539BA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52676025D536B2F5B0BCB5A3 /* Pods_RestaurantTinderUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2E5F6EB78D0A4268A2CD139C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				77DA19CED7896D9585F845BA /* Pods-RestaurantTinder.debug.xcconfig */,
+				A48972BE1E32052FE2B2A99D /* Pods-RestaurantTinder.release.xcconfig */,
+				1011A12ABB17F52813EE70EB /* Pods-RestaurantTinderTests.debug.xcconfig */,
+				E9AF9D51EFD0CF8C827A8123 /* Pods-RestaurantTinderTests.release.xcconfig */,
+				D4754501495133C31FF88701 /* Pods-RestaurantTinderUITests.debug.xcconfig */,
+				389D56C85EBDCA6D276F210B /* Pods-RestaurantTinderUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		772310B21E14AF95003539BA = {
+			isa = PBXGroup;
+			children = (
+				772310BD1E14AF96003539BA /* RestaurantTinder */,
+				772310D21E14AF96003539BA /* RestaurantTinderTests */,
+				772310DD1E14AF96003539BA /* RestaurantTinderUITests */,
+				772310BC1E14AF96003539BA /* Products */,
+				2E5F6EB78D0A4268A2CD139C /* Pods */,
+				899AC9D741C473A857F9CFEE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		772310BC1E14AF96003539BA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				772310BB1E14AF96003539BA /* RestaurantTinder.app */,
+				772310CF1E14AF96003539BA /* RestaurantTinderTests.xctest */,
+				772310DA1E14AF96003539BA /* RestaurantTinderUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		772310BD1E14AF96003539BA /* RestaurantTinder */ = {
+			isa = PBXGroup;
+			children = (
+				77F84F131E15CEDC000B3531 /* RestaurantTinder.entitlements */,
+				772310BE1E14AF96003539BA /* AppDelegate.swift */,
+				772310C01E14AF96003539BA /* ViewController.swift */,
+				772310C21E14AF96003539BA /* Main.storyboard */,
+				778108DC1E17D54A00301F1C /* GoogleService-Info.plist */,
+				772310C51E14AF96003539BA /* Assets.xcassets */,
+				772310C71E14AF96003539BA /* LaunchScreen.storyboard */,
+				772310CA1E14AF96003539BA /* Info.plist */,
+				771BFFCA1E1509C300CD53F6 /* SearchPageController.swift */,
+				77F84F0D1E15B230000B3531 /* Restaurant.swift */,
+				77F84F0F1E15C6A2000B3531 /* SwipeViewController.swift */,
+				778270751E1BB667008F6E34 /* TopRestaurantsController.swift */,
+				77BF8BC11E1DB103005969E3 /* TopRestaurantTableViewCell.swift */,
+				7799735F1E20F63C0039B958 /* RestaurantViewController.swift */,
+				7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */,
+			);
+			path = RestaurantTinder;
+			sourceTree = "<group>";
+		};
+		772310D21E14AF96003539BA /* RestaurantTinderTests */ = {
+			isa = PBXGroup;
+			children = (
+				772310D31E14AF96003539BA /* RestaurantTinderTests.swift */,
+				772310D51E14AF96003539BA /* Info.plist */,
+			);
+			path = RestaurantTinderTests;
+			sourceTree = "<group>";
+		};
+		772310DD1E14AF96003539BA /* RestaurantTinderUITests */ = {
+			isa = PBXGroup;
+			children = (
+				772310DE1E14AF96003539BA /* RestaurantTinderUITests.swift */,
+				772310E01E14AF96003539BA /* Info.plist */,
+			);
+			path = RestaurantTinderUITests;
+			sourceTree = "<group>";
+		};
+		899AC9D741C473A857F9CFEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */,
+				771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */,
+				771BFFC21E14B3F500CD53F6 /* FBSDKShareKit.framework */,
+				9E292770AF2C1489ADF06B83 /* Pods_RestaurantTinder.framework */,
+				CBD2268BAC0DBDBE75DAC0A2 /* Pods_RestaurantTinderTests.framework */,
+				AC9089FDD15DB40767AC91B6 /* Pods_RestaurantTinderUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		772310BA1E14AF95003539BA /* RestaurantTinder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 772310E31E14AF96003539BA /* Build configuration list for PBXNativeTarget "RestaurantTinder" */;
+			buildPhases = (
+				376CB09329D9EAB9ACDF9EE7 /* [CP] Check Pods Manifest.lock */,
+				772310B71E14AF95003539BA /* Sources */,
+				772310B81E14AF95003539BA /* Frameworks */,
+				772310B91E14AF95003539BA /* Resources */,
+				EBF8E6245B29683ED1C27D2E /* [CP] Embed Pods Frameworks */,
+				01BE960FEC93B84C35CFFB67 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RestaurantTinder;
+			productName = RestaurantTinder;
+			productReference = 772310BB1E14AF96003539BA /* RestaurantTinder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		772310CE1E14AF96003539BA /* RestaurantTinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 772310E61E14AF96003539BA /* Build configuration list for PBXNativeTarget "RestaurantTinderTests" */;
+			buildPhases = (
+				F823479411CAB4178EE8CC82 /* [CP] Check Pods Manifest.lock */,
+				772310CB1E14AF96003539BA /* Sources */,
+				772310CC1E14AF96003539BA /* Frameworks */,
+				772310CD1E14AF96003539BA /* Resources */,
+				BD6193A467FA86FCFFA5EF78 /* [CP] Embed Pods Frameworks */,
+				8C7455CA7D36AD6BFB30BB86 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				772310D11E14AF96003539BA /* PBXTargetDependency */,
+			);
+			name = RestaurantTinderTests;
+			productName = RestaurantTinderTests;
+			productReference = 772310CF1E14AF96003539BA /* RestaurantTinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		772310D91E14AF96003539BA /* RestaurantTinderUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 772310E91E14AF96003539BA /* Build configuration list for PBXNativeTarget "RestaurantTinderUITests" */;
+			buildPhases = (
+				4D4553DC03AF5019AE7C91F6 /* [CP] Check Pods Manifest.lock */,
+				772310D61E14AF96003539BA /* Sources */,
+				772310D71E14AF96003539BA /* Frameworks */,
+				772310D81E14AF96003539BA /* Resources */,
+				67F00C81E0C52AE3F4D25CCD /* [CP] Embed Pods Frameworks */,
+				E44EDF9B17DB2DAFC44CFC7E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				772310DC1E14AF96003539BA /* PBXTargetDependency */,
+			);
+			name = RestaurantTinderUITests;
+			productName = RestaurantTinderUITests;
+			productReference = 772310DA1E14AF96003539BA /* RestaurantTinderUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		772310B31E14AF95003539BA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = haasith;
+				TargetAttributes = {
+					772310BA1E14AF95003539BA = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 5T8JY35ANP;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
+					772310CE1E14AF96003539BA = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 772310BA1E14AF95003539BA;
+					};
+					772310D91E14AF96003539BA = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 772310BA1E14AF95003539BA;
+					};
+				};
+			};
+			buildConfigurationList = 772310B61E14AF95003539BA /* Build configuration list for PBXProject "RestaurantTinder" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 772310B21E14AF95003539BA;
+			productRefGroup = 772310BC1E14AF96003539BA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				772310BA1E14AF95003539BA /* RestaurantTinder */,
+				772310CE1E14AF96003539BA /* RestaurantTinderTests */,
+				772310D91E14AF96003539BA /* RestaurantTinderUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		772310B91E14AF95003539BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				772310C91E14AF96003539BA /* LaunchScreen.storyboard in Resources */,
+				772310C61E14AF96003539BA /* Assets.xcassets in Resources */,
+				772310C41E14AF96003539BA /* Main.storyboard in Resources */,
+				778108DD1E17D54A00301F1C /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		772310CD1E14AF96003539BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		772310D81E14AF96003539BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01BE960FEC93B84C35CFFB67 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RestaurantTinder/Pods-RestaurantTinder-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		376CB09329D9EAB9ACDF9EE7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4D4553DC03AF5019AE7C91F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		67F00C81E0C52AE3F4D25CCD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RestaurantTinderUITests/Pods-RestaurantTinderUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C7455CA7D36AD6BFB30BB86 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RestaurantTinderTests/Pods-RestaurantTinderTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD6193A467FA86FCFFA5EF78 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RestaurantTinderTests/Pods-RestaurantTinderTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E44EDF9B17DB2DAFC44CFC7E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RestaurantTinderUITests/Pods-RestaurantTinderUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBF8E6245B29683ED1C27D2E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RestaurantTinder/Pods-RestaurantTinder-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F823479411CAB4178EE8CC82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		772310B71E14AF95003539BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77F84F101E15C6A2000B3531 /* SwipeViewController.swift in Sources */,
+				779973601E20F63C0039B958 /* RestaurantViewController.swift in Sources */,
+				77F84F0E1E15B230000B3531 /* Restaurant.swift in Sources */,
+				772310C11E14AF96003539BA /* ViewController.swift in Sources */,
+				772310BF1E14AF96003539BA /* AppDelegate.swift in Sources */,
+				778270761E1BB667008F6E34 /* TopRestaurantsController.swift in Sources */,
+				77BF8BC21E1DB103005969E3 /* TopRestaurantTableViewCell.swift in Sources */,
+				7037BCD21E2ADBBB00541877 /* TipTableViewCell.swift in Sources */,
+				771BFFCB1E1509C300CD53F6 /* SearchPageController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		772310CB1E14AF96003539BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				772310D41E14AF96003539BA /* RestaurantTinderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		772310D61E14AF96003539BA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				772310DF1E14AF96003539BA /* RestaurantTinderUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		772310D11E14AF96003539BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 772310BA1E14AF95003539BA /* RestaurantTinder */;
+			targetProxy = 772310D01E14AF96003539BA /* PBXContainerItemProxy */;
+		};
+		772310DC1E14AF96003539BA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 772310BA1E14AF95003539BA /* RestaurantTinder */;
+			targetProxy = 772310DB1E14AF96003539BA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		772310C21E14AF96003539BA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				772310C31E14AF96003539BA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		772310C71E14AF96003539BA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				772310C81E14AF96003539BA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		772310E11E14AF96003539BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		772310E21E14AF96003539BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		772310E41E14AF96003539BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77DA19CED7896D9585F845BA /* Pods-RestaurantTinder.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RestaurantTinder/RestaurantTinder.entitlements;
+				DEVELOPMENT_TEAM = 5T8JY35ANP;
+				INFOPLIST_FILE = RestaurantTinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.haasith.RestaurantTinder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		772310E51E14AF96003539BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A48972BE1E32052FE2B2A99D /* Pods-RestaurantTinder.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RestaurantTinder/RestaurantTinder.entitlements;
+				DEVELOPMENT_TEAM = 5T8JY35ANP;
+				INFOPLIST_FILE = RestaurantTinder/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.haasith.RestaurantTinder;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		772310E71E14AF96003539BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1011A12ABB17F52813EE70EB /* Pods-RestaurantTinderTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RestaurantTinderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.haasith.RestaurantTinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RestaurantTinder.app/RestaurantTinder";
+			};
+			name = Debug;
+		};
+		772310E81E14AF96003539BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9AF9D51EFD0CF8C827A8123 /* Pods-RestaurantTinderTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = RestaurantTinderTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.haasith.RestaurantTinderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RestaurantTinder.app/RestaurantTinder";
+			};
+			name = Release;
+		};
+		772310EA1E14AF96003539BA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4754501495133C31FF88701 /* Pods-RestaurantTinderUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = RestaurantTinderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.haasith.RestaurantTinderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = RestaurantTinder;
+			};
+			name = Debug;
+		};
+		772310EB1E14AF96003539BA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 389D56C85EBDCA6D276F210B /* Pods-RestaurantTinderUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = RestaurantTinderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.haasith.RestaurantTinderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = RestaurantTinder;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		772310B61E14AF95003539BA /* Build configuration list for PBXProject "RestaurantTinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				772310E11E14AF96003539BA /* Debug */,
+				772310E21E14AF96003539BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		772310E31E14AF96003539BA /* Build configuration list for PBXNativeTarget "RestaurantTinder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				772310E41E14AF96003539BA /* Debug */,
+				772310E51E14AF96003539BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		772310E61E14AF96003539BA /* Build configuration list for PBXNativeTarget "RestaurantTinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				772310E71E14AF96003539BA /* Debug */,
+				772310E81E14AF96003539BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		772310E91E14AF96003539BA /* Build configuration list for PBXNativeTarget "RestaurantTinderUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				772310EA1E14AF96003539BA /* Debug */,
+				772310EB1E14AF96003539BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 772310B31E14AF95003539BA /* Project object */;
+}

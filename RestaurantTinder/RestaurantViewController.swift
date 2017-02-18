@@ -40,9 +40,12 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     
+    
+    
+    
+    
     var currentLat:Double!
     var currentLon:Double!
-    @IBOutlet var coverPhoto: UIImageView!
     @IBOutlet var restaurantIcon: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var storeOpenClosedLabel: UILabel!

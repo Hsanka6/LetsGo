@@ -11,7 +11,6 @@ import QuartzCore
 
 class SwipeViewController: UIViewController {
     
-    @IBOutlet weak var text: UILabel!
     @IBOutlet weak var background: UIView!
     @IBOutlet weak var Picture: UIImageView!
     var imgs = [String]()
@@ -129,7 +128,7 @@ class SwipeViewController: UIViewController {
         
         
         yesNoArray = imgs
-        text.text = "Swipe Right to like food and left to reject"
+        //text.text = "Swipe Right to like food and left to reject"
         
         
         
@@ -148,7 +147,6 @@ class SwipeViewController: UIViewController {
         Picture.isUserInteractionEnabled = true
         
         
-        print("rest ids")
         
         
         if restaurant[0] != "" && restaurant.count > 0
@@ -198,12 +196,6 @@ class SwipeViewController: UIViewController {
         }
         
         
-        
-        
-        
-        
-        
-        
         print(store1 + "  " + store2 + "  " + store3 + "  " + store4 + "  " + store5 + "  ")
         
         print("imgs")
@@ -235,7 +227,7 @@ class SwipeViewController: UIViewController {
         let translation = gesture.translation(in: self.view)
         let label = gesture.view!
         
-        label.center = CGPoint(x: self.view.bounds.width/2 + translation.x, y: self.view.bounds.height/2 + translation.y)
+        label.center = CGPoint(x: self.view.bounds.width/2 + translation.x , y: self.view.bounds.height/2 + translation.y)
         
         let xFromCenter = label.center.x - self.view.bounds.width/2
         
@@ -454,7 +446,7 @@ class SwipeViewController: UIViewController {
             
             label.transform = stretch
             
-            label.center = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2 - 20)
+            label.center = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
             
             print("SO FAR")
             print(yesNoArray)
