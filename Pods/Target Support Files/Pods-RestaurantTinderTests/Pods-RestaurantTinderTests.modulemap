@@ -1,6 +1,0 @@
-framework module Pods_RestaurantTinderTests {
-  umbrella header "Pods-RestaurantTinderTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

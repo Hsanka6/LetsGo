@@ -1,0 +1,6 @@
+framework module Pods_RestaurantTinderUITests {
+  umbrella header "Pods-RestaurantTinderUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
