@@ -245,183 +245,83 @@ class SwipeViewController: UIViewController {
             if self.i == 0
             {
                 print("0 item")
-                if gesture.state == UIGestureRecognizerState.ended
+                doFirstCondition(gesture: gesture, label: label as! UIImageView)
+            }
+            else
+            {
+                if i < imgs.count - 1
                 {
+              
+                    print("here1")
                     if label.center.x < 100
                     {
-                        
-                        
-                        print("first left")
+                        print("here2")
+                        print(i)
                         self.yesNoArray[i] = "NO"
-                        let url = URL(string: self.imgs[i + 1])!
-                        self.Picture.kf.setImage(with: url)
-                        
-                        i = i + 1
-                        
+                        if verifyUrl(urlString: self.imgs[i+1]) == false
+                        {
+                            if i + 2 < imgs.count
+                            {
+                                let url = URL(string: self.imgs[i+2])! // i = 1
+                                self.Picture.kf.setImage(with: url)
+                                i = i + 1
+                            }
+                            else
+                            {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
+                                {
+
+                                    self.performSegue(withIdentifier: "SendTopData", sender: nil)
+                                }
+                                
+                            }
+                            
+                        }
+                        else
+                        {
+                            let url = URL(string: self.imgs[i+1])! // i = 1
+                            self.Picture.kf.setImage(with: url)
+                        }
                         
                     }
                     else if label.center.x > self.view.bounds.width - 100
                     {
-                        
-                        print("first right")
+                        print("here2")
+                        print(i)
                         self.yesNoArray[i] = "YES"
-                        
-                            let url = URL(string: self.imgs[i + 1])!
-                            self.Picture.kf.setImage(with: url)
-                            i = i + 1
-                        
-                        
-                    }
-                }
-                
-            }
-            else if verifyUrl(urlString: self.imgs[1]) == false
-            {
-                let url = URL(string: self.imgs[i])!
-                self.Picture.kf.setImage(with: url)
-                i = i + 1
-                
-            }
-            else
-            {
-                if label.center.x < 100
-                {
-                    
-                    
-                    
-                    print("second left")
-                    
-                    if i < imgs.count
-                    {
-                        
-                        if self.imgs[i] == store1 || self.imgs[i] == store2  || self.imgs[i] == store3  || self.imgs[i] == store4  || self.imgs[i] == store5
+                        if verifyUrl(urlString: self.imgs[i+1]) == false
                         {
-                            
-                            let url = URL(string: self.imgs[i])!
-                            self.Picture.kf.setImage(with: url)
-                            i = i + 1
-                            
+                            if i + 2 < imgs.count
+                            {
+                                let url = URL(string: self.imgs[i+2])! // i = 1
+                                self.Picture.kf.setImage(with: url)
+                                i = i + 1
+                            }
+                            else
+                            {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
+                                {
+                                    
+                                    self.performSegue(withIdentifier: "SendTopData", sender: nil)
+                                }
+                                
+                            }
                             
                         }
                         else
                         {
-                            if verifyUrl(urlString: self.imgs[i]) == true
-                            {
-                                let url = URL(string: self.imgs[i])!
-                                self.Picture.kf.setImage(with: url)
-                                yesNoArray[i] = "NO"
-                                
-                                i = i + 1
-                                
-                                
-                                print("true")
-                                
-                            }
-                            else
-                            {
-                                print("false")
-                                i = i + 1
-                                let url = URL(string: self.imgs[i])!
-                                self.Picture.kf.setImage(with: url)
-                                
-                                
-                            }
-                            
-                        }
-                        
-                    }
-                    else
-                    {
-                        let a = UIAlertView()
-                        a.message = "Done Swiping images"
-                        a.title = "Alert"
-                        a.addButton(withTitle: "ok")
-                        
-                        a.show()
-                        self.performSegue(withIdentifier: "SendTopData", sender: self)
-                        
-                        
-                    }
-                    
-                }
-                else if label.center.x > self.view.bounds.width - 100
-                {
-                    print("second right")
-                    if i < imgs.count
-                    {
-                        
-                        if self.imgs[i] == store1 || self.imgs[i] == store2  || self.imgs[i] == store3  || self.imgs[i] == store4  || self.imgs[i] == store5
-                        {
-                            print("ugh2")
-                            
-                            print("i")
-                            print(i)
-                            i = i + 1
-                            print("here")
-                            let url = URL(string: self.imgs[i])!
+                            let url = URL(string: self.imgs[i+1])! // i = 1
                             self.Picture.kf.setImage(with: url)
-                            
-                            
                         }
-                        else
-                        {
-                            
-                            if verifyUrl(urlString: self.imgs[i]) == true
-                            {
-                                
-                                let url = URL(string: self.imgs[i])!
-                                self.Picture.kf.setImage(with: url)
-                                yesNoArray[i] = "YES"
-                                
-                                i = i + 1
-
-                                
-                                print("i")
-                                print(i)
-                                print("true2")
-                                
-                            }
-                            else
-                            {
-                                print("i")
-                                print(i)
-                                i = i + 1
-                                let url = URL(string: self.imgs[i])!
-                                self.Picture.kf.setImage(with: url)
-                                
-                                print("false2")
-                                
-                                
-                            }
-                            
-                        }
-                        
                     }
-                    else
-                    {
-                        let a = UIAlertView()
-                        a.message = "Done Swiping images"
-                        a.title = "Alert"
-                        a.addButton(withTitle: "ok")
-                        
-                        a.show()
-                        self.performSegue(withIdentifier: "SendTopData", sender: self)
-                        
-                        
-                    }
-
-                    
+                }
+                else
+                {
+                    performSegue(withIdentifier: "SendTopData", sender: nil)
                 }
                 
-
                 
             }
-           
-            
-            
-            
-            
-            
             rotation = CGAffineTransform(rotationAngle: 0)
             
             stretch = rotation.scaledBy(x: 1,y: 1)
@@ -433,9 +333,43 @@ class SwipeViewController: UIViewController {
             print("SO FAR")
             print(yesNoArray)
             
-            
+            print("i is here")
+            i = i + 1
+            print(i)
             
         }
+        
+    }
+    
+    
+    
+    
+    func doFirstCondition(gesture: UIPanGestureRecognizer, label: UIImageView)
+    {
+        if gesture.state == UIGestureRecognizerState.ended
+        {
+            if label.center.x < 100
+            {
+                
+                
+                print("first left")
+                self.yesNoArray[i] = "NO"
+                let url = URL(string: self.imgs[i + 1])!
+                self.Picture.kf.setImage(with: url)
+            }
+            else if label.center.x > self.view.bounds.width - 100
+            {
+                
+                print("first right")
+                self.yesNoArray[i] = "YES"
+                
+                let url = URL(string: self.imgs[i + 1])!
+                self.Picture.kf.setImage(with: url)
+                
+                
+            }
+        }
+
         
     }
     
