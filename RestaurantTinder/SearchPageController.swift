@@ -16,6 +16,7 @@ import SkyFloatingLabelTextField
 import FontAwesome_swift
 
 
+
 class SearchPageController: UIViewController,CLLocationManagerDelegate {
     var someLabel = UILabel()
     var timer = Timer()
@@ -27,20 +28,41 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     var restaurants = [String]()
     @IBOutlet var searchBar: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet var indicator: UIActivityIndicatorView!
+    
+    @IBOutlet var searchImage: UIImageView!
+    
+    @IBOutlet var Miles: UILabel!
+    
+    @IBOutlet var MilesSlider: UISlider!
+    
+    
+    
     func checkSearchBar()
     {
+        let image = UIImage(named: "goButton") as UIImage?
+        let image1 = UIImage(named: "SurpriseMeButton") as UIImage?
         
+        //Changes pic for button depending on the search text field
         if searchBar.text?.isEmpty == true
         {
-            searchRestaurantsButton.setTitle("Surprise Me!", for: .normal)
+            
+            searchRestaurantsButton.setImage(image1, for: .normal)
             
         }
         else
         {
-            searchRestaurantsButton.setTitle("GO!", for: .normal)
+            searchRestaurantsButton.setImage(image, for: .normal)
         }
         
     }
+    
+    @IBAction func ValueChanged(_ sender: Any)
+    {
+        let sliderValue = Int(MilesSlider.value)
+        Miles.text = "\(sliderValue)" + " mi"
+    }
+    
+    
     func scheduledTimerWithTimeInterval(){
         // Scheduling timer to Call the function **Countdown** with the interval of 1 seconds
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.checkSearchBar), userInfo: nil, repeats: true)
@@ -48,6 +70,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     @IBOutlet var searchRestaurantsButton: UIButton!
     
     @IBAction func searchRestaurantsButton(_ sender: Any) {
+        print("here")
         indicator.isHidden = false
         indicator.startAnimating()
         searchQuery = searchBar.text
@@ -68,10 +91,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
             print(uid)
             let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
             
-            var userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches").childByAutoId()
-            
-            
-            userSearchReference.setValue(values)
+        var userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches").childByAutoId()
+        userSearchReference.setValue(values)
         FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as? NSDictionary
@@ -86,9 +107,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         { (error) in
                 print(error.localizedDescription)
         }
-            Alamofire.request("https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=5&radius=10000").responseJSON { response in
-                
-                
+        print("here11")
+        Alamofire.request("https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=5&radius=10000").responseJSON { response in
                 if((response.result.value) != nil)
                 {
                     let json = JSON(response.result.value!)
@@ -113,12 +133,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                             print(id)
                             print(subJson["name"].stringValue)
                             Alamofire.request("https://api.foursquare.com/v2/venues/\(id)/photos?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&limit=3").responseJSON { response in
-                                
                                 var secondJSON:JSON!
                                 if((response.result.value) != nil)
                                 {
                                     secondJSON = JSON(response.result.value!)
-                                    
                                     if secondJSON["response"]["photos"]["items"].isEmpty
                                     {
                                         print("No images found for this restaurant")
@@ -128,30 +146,18 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                         for (_,subJson):(String, JSON) in secondJSON["response"]["photos"]["items"]
                                         {
                                             var url: String = subJson["prefix"].stringValue
-                                            
                                             url += "250x250"
                                             url += subJson["suffix"].stringValue
                                             self.pics.append(url)
-                                            
-                                        }
-                                        
+                                         }
                                         self.pics.append(id)
                                         self.restaurants.append(id)
-                                        
                                         DispatchQueue.main.asyncAfter(deadline: .now() + 2)
                                         {
                                             self.indicator.stopAnimating()
                                             self.performSegue(withIdentifier: "swipe", sender: self.pics)
-                                            
-                                            
                                         }
-                                        
-                                        
                                     }
-                                    
-                                    
-                                    
-                                    
                                 }
                                 else
                                 {
@@ -159,29 +165,18 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                     a.message = "Failed"
                                     a.title = "Alert"
                                     a.addButton(withTitle: "ok")
-                                    
                                     a.show()
-                                    
                                     self.indicator.stopAnimating()
-                                    
                                 }
-                                
-                                
-                                
                             }
                         }
-                    }
-                    
-                    
-                    
+                    }//
                 }
-                
-                
-                
+            else
+            {
+                print("failed")
+            }
         }
-        
-        
-        
     }
     var locationManager: CLLocationManager!
     
@@ -202,17 +197,40 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         }
         
     }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         scheduledTimerWithTimeInterval()
+        
+        
+        //pulsator.position = view.center
+        
+//        pulsator.radius = 300
+//        pulsator.numPulse = 6
+//        pulsator.backgroundColor = UIColor.black.cgColor
+////        pulsator.animationDuration = 12
+////        pulsator.pulseInterval = 0.1
+//        view.layer.addSublayer(pulsator)
+//        
+//        pulsator.start()
+//        
+//        let pulseEffect = LFTPulseAnimation(repeatCount: Float.infinity, radius:300, position:searchImage.center)
+//        view.layer.insertSublayer(pulseEffect, below: searchImage.layer)
+//        pulseEffect.animationDuration = 0.8
+//        pulseEffect.pulseInterval = 0
+
+        
+        
         indicator.isHidden = true
+        
+        
+        
         //LOCATION CRAP
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        
-        
-        
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         if CLLocationManager.locationServicesEnabled() {
@@ -226,6 +244,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
 
         searchQuery = searchBar.text
         
+      
+        
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let locValue:CLLocationCoordinate2D = manager.location!.coordinate
@@ -234,6 +254,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
         
     }
+  
+  
    
 }
 extension Array {

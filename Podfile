@@ -19,6 +19,8 @@ pod 'GoogleMaps'
 pod 'SwiftyJSON'
 pod 'SkyFloatingLabelTextField', '~> 2.0.0'
 pod 'FontAwesome.swift', '~> 1.0.0'
+pod 'Cheetah', '~> 0.4'
+
 
 
 

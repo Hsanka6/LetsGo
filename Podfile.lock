@@ -8,6 +8,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - Cheetah (0.4.1)
   - FBSDKCoreKit (4.18.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.18.0):
@@ -66,6 +67,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - Alamofire-Synchronous (~> 4.0)
+  - Cheetah (~> 0.4)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -82,6 +84,7 @@ SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Cheetah: 14e1eff625b9e02ffa8d3fd1157236d6f20d71be
   FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
   FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
   FBSDKShareKit: 0b8d6cc3f103c75297eb3c62caec284a2ccf1b9e
@@ -101,6 +104,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: a81a0eaed2785d1599f11484c6ebc1c4eb5d1228
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: b22724a7fe5a34520a6d52bbbebd83485e968212
+PODFILE CHECKSUM: 959d92807286ce8a7beb3b4d91f9297e83c28c75
 
 COCOAPODS: 1.1.1

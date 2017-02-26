@@ -28,14 +28,15 @@ class SwipeViewController: UIViewController {
     
     
     
-    @IBAction func Back(_ sender: Any)
+    @IBAction func back(_ sender: Any) 
     {
         self.performSegue(withIdentifier: "clear", sender: self.imgs)
-        
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
         
         if segue.identifier == "clear"
         {
@@ -123,33 +124,15 @@ class SwipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         yesNoArray = imgs
-        //text.text = "Swipe Right to like food and left to reject"
-        
-        
-        print("swipingplace")
-        print(yesNoArray)
-        
-        
         background.layer.masksToBounds = false
-        
         background.layer.shadowColor = UIColor.black.cgColor
         //background.layer.shadowRadius = 5;
         background.layer.shadowOpacity = 1.5;
         background.layer.shadowOffset = CGSize.zero
-        
-        
-        
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(wasDragged))
         Picture.addGestureRecognizer(gesture)
-        
         Picture.isUserInteractionEnabled = true
-        
-        
-        
-        
         if restaurant[0] != "" && restaurant.count > 0
         {
             print("rest")
@@ -354,17 +337,60 @@ class SwipeViewController: UIViewController {
                 
                 print("first left")
                 self.yesNoArray[i] = "NO"
-                let url = URL(string: self.imgs[i + 1])!
-                self.Picture.kf.setImage(with: url)
+                if verifyUrl(urlString: self.imgs[i+1]) == false
+                {
+                    if i + 2 < imgs.count
+                    {
+                        let url = URL(string: self.imgs[i+2])! // i = 1
+                        self.Picture.kf.setImage(with: url)
+                        i = i + 1
+                    }
+                    else
+                    {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
+                        {
+                            
+                            self.performSegue(withIdentifier: "SendTopData", sender: nil)
+                        }
+                        
+                    }
+                    
+                }
+                else
+                {
+                    let url = URL(string: self.imgs[i+1])! // i = 1
+                    self.Picture.kf.setImage(with: url)
+                }
             }
             else if label.center.x > self.view.bounds.width - 100
             {
                 
                 print("first right")
                 self.yesNoArray[i] = "YES"
+                if verifyUrl(urlString: self.imgs[i+1]) == false
+                {
+                    if i + 2 < imgs.count
+                    {
+                        let url = URL(string: self.imgs[i+2])! // i = 1
+                        self.Picture.kf.setImage(with: url)
+                        i = i + 1
+                    }
+                    else
+                    {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
+                        {
+                            
+                            self.performSegue(withIdentifier: "SendTopData", sender: nil)
+                        }
+                        
+                    }
+                }
+                else
+                {
                 
-                let url = URL(string: self.imgs[i + 1])!
-                self.Picture.kf.setImage(with: url)
+                    let url = URL(string: self.imgs[i + 1])!
+                    self.Picture.kf.setImage(with: url)
+                }
                 
                 
             }

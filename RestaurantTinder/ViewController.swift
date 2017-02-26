@@ -19,9 +19,8 @@ class ViewController: UIViewController
     
     @IBOutlet var indicator: UIActivityIndicatorView!
     
-    @IBAction func fbButton(_ sender: Any) {
-        
-        
+    @IBAction func fbButton(_ sender: Any)
+    {
         indicator.isHidden = false
         indicator.startAnimating()
         
@@ -39,32 +38,27 @@ class ViewController: UIViewController
             {
                 
                 print("logged in")
-                self.performSegue(withIdentifier: "ToSearch", sender: self)
                 
                 
                 let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 self.firebaseAuth(credential)
                 self.indicator.stopAnimating()
+                self.performSegue(withIdentifier: "ToSearch", sender: self)
             }
             
             
         }
         
-        
-        
+
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ugh")
         indicator.isHidden = true
         
-        
     }
-    
-    
-    
-    
     func firebaseAuth(_ credential: FIRAuthCredential)
     {
         FIRAuth.auth()?.signIn(with: credential, completion:{ (user, error) in
@@ -78,9 +72,9 @@ class ViewController: UIViewController
                 
                 print("success")
                 
-                var email = user?.email as String!
-                var name = user?.displayName as String!
-                var url = user?.photoURL?.absoluteString
+                let email = user?.email as String!
+                let name = user?.displayName as String!
+                let url = user?.photoURL?.absoluteString
                 
                 guard let uid = FIRAuth.auth()?.currentUser?.uid else {
                     return
@@ -89,10 +83,11 @@ class ViewController: UIViewController
                 
                 let values = ["email": email!, "name": name!, "profileImageUrl": url!] as [String : Any]
                 
-                var userReference = FIRDatabase.database().reference().child("users").child(uid)
+                let userReference = FIRDatabase.database().reference().child("users").child(uid)
                 
                 
                 userReference.setValue(values)
+                
 
             }
          })

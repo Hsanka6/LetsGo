@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Cheetah.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -92,12 +97,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1D2FF2730C06BDF92144B603050EBCDD</key>
+		<key>1DB5491504588B8C8A33E34320FE0F1D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3558B5811B03D909D34F95CEE541F3E7</key>
+		<key>3244300D59C46DA3C837D0CE22CB588C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +112,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>495E9147A773901BEB4473B2765B8DDA</key>
+		<key>76D09C9AF4B60CFD1DA4DEEF51C51944</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -158,6 +163,11 @@
 			<true/>
 		</dict>
 		<key>EBE460D3E3A3CF1AFBBDFA387940E5E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F2462BA726592BDA9B6792F284C86413</key>
 		<dict>
 			<key>primary</key>
 			<true/>

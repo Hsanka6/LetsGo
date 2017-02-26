@@ -35,7 +35,7 @@ class TopRestaurantTableViewCell: UITableViewCell {
     func setUp(restaurantName: String, Rating: Double, MilesAway: Double, CheckIns: Int, ImageUrl:String) {
         
         
-        var color1 = hexStringToUIColor(hex: "#03A9F4")
+        let color1 = hexStringToUIColor(hex: "#03A9F4")
 
         
         rating.layer.cornerRadius = 20
@@ -48,7 +48,7 @@ class TopRestaurantTableViewCell: UITableViewCell {
         name.text = restaurantName
         rating.text = String(Rating)
         checkIns.text = "Visits: " + String(CheckIns)
-        milesAway.text = String(format: "%.2f", MilesAway) + " mi"
+        milesAway.text = String(format: "%.1f", MilesAway) + " mi"
         
         
         let url = URL(string: ImageUrl)
