@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import QuartzCore
 class TopRestaurantTableViewCell: UITableViewCell {
 
    
@@ -35,18 +36,38 @@ class TopRestaurantTableViewCell: UITableViewCell {
     func setUp(restaurantName: String, Rating: Double, MilesAway: Double, CheckIns: Int, ImageUrl:String) {
         
         
-        let color1 = hexStringToUIColor(hex: "#03A9F4")
+        let blue1 = hexStringToUIColor(hex: "#1982FF")
+        let yellow = hexStringToUIColor(hex: "#FF8A00")
+        let red = hexStringToUIColor(hex: "#FF165E")
+        
 
         
-        rating.layer.cornerRadius = 20
-        rating.layer.borderWidth = 3.0
-        rating.layer.backgroundColor = color1.cgColor
-        rating.layer.borderColor = color1.cgColor
+        rating.layer.masksToBounds = true
+        rating.layer.cornerRadius = 5
         
-        
+        restaurantIcon.layer.masksToBounds = true
+        restaurantIcon.layer.cornerRadius = 5
+
+        //FF8A00 orange
+        //FF165E red
+        //1982FF blue
         
         name.text = restaurantName
+        
+        if Rating > 0 && Rating < 4
+        {
+            rating.backgroundColor = red
+        }
+        else if Rating >= 4 && Rating < 7
+        {
+            rating.backgroundColor = yellow
+        }
+        else
+        {
+            rating.backgroundColor = blue1
+        }
         rating.text = String(Rating)
+        
         checkIns.text = "Visits: " + String(CheckIns)
         milesAway.text = String(format: "%.1f", MilesAway) + " mi"
         

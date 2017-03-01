@@ -16,6 +16,7 @@ class ViewController: UIViewController
 {
 
     var loginButton = FBSDKLoginButton()
+    var fbcredential:String = ""
     
     @IBOutlet var indicator: UIActivityIndicatorView!
     
@@ -39,6 +40,7 @@ class ViewController: UIViewController
                 
                 print("logged in")
                 
+                self.fbcredential = FBSDKAccessToken.current().tokenString
                 
                 let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 self.firebaseAuth(credential)
@@ -52,11 +54,44 @@ class ViewController: UIViewController
 
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "ToSearch"
+        {
+            if let destination = segue.destination as? SearchPageController
+            {
+                destination.token = fbcredential
+                print("sender \(sender)")
+            }
+        }
+        
+    }
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         indicator.isHidden = true
+        
+        
+        
+        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+            if let user = user {
+                // User is signed in.
+                print("user is signed in")
+                
+                self.performSegue(withIdentifier: "ToSearch", sender: self)
+                print(user.email!)
+            } else {
+                // No user is signed in.
+                print("stay here bitch")
+            }
+        }
+        
+        
+        
+
+        
         
     }
     func firebaseAuth(_ credential: FIRAuthCredential)
@@ -92,6 +127,8 @@ class ViewController: UIViewController
             }
          })
     }
+    
+    
     
     
     

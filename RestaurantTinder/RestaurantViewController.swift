@@ -12,6 +12,7 @@ import SwiftyJSON
 import GoogleMaps
 import CoreLocation
 import MessageUI
+import QuartzCore
 
 
 class RestaurantViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,MFMessageComposeViewControllerDelegate {
@@ -50,7 +51,6 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var storeOpenClosedLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
-    @IBOutlet var phoneNumberLabel: UILabel!
     @IBOutlet var ratingLabel: UILabel!
     
     @IBOutlet var tableView: UITableView!
@@ -75,6 +75,8 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         super.viewDidLoad()
         
+        restaurantIcon.layer.masksToBounds = true
+        restaurantIcon.layer.cornerRadius = 5
         
         
 
@@ -111,8 +113,8 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 let json = JSON(response.result.value!)
                 
                 self.nameLabel.text = json["response"]["venue"]["name"].stringValue
-                self.phoneNumberLabel.text = json["response"]["venue"]["contact"]["formattedPhone"].stringValue
-                
+//                self.phoneNumberLabel.text = json["response"]["venue"]["contact"]["formattedPhone"].stringValue
+//                
                 
                 var url:String = json["response"]["venue"]["bestPhoto"]["prefix"].stringValue
                 

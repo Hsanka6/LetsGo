@@ -14,7 +14,7 @@ import FirebaseDatabase
 import Firebase
 import SkyFloatingLabelTextField
 import FontAwesome_swift
-
+import FBSDKLoginKit
 
 
 class SearchPageController: UIViewController,CLLocationManagerDelegate {
@@ -28,13 +28,12 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     var restaurants = [String]()
     @IBOutlet var searchBar: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet var indicator: UIActivityIndicatorView!
-    
     @IBOutlet var searchImage: UIImageView!
-    
     @IBOutlet var Miles: UILabel!
-    
+    @IBOutlet var someView: UIView!
     @IBOutlet var MilesSlider: UISlider!
-    
+    var meters:Int = 8045
+    var token:String = ""
     
     
     func checkSearchBar()
@@ -45,7 +44,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         //Changes pic for button depending on the search text field
         if searchBar.text?.isEmpty == true
         {
-            
             searchRestaurantsButton.setImage(image1, for: .normal)
             
         }
@@ -60,19 +58,18 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     {
         let sliderValue = Int(MilesSlider.value)
         Miles.text = "\(sliderValue)" + " mi"
+        meters = getMeters(miles: sliderValue)
     }
     
     
-    func scheduledTimerWithTimeInterval(){
-        // Scheduling timer to Call the function **Countdown** with the interval of 1 seconds
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.checkSearchBar), userInfo: nil, repeats: true)
-    }
+
     @IBOutlet var searchRestaurantsButton: UIButton!
     
     @IBAction func searchRestaurantsButton(_ sender: Any) {
-        print("here")
+        //start animator
         indicator.isHidden = false
         indicator.startAnimating()
+        
         searchQuery = searchBar.text
         if searchBar.text?.isEmpty == true
         {
@@ -90,9 +87,9 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
             print("uid coming up")
             print(uid)
             let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
-            
-        var userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches").childByAutoId()
-        userSearchReference.setValue(values)
+        
+        let userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches")
+        userSearchReference.childByAutoId().setValue(values)
         FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as? NSDictionary
@@ -107,8 +104,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         { (error) in
                 print(error.localizedDescription)
         }
-        print("here11")
-        Alamofire.request("https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=5&radius=10000").responseJSON { response in
+        
+        
+        
+        Alamofire.request("https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=5&radius=\(meters)").responseJSON { response in
                 if((response.result.value) != nil)
                 {
                     let json = JSON(response.result.value!)
@@ -119,16 +118,12 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                         a.message = "No Restaurants found"
                         a.title = "Alert"
                         a.addButton(withTitle: "ok")
-                        
                         a.show()
-                        self.indicator.stopAnimating()
-                        
                     }
                     else
                     {
                         for (_,subJson):(String, JSON) in json["response"]["venues"]
                         {
-                            var storeNum:Int = 0
                             let id: String = subJson["id"].stringValue
                             print(id)
                             print(subJson["name"].stringValue)
@@ -170,7 +165,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                 }
                             }
                         }
-                    }//
+                    }
                 }
             else
             {
@@ -203,28 +198,23 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        scheduledTimerWithTimeInterval()
         
         
-        //pulsator.position = view.center
         
-//        pulsator.radius = 300
-//        pulsator.numPulse = 6
-//        pulsator.backgroundColor = UIColor.black.cgColor
-////        pulsator.animationDuration = 12
-////        pulsator.pulseInterval = 0.1
-//        view.layer.addSublayer(pulsator)
-//        
-//        pulsator.start()
-//        
-//        let pulseEffect = LFTPulseAnimation(repeatCount: Float.infinity, radius:300, position:searchImage.center)
-//        view.layer.insertSublayer(pulseEffect, below: searchImage.layer)
-//        pulseEffect.animationDuration = 0.8
-//        pulseEffect.pulseInterval = 0
-
+        let pulseEffect = LFTPulseAnimation(repeatCount: Float.infinity, radius:300, position:searchImage.center)
+        view.layer.insertSublayer(pulseEffect, below: searchImage.layer)
+        pulseEffect.animationDuration = 5
+        pulseEffect.pulseInterval = 0.5
+        
+        let pulse = LFTPulseAnimation(repeatCount: Float.infinity, radius:50, position:Miles.center)
+        pulse.animationDuration = 5
+        pulse.pulseInterval = 0.5
         
         
         indicator.isHidden = true
+        
+      
+        
         
         
         
@@ -253,6 +243,13 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         lon = locValue.longitude as Double!
         
         
+    }
+    
+    func getMeters(miles: Int) -> Int
+    {
+        var meters:Int = 0
+        meters = miles * 1609
+        return meters
     }
   
   

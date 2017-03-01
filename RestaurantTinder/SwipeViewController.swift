@@ -227,7 +227,6 @@ class SwipeViewController: UIViewController {
         {
             if self.i == 0
             {
-                print("0 item")
                 doFirstCondition(gesture: gesture, label: label as! UIImageView)
             }
             else
@@ -235,10 +234,8 @@ class SwipeViewController: UIViewController {
                 if i < imgs.count - 1
                 {
               
-                    print("here1")
                     if label.center.x < 100
                     {
-                        print("here2")
                         print(i)
                         self.yesNoArray[i] = "NO"
                         if verifyUrl(urlString: self.imgs[i+1]) == false
@@ -269,7 +266,6 @@ class SwipeViewController: UIViewController {
                     }
                     else if label.center.x > self.view.bounds.width - 100
                     {
-                        print("here2")
                         print(i)
                         self.yesNoArray[i] = "YES"
                         if verifyUrl(urlString: self.imgs[i+1]) == false
@@ -313,10 +309,6 @@ class SwipeViewController: UIViewController {
             
             label.center = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
             
-            print("SO FAR")
-            print(yesNoArray)
-            
-            print("i is here")
             i = i + 1
             print(i)
             
