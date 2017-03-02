@@ -15,12 +15,13 @@ import MessageUI
 import QuartzCore
 
 
-class RestaurantViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,MFMessageComposeViewControllerDelegate {
+class RestaurantViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,MFMessageComposeViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     var restId:String!
     var storeLat:Double!
     var storeLon:Double!
     
+    @IBOutlet var collectionView: UICollectionView!
     var top = [Restaurant]()
     
     @IBAction func sendMessage(_ sender: Any)
@@ -35,16 +36,6 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         self.present(messageVC, animated: false, completion: nil)
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     var currentLat:Double!
     var currentLon:Double!
     @IBOutlet var restaurantIcon: UIImageView!
@@ -57,6 +48,9 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var nameArray = [String]()
     var commentArray = [String]()
+    
+    var pics = [String]()
+    var imageString:String = ""
     
     
     @IBAction func goButton(_ sender: Any) {
@@ -82,18 +76,19 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
 
         tableView.delegate = self
         tableView.dataSource = self
-        print("shit")
-        print(restId)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         
-        print("me")
-        print(currentLat)
-        print(currentLon)
-        
-        print("store")
-        print(storeLat)
-        print(storeLon)
-      
+//        print("location current")
+//        print(currentLat)
+//        print(currentLon)
+//        
+//        print("store location")
+//        print(storeLat)
+//        print(storeLon)
+//      
         
         doShit()
         
@@ -139,39 +134,40 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 {
                     self.storeOpenClosedLabel.text = "Closed"
                 }
-                
-                
-                
                 while a < 6
                 {
                     var name: String = json["response"]["venue"]["tips"]["groups"][0]["items"][a]["user"]["firstName"].stringValue
                     name += " "
                     name += json["response"]["venue"]["tips"]["groups"][0]["items"][a]["user"]["lastName"].stringValue
-                    print("name")
-                    print(name)
                     
                     self.nameArray.append(name)
                     
                     
-                    print("comment")
                     var comment: String = json["response"]["venue"]["tips"]["groups"][0]["items"][a]["text"].stringValue
                     print(comment)
                     
                     self.commentArray.append(comment)
-                    
-                    
-                    
-                    
                     a = a + 1
                 }
                 
                 
                 
-                
-                
-                
-                
-                
+                if json["response"]["venue"]["photos"]["groups"][0]["items"].isEmpty
+                {
+                    print("No images found for this restaurant")
+                }
+                else
+                {
+                    var b = 0
+                    while b <= 10
+                    {
+                        var url: String = json["response"]["venue"]["photos"]["groups"][0]["items"][b]["prefix"].stringValue
+                        url += "250x250"
+                        url += json["response"]["venue"]["photos"]["groups"][0]["items"][b]["suffix"].stringValue
+                        b += 1
+                        self.pics.append(url)
+                    }
+                }
             }
             else
             {
@@ -189,7 +185,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tip", for: indexPath)  as!  TipTableViewCell
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             
             
             
@@ -216,6 +212,48 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 print("sender \(sender)")
             }
         }
+        
+        if segue.identifier == "full"
+        {
+            if let destination = segue.destination as? FullScreenViewController
+            {
+                if let imageString = sender as? String
+                {
+                    destination.imgUrl = imageString
+                    destination.currentLat = currentLat
+                    destination.currentLon = currentLon
+                }
+                
+            }
+        }
+
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    {
+        
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pic", for: indexPath) as! PhotoCollectionViewCell
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            
+            let imgUrl = URL(string: self.pics[indexPath.row])
+            
+            cell.imageView.kf.setImage(with: imgUrl)
+        }
+        
+        return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //var imgUrl:String = ""
+        imageString = pics[indexPath.row]
+        performSegue(withIdentifier: "full", sender: imageString)
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult)

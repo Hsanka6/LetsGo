@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		4CFDBF4F1947EA09AAB390C7 /* Pods_RestaurantTinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E292770AF2C1489ADF06B83 /* Pods_RestaurantTinder.framework */; };
 		52676025D536B2F5B0BCB5A3 /* Pods_RestaurantTinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC9089FDD15DB40767AC91B6 /* Pods_RestaurantTinderUITests.framework */; };
+		70078C9F1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */; };
 		7037BCD21E2ADBBB00541877 /* TipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */; };
+		707B73921E67F93100EC4B11 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707B73911E67F93100EC4B11 /* FullScreenViewController.swift */; };
 		70D0503D1E61A1A500579C3A /* LFTPulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D0503C1E61A1A500579C3A /* LFTPulseAnimation.swift */; };
 		771BFFC31E14B3F500CD53F6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */; };
 		771BFFC41E14B3F500CD53F6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */; };
@@ -51,7 +53,9 @@
 /* Begin PBXFileReference section */
 		1011A12ABB17F52813EE70EB /* Pods-RestaurantTinderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinderTests/Pods-RestaurantTinderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		389D56C85EBDCA6D276F210B /* Pods-RestaurantTinderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinderUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinderUITests/Pods-RestaurantTinderUITests.release.xcconfig"; sourceTree = "<group>"; };
+		70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipTableViewCell.swift; sourceTree = "<group>"; };
+		707B73911E67F93100EC4B11 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		70D0503C1E61A1A500579C3A /* LFTPulseAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFTPulseAnimation.swift; sourceTree = "<group>"; };
 		771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -171,6 +175,8 @@
 				77BF8BC11E1DB103005969E3 /* TopRestaurantTableViewCell.swift */,
 				7799735F1E20F63C0039B958 /* RestaurantViewController.swift */,
 				7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */,
+				70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */,
+				707B73911E67F93100EC4B11 /* FullScreenViewController.swift */,
 			);
 			path = RestaurantTinder;
 			sourceTree = "<group>";
@@ -503,7 +509,9 @@
 				70D0503D1E61A1A500579C3A /* LFTPulseAnimation.swift in Sources */,
 				77BF8BC21E1DB103005969E3 /* TopRestaurantTableViewCell.swift in Sources */,
 				7037BCD21E2ADBBB00541877 /* TipTableViewCell.swift in Sources */,
+				70078C9F1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift in Sources */,
 				771BFFCB1E1509C300CD53F6 /* SearchPageController.swift in Sources */,
+				707B73921E67F93100EC4B11 /* FullScreenViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
