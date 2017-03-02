@@ -60,6 +60,9 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
     var storeLat:Double!
     var storeLon:Double!
     
+    var lat:Double! = 0.0
+    var lon:Double! = 0.0
+    
   
     
     
@@ -248,21 +251,21 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 
                 
                 
-                let lat = json["response"]["venue"]["location"]["lat"].doubleValue
-                let long = json["response"]["venue"]["location"]["lng"].doubleValue
+                lat = json["response"]["venue"]["location"]["lat"].doubleValue
+                lon = json["response"]["venue"]["location"]["lng"].doubleValue
                 
                 
                 
                 
                 var distanceAway = 0.0
                 
-                distanceAway = self.getMilesAway(lat: lat, lon: long)
+                distanceAway = self.getMilesAway(lat: lat, lon: lon)
                 
                 
                 print("name")
                 print(name)
                 
-                r = Restaurant(name: name,checkIns: check,rating: ratings,milesAway: distanceAway, imageUrl: url, id:restId, lat: lat, lon: long)
+                r = Restaurant(name: name,checkIns: check,rating: ratings,milesAway: distanceAway, imageUrl: url, id:restId, lat: lat, lon: lon)
                 
                 self.topRestaurants.append(r)
                 
@@ -422,6 +425,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 destination.currentLat = currentLat
                 destination.currentLon = currentLon
                 destination.top = topRestaurants
+                destination.miles = getMilesAway(lat: lat, lon: lon)
                 print("sender \(sender)")
             }
         }

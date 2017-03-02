@@ -13,11 +13,16 @@ import QuartzCore
 class FullScreenViewController: UIViewController
 {
 
-    var imgUrl:String = ""
-    var currentLat:Double!
-    var currentLon:Double!
-    var storeLat:Double!
-    var storeLon:Double!
+    var imgUrl:String! = ""
+    var currentLat:Double! = 0.0
+    var currentLon:Double! = 0.0
+    var storeLat:Double! = 0.0
+    var storeLon:Double! = 0.0
+    var imgs = [String]()
+    var restaurantId:String! = ""
+    var miles:Double! = 0.0
+    
+    
     
     
     @IBOutlet var imageView: UIImageView!
@@ -48,6 +53,11 @@ class FullScreenViewController: UIViewController
                 {
                     destination.currentLat =  currentLat
                     destination.currentLon = currentLon
+                    destination.storeLat = storeLat
+                    destination.storeLon = storeLon
+                    destination.restId = restaurantId
+                    destination.pics = imgs
+                    destination.miles = miles
                 }
                 
             }
