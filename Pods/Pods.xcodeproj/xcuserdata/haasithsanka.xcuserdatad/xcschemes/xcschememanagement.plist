@@ -59,6 +59,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Hue.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Kingfisher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -75,6 +80,16 @@
 			<false/>
 		</dict>
 		<key>Pods-RestaurantTinderUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RevealingSplashView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SCLAlertView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -97,12 +112,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1DB5491504588B8C8A33E34320FE0F1D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3244300D59C46DA3C837D0CE22CB588C</key>
+		<key>22D3C153C2ACA76C6BB319900727F2E9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,7 +122,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>76D09C9AF4B60CFD1DA4DEEF51C51944</key>
+		<key>5D191647700DBB99E60FEC8F8C43DCC5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +132,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>850C7B9DFB84E184AF95312CB3081FEE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9D824CDF27592BED72314D2CAAE1B5AF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2542602E50EDF091ADB18B4688DF34F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B774B815F2714A881D831F944724B233</key>
 		<dict>
 			<key>primary</key>
 			<true/>

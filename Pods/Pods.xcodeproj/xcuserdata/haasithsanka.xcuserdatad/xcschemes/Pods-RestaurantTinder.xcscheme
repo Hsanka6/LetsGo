@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1DB5491504588B8C8A33E34320FE0F1D"
+               BlueprintIdentifier = "850C7B9DFB84E184AF95312CB3081FEE"
                BuildableName = "Pods_RestaurantTinder.framework"
                BlueprintName = "Pods-RestaurantTinder"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1DB5491504588B8C8A33E34320FE0F1D"
+            BlueprintIdentifier = "850C7B9DFB84E184AF95312CB3081FEE"
             BuildableName = "Pods_RestaurantTinder.framework"
             BlueprintName = "Pods-RestaurantTinder"
             ReferencedContainer = "container:Pods.xcodeproj">

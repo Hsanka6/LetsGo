@@ -325,41 +325,43 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         return 1
     }
     
+    var numRows:Int! = 0
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if (storeId1 != "NULL" && storeId2 == "NULL" && storeId3 == "NULL" && storeId4 == "NULL"  && storeId5 == "NULL")
         {
-            return 1
+            numRows = 1
             
         }
         
         else if (storeId1 != "NULL" && storeId2 != "NULL" && storeId3 == "NULL" && storeId4 == "NULL"  && storeId5 == "NULL")
         {
-            return 2
+            numRows = 2
             
         }
         
         else if (storeId1 != "NULL" && storeId2 != "NULL" && storeId3 != "NULL" && storeId4 == "NULL"  && storeId5 == "NULL")
         {
-            return 3
+            numRows = 3
             
         }
         
         else if (storeId1 != "NULL" && storeId2 != "NULL" && storeId3 != "NULL" && storeId4 != "NULL"  && storeId5 == "NULL")
         {
-            return 4
+            numRows = 4
             
         }
             
         else if (storeId1 != "NULL" && storeId2 != "NULL" && storeId3 != "NULL" && storeId4 != "NULL"  && storeId5 != "NULL")
         {
-            return 5
+            numRows = 5
             
         }
         else
         {
-            return 0
+            numRows = 0
         }
+        return numRows
         
         
     }
@@ -402,6 +404,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 destination.store3 = storeId3
                 destination.store4 = storeId4
                 destination.store5 = storeId5
+                destination.numRows = numRows
                 
              }
         }

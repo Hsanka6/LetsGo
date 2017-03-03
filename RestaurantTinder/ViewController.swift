@@ -11,6 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
 import FirebaseAuth
+import RevealingSplashView
 
 class ViewController: UIViewController
 {
@@ -74,18 +75,29 @@ class ViewController: UIViewController
         indicator.isHidden = true
         
         
+        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "finalLogo")!,iconInitialSize: CGSize(width: 120, height: 170), backgroundColor: UIColor.white)
         
-        FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-            if let user = user {
-                // User is signed in.
-                print("user is signed in")
-                
-                self.performSegue(withIdentifier: "ToSearch", sender: self)
-                print(user.email!)
-            } else {
-                // No user is signed in.
-                print("stay here bitch")
+        //revealingSplashView.animationType = SplashAnimationType.rotateOut
+
+        //Adds the revealing splash view as a sub view
+        self.view.addSubview(revealingSplashView)
+        
+        //Starts animation
+        revealingSplashView.startAnimation(){
+            FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+                if let user = user {
+                    // User is signed in.
+                    print("user is signed in")
+                    
+                    self.performSegue(withIdentifier: "ToSearch", sender: self)
+                    print(user.email!)
+                } else {
+                    // No user is signed in.
+                    print("stay here bitch")
+                }
             }
+
+            
         }
         
         

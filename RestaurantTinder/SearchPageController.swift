@@ -15,6 +15,7 @@ import Firebase
 import SkyFloatingLabelTextField
 import FontAwesome_swift
 import FBSDKLoginKit
+import SCLAlertView
 
 
 class SearchPageController: UIViewController,CLLocationManagerDelegate {
@@ -50,8 +51,14 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         else
         {
             searchRestaurantsButton.setImage(image, for: .normal)
+         
         }
         
+    }
+    
+    func scheduledTimerWithTimeInterval(){
+        // Scheduling timer to Call the function **Countdown** with the interval of 1 seconds
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.checkSearchBar), userInfo: nil, repeats: true)
     }
     
     @IBAction func ValueChanged(_ sender: Any)
@@ -106,19 +113,29 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         }
         
         
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
+            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+            showCloseButton: true
+        )
         
-        Alamofire.request("https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=5&radius=\(meters)").responseJSON { response in
+        
+        Alamofire.request("https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=10&radius=\(meters)").responseJSON { response in
                 if((response.result.value) != nil)
                 {
                     let json = JSON(response.result.value!)
                     
                     if json["response"]["venues"].isEmpty
                     {
-                        let a = UIAlertView()
-                        a.message = "No Restaurants found"
-                        a.title = "Alert"
-                        a.addButton(withTitle: "ok")
-                        a.show()
+                        
+                        
+                        let alert = SCLAlertView(appearance: appearance)
+       
+                        alert.showError("Error", subTitle: "No Restaurants were found.")
+                        self.indicator.stopAnimating()
+                       
+                        
                     }
                     else
                     {
@@ -135,6 +152,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                     if secondJSON["response"]["photos"]["items"].isEmpty
                                     {
                                         print("No images found for this restaurant")
+                                        self.indicator.stopAnimating()
+                                        self.searchRestaurantsButton.isEnabled = true
                                     }
                                     else
                                     {
@@ -151,6 +170,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                         {
                                             self.indicator.stopAnimating()
                                             self.performSegue(withIdentifier: "swipe", sender: self.pics)
+                                            self.searchRestaurantsButton.isEnabled = false
                                         }
                                     }
                                 }
@@ -172,6 +192,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                 print("failed")
             }
         }
+        
     }
     var locationManager: CLLocationManager!
     
@@ -214,10 +235,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         indicator.isHidden = true
         
       
-        
-        
-        
-        
+        scheduledTimerWithTimeInterval()
         //LOCATION CRAP
         locationManager = CLLocationManager()
         locationManager.delegate = self

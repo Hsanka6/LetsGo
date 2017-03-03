@@ -28,24 +28,28 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var store3:String! = ""
     var store4:String! = ""
     var store5:String! = ""
-    
+    var numPics:Int! = 0
+    var numRows:Int! = 1
     
     
     
     @IBOutlet var collectionView: UICollectionView!
     
-    @IBAction func sendMessage(_ sender: Any)
+    
+    @IBAction func sendText(_ sender: Any)
     {
+        let messageVC = MFMessageComposeViewController()
         
-        var messageVC = MFMessageComposeViewController()
-        
-        messageVC.body = "Enter a message";
-        messageVC.recipients = ["Enter tel-nr"]
+        messageVC.body = "Meet me at " + restName!
+        messageVC.recipients = [""]
         messageVC.messageComposeDelegate = self;
         
         self.present(messageVC, animated: false, completion: nil)
-        
+
     }
+    
+    
+    
     var currentLat:Double! = 0.0
     var currentLon:Double! = 0.0
     @IBOutlet var restaurantIcon: UIImageView!
@@ -64,20 +68,20 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var miles:Double! = 0.0
     var pics = [String]()
     var imageString:String = ""
+    var restName:String! = ""
     
     
-    @IBAction func goButton(_ sender: Any) {
-        
-                if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemapsurl://")! as URL))
-                {
-                    UIApplication.shared.openURL(NSURL(string:
-                        "comgooglemapsurl://?saddr=&daddr=\(storeLat!),\(storeLon!)&directionsmode=driving")! as URL)
-        
-                } else {
-                    NSLog("Can't use comgooglemaps://");
-                }
-                
-                }
+    @IBAction func goButton(_ sender: Any)
+    {
+        if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemapsurl://")! as URL))
+        {
+            UIApplication.shared.openURL(NSURL(string:"comgooglemapsurl://?saddr=&daddr=\(storeLat!),\(storeLon!)&directionsmode=driving")! as URL)
+        }
+        else
+        {
+            NSLog("Can't use comgooglemaps://");
+        }
+    }
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -125,6 +129,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.nameLabel.text = json["response"]["venue"]["name"].stringValue
 //                self.phoneNumberLabel.text = json["response"]["venue"]["contact"]["formattedPhone"].stringValue
 //                
+                self.restName = json["response"]["venue"]["name"].stringValue
                 
                 var url:String = json["response"]["venue"]["bestPhoto"]["prefix"].stringValue
                 
@@ -181,9 +186,28 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                         var url: String = json["response"]["venue"]["photos"]["groups"][0]["items"][b]["prefix"].stringValue
                         url += "105x105"
                         url += json["response"]["venue"]["photos"]["groups"][0]["items"][b]["suffix"].stringValue
+                        print("b")
+                        print(b)
+                        if url.isEmpty
+                        {
+                            self.pics.append("NULL")
+                            
+                        }
+                        else
+                        {
+                            self.pics.append(url)
+                            
+                        }
+                            self.collectionView.reloadData()
+                        
+                    
                         b += 1
-                        self.pics.append(url)
+                        
                     }
+                    self.numPics = self.pics.count
+                    self.collectionView.reloadData()
+                    
+                    
                 }
             }
             else
@@ -192,6 +216,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 print(response.result)
             }
         }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -239,6 +264,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 destination.storeId3 = store3
                 destination.storeId4 = store4
                 destination.storeId5 = store5
+                destination.numRows = numRows
                 
             }
         }
@@ -271,8 +297,8 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        
-        return 10
+        print("err")
+        return numPics
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -300,7 +326,22 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult)
     {
-        print(result)
+        
+        
+        switch (result.rawValue) {
+        case MessageComposeResult.cancelled.rawValue:
+            print("Message was cancelled")
+            self.dismiss(animated: true, completion: nil)
+        case MessageComposeResult.failed.rawValue:
+            print("Message failed")
+            self.dismiss(animated: true, completion: nil)
+        case MessageComposeResult.sent.rawValue:
+            print("Message was sent")
+            self.dismiss(animated: true, completion: nil)
+        default:
+            break;
+        }
+        
     }
 
 

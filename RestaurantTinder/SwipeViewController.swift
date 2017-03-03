@@ -135,8 +135,6 @@ class SwipeViewController: UIViewController {
         Picture.isUserInteractionEnabled = true
         if restaurant[0] != "" && restaurant.count > 0
         {
-            print("rest")
-            print(restaurant[0])
             store1 = restaurant[0]
         }
         else
@@ -180,10 +178,6 @@ class SwipeViewController: UIViewController {
         }
         
         
-        print(store1 + "  " + store2 + "  " + store3 + "  " + store4 + "  " + store5 + "  ")
-        
-        print("imgs")
-        print(imgs)
         
         if(imgs.count == 0)
         {
@@ -236,7 +230,6 @@ class SwipeViewController: UIViewController {
               
                     if label.center.x < 100
                     {
-                        print(i)
                         self.yesNoArray[i] = "NO"
                         if verifyUrl(urlString: self.imgs[i+1]) == false
                         {
@@ -266,7 +259,6 @@ class SwipeViewController: UIViewController {
                     }
                     else if label.center.x > self.view.bounds.width - 100
                     {
-                        print(i)
                         self.yesNoArray[i] = "YES"
                         if verifyUrl(urlString: self.imgs[i+1]) == false
                         {
@@ -310,8 +302,6 @@ class SwipeViewController: UIViewController {
             label.center = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
             
             i = i + 1
-            print(i)
-            
         }
         
     }
@@ -325,9 +315,6 @@ class SwipeViewController: UIViewController {
         {
             if label.center.x < 100
             {
-                
-                
-                print("first left")
                 self.yesNoArray[i] = "NO"
                 if verifyUrl(urlString: self.imgs[i+1]) == false
                 {
@@ -341,12 +328,9 @@ class SwipeViewController: UIViewController {
                     {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
                         {
-                            
                             self.performSegue(withIdentifier: "SendTopData", sender: nil)
                         }
-                        
                     }
-                    
                 }
                 else
                 {
@@ -356,8 +340,6 @@ class SwipeViewController: UIViewController {
             }
             else if label.center.x > self.view.bounds.width - 100
             {
-                
-                print("first right")
                 self.yesNoArray[i] = "YES"
                 if verifyUrl(urlString: self.imgs[i+1]) == false
                 {
@@ -371,24 +353,17 @@ class SwipeViewController: UIViewController {
                     {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
                         {
-                            
                             self.performSegue(withIdentifier: "SendTopData", sender: nil)
                         }
-                        
                     }
                 }
                 else
                 {
-                
                     let url = URL(string: self.imgs[i + 1])!
                     self.Picture.kf.setImage(with: url)
                 }
-                
-                
             }
         }
-
-        
     }
     
     func verifyUrl (urlString: String?) -> Bool {
