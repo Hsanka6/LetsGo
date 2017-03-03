@@ -23,6 +23,11 @@ class FullScreenViewController: UIViewController
     var miles:Double! = 0.0
     
     
+    var topRestaurants = [Restaurant]()
+    
+    
+    
+    
     
     
     @IBOutlet var imageView: UIImageView!
@@ -58,6 +63,10 @@ class FullScreenViewController: UIViewController
                     destination.restId = restaurantId
                     destination.pics = imgs
                     destination.miles = miles
+                    
+                    destination.topRestaurants = topRestaurants
+                    
+                    
                 }
                 
             }

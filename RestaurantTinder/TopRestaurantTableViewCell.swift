@@ -46,7 +46,7 @@ class TopRestaurantTableViewCell: UITableViewCell {
         rating.layer.cornerRadius = 5
         
         restaurantIcon.layer.masksToBounds = true
-        restaurantIcon.layer.cornerRadius = 5
+        restaurantIcon.layer.cornerRadius = 8
 
         //FF8A00 orange
         //FF165E red

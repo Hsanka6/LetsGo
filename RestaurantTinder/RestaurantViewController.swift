@@ -20,9 +20,19 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var restId:String! = ""
     var storeLat:Double! = 0.0
     var storeLon:Double! = 0.0
+    var topRestaurants = [Restaurant]()
+    
+        
+    var store1:String! = ""
+    var store2:String! = ""
+    var store3:String! = ""
+    var store4:String! = ""
+    var store5:String! = ""
+    
+    
+    
     
     @IBOutlet var collectionView: UICollectionView!
-    var top = [Restaurant]()
     
     @IBAction func sendMessage(_ sender: Any)
     {
@@ -84,16 +94,17 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         collectionView.dataSource = self
         
         
-//        print("location current")
-//        print(currentLat)
-//        print(currentLon)
-//        
+        print("location current")
+        print(currentLat)
+        print(currentLon)
+        
         print("store location")
         print(storeLat)
         print(storeLon)
       
-        
-        milesAway.text = String(miles)
+        print("milesss")
+        print(miles)
+        milesAway.text = String(format: "%.1f", miles) + " MI"
         doShit()
         
         
@@ -222,8 +233,13 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         {
             if let destination = segue.destination as? TopRestaurantsController
             {
-                destination.topRestaurants = top
-                print("sender \(sender)")
+                destination.topRestaurants = topRestaurants
+                destination.storeId1 = store1
+                destination.storeId2 = store2
+                destination.storeId3 = store3
+                destination.storeId4 = store4
+                destination.storeId5 = store5
+                
             }
         }
         
@@ -241,6 +257,10 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                     destination.imgs = pics
                     destination.restaurantId = restId
                     destination.miles = miles
+                    
+                    destination.topRestaurants = topRestaurants
+                    
+                    
                 }
                 
             }

@@ -17,8 +17,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBOutlet weak var tableView: UITableView!
     
-    var timer = Timer()
-
+    
     var restaurantArray = [String]()
     var yesNo = [String]()
     var intArray = [Int]()
@@ -63,8 +62,11 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
     var lat:Double! = 0.0
     var lon:Double! = 0.0
     
-  
     
+    var milesAway:Double! = 0.0
+    
+    
+    @IBOutlet var transparent: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,7 +75,13 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         tableView.dataSource = self
         
         
-        
+//        let gradient = CAGradientLayer()
+//        
+//        gradient.frame = view.bounds
+//        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+//        
+//        transparent.layer.insertSublayer(gradient, at: 0)
+//        
         var i = 0
         while i < yesNo.count
         {
@@ -204,6 +212,10 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 o = o + 1
             }
         
+        
+        //curvedView.layer.masksToBounds = true
+        //curvedView.layer.cornerRadius = 5
+        
                 
     }
     
@@ -211,14 +223,10 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
     func putRestaurantsInOrder(dictionary:[String:Int]) -> [String]
     {
         var orderRestaurant = [String]()
-        
-        
         for (k,v) in (Array(orderedRestaurant).sorted {$0.1 > $1.1}) {
-            
             print("\(k):\(v)")
             orderRestaurant.append(k)
         }
-        
         return orderRestaurant
     }
     
@@ -228,9 +236,6 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         var check:Int!
         var ratings:Double!
         var r:Restaurant!
-        
-        
-        
         if id != ""
         {
             
@@ -245,8 +250,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 ratings = json["response"]["venue"]["rating"].doubleValue
                 var url:String = json["response"]["venue"]["bestPhoto"]["prefix"].stringValue
                 let restId:String = id
-                
-                url += "100x100"
+                url += "110x100"
                 url += json["response"]["venue"]["bestPhoto"]["suffix"].stringValue
                 
                 
@@ -254,24 +258,14 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 lat = json["response"]["venue"]["location"]["lat"].doubleValue
                 lon = json["response"]["venue"]["location"]["lng"].doubleValue
                 
-                
-                
-                
                 var distanceAway = 0.0
                 
                 distanceAway = self.getMilesAway(lat: lat, lon: lon)
                 
-                
-                print("name")
-                print(name)
-                
                 r = Restaurant(name: name,checkIns: check,rating: ratings,milesAway: distanceAway, imageUrl: url, id:restId, lat: lat, lon: lon)
                 
                 self.topRestaurants.append(r)
-                
-                
-
-            }
+               }
 
         }
         
@@ -297,26 +291,17 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                     }
                     j = j + 1
                 }
-        
         var a = 0
         var score:Int = 0
-        
-                while a < store.count {
-        
-                    StoreInts.append(Int(Store[a])!)
-        
-                    if a < 5
-                    {
-                        score += StoreInts[a]
-        
-                    }
-                    
-                    a = a + 1
-                    
-                    
-                }
-        
-        
+        while a < store.count
+        {
+            StoreInts.append(Int(Store[a])!)
+            if a < 5
+            {
+                score += StoreInts[a]
+            }
+            a = a + 1
+        }
         return score
     }
     
@@ -325,16 +310,8 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
     {
         let coordinate₀ = CLLocation(latitude: currentLat, longitude: currentLon)
         let coordinate₁ = CLLocation(latitude: lat, longitude: lon)
-        print("longitude")
-        print(currentLon)
-        print("coordinates")
-        print(coordinate₁)
-        print(coordinate₀)
         
         let distanceInMeters = coordinate₀.distance(from: coordinate₁) // result is in meters
-        
-        print(distanceInMeters)
-        
         
         let milesAway:Double = distanceInMeters/1609.0
         
@@ -380,7 +357,9 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
             
         }
         else
-        { return 0}
+        {
+            return 0
+        }
         
         
     }
@@ -389,11 +368,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TopRestaurantTableViewCell
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            
-            
-            cell.setUp(restaurantName: self.topRestaurants[indexPath.row].getName, Rating: self.topRestaurants[indexPath.row].getRating, MilesAway: self.topRestaurants[indexPath.row].getMilesAway, CheckIns: self.topRestaurants[indexPath.row].getCheckIns, ImageUrl: self.topRestaurants[indexPath.row].getImageUrl/*, lat: self.topRestaurants[indexPath.row].getLat, lon: self.topRestaurants[indexPath.row]*/ )
-            
-            
+            cell.setUp(restaurantName: self.topRestaurants[indexPath.row].getName, Rating: self.topRestaurants[indexPath.row].getRating, MilesAway: self.topRestaurants[indexPath.row].getMilesAway, CheckIns: self.topRestaurants[indexPath.row].getCheckIns, ImageUrl: self.topRestaurants[indexPath.row].getImageUrl)/*, lat: self.topRestaurants[indexPath.row].getLat, lon: self.topRestaurants[indexPath.row]*/
         }
         return cell
     }
@@ -401,15 +376,11 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt: IndexPath)
     {
         let indexPath = tableView.indexPathForSelectedRow //optional, to get from any UIButton for example
-
-        
         selectedId = topRestaurants[(indexPath?.row)!].getId
         storeLat = topRestaurants[(indexPath?.row)!].getLat
         storeLon = topRestaurants[(indexPath?.row)!].getLon
-        
+        milesAway = topRestaurants[(indexPath?.row)!].getMilesAway
         performSegue(withIdentifier: "send", sender: self)
-
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -424,19 +395,17 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 destination.storeLon = storeLon
                 destination.currentLat = currentLat
                 destination.currentLon = currentLon
-                destination.top = topRestaurants
-                destination.miles = getMilesAway(lat: lat, lon: lon)
-                print("sender \(sender)")
-            }
+                destination.miles = milesAway
+                destination.topRestaurants = topRestaurants
+                destination.store1 = storeId1
+                destination.store2 = storeId2
+                destination.store3 = storeId3
+                destination.store4 = storeId4
+                destination.store5 = storeId5
+                
+             }
         }
     }
-    
-   
-        
-        
-        
-   
- 
 }
 
 
