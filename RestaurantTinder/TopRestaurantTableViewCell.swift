@@ -73,7 +73,6 @@ class TopRestaurantTableViewCell: UITableViewCell {
         
         
         let url = URL(string: ImageUrl)
-        print(url)
         restaurantIcon.kf.setImage(with: url)
         
         

@@ -16,6 +16,8 @@ import SkyFloatingLabelTextField
 import FontAwesome_swift
 import FBSDKLoginKit
 import SCLAlertView
+import NVActivityIndicatorView
+
 
 
 class SearchPageController: UIViewController,CLLocationManagerDelegate {
@@ -28,14 +30,17 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     var pics = [String]()
     var restaurants = [String]()
     @IBOutlet var searchBar: SkyFloatingLabelTextFieldWithIcon!
-    @IBOutlet var indicator: UIActivityIndicatorView!
     @IBOutlet var searchImage: UIImageView!
     @IBOutlet var Miles: UILabel!
     @IBOutlet var someView: UIView!
     @IBOutlet var MilesSlider: UISlider!
     var meters:Int = 8045
-    var token:String = ""
+    var ref: FIRDatabaseReference!
     
+    @IBOutlet var indicator: NVActivityIndicatorView!
+    
+    @IBOutlet var popularFood1: UILabel!
+    @IBOutlet var popularfood2: UILabel!
     
     func checkSearchBar()
     {
@@ -241,6 +246,24 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
         indicator.isHidden = true
         
+        var appearnce = BadgeAppearnce()
+        appearnce.backgroundColor = UIColor.blue //default is red
+        appearnce.textColor = UIColor.white // default is white
+        appearnce.textAlignment = .center //default is center
+        appearnce.textSize = 18 //default is 12
+        appearnce.distenceFromCenterX = 15 //default is 0
+        appearnce.distenceFromCenterY = -10 //default is 0
+        appearnce.allowShadow = true
+        appearnce.borderColor = .blue
+        appearnce.borderWidth = 1
+        
+        
+        popularFood1.badge(text: "boba",appearnce: appearnce)
+        
+        
+        
+        ref = FIRDatabase.database().reference().child("total-searches")
+        
         
         
         scheduledTimerWithTimeInterval()
@@ -260,6 +283,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
 
         searchQuery = searchBar.text
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
       
         
     }
@@ -271,12 +298,26 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
     }
     
+    //View moves up when keyboard is shown
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y -= 100
+    }
+    
+    
+    
+    //View moves down when keyboard is hiding
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y += 100
+    }
+    
     func getMeters(miles: Int) -> Int
     {
         var meters:Int = 0
         meters = miles * 1609
         return meters
     }
+    
+    
   
   
    

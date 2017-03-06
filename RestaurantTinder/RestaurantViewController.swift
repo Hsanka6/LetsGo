@@ -30,6 +30,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var store5:String! = ""
     var numPics:Int! = 0
     var numRows:Int! = 1
+    var storePhone:String! = ""
     
     
     
@@ -48,6 +49,23 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
 
     }
     
+    @IBAction func callButton(_ sender: Any)
+    {
+        if self.storePhone != ""
+        {
+        self.callNumber(phoneNumber: self.storePhone)
+        }
+        else
+        {
+            print("failed")
+        }
+        
+    }
+    
+    
+    @IBAction func shareButton(_ sender: Any)
+    {
+    }
     
     
     var currentLat:Double! = 0.0
@@ -78,7 +96,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else
         {
-            NSLog("Can't use comgooglemaps://");
+            NSLog("Can't use comgooglemaps://")
         }
     }
     override func viewDidLoad()
@@ -114,20 +132,34 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         
        // Do any additional setup after loading the view.
     }
+    
+    private func callNumber(phoneNumber:String)
+    {
+        if let phoneCallURL = URL(string: "tel://\(phoneNumber)")
+        {
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL))
+            {
+                application.open(phoneCallURL, options: [:], completionHandler: nil)
+            }
+        }
+    }
+    
+    
 
     func doShit()
     {
         var a = 0
-        
-        
+        print("id")
+        print(restId)
         Alamofire.request("https://api.foursquare.com/v2/venues/\(restId!)?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815").responseJSON { response in
             if((response.result.value) != nil)
             {
                 let json = JSON(response.result.value!)
                 
                 self.nameLabel.text = json["response"]["venue"]["name"].stringValue
-//                self.phoneNumberLabel.text = json["response"]["venue"]["contact"]["formattedPhone"].stringValue
-//                
+                self.storePhone = json["response"]["venue"]["contact"]["phone"].stringValue
+                  
                 self.restName = json["response"]["venue"]["name"].stringValue
                 
                 var url:String = json["response"]["venue"]["bestPhoto"]["prefix"].stringValue

@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import Firebase
 import FirebaseAuth
 import RevealingSplashView
+import NVActivityIndicatorView
 
 class ViewController: UIViewController
 {
@@ -19,7 +20,7 @@ class ViewController: UIViewController
     var loginButton = FBSDKLoginButton()
     var fbcredential:String = ""
     
-    @IBOutlet var indicator: UIActivityIndicatorView!
+    @IBOutlet var indicator: NVActivityIndicatorView!
     
     @IBAction func fbButton(_ sender: Any)
     {
@@ -55,18 +56,6 @@ class ViewController: UIViewController
 
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
-        if segue.identifier == "ToSearch"
-        {
-            if let destination = segue.destination as? SearchPageController
-            {
-                destination.token = fbcredential
-                print("sender \(sender)")
-            }
-        }
-        
-    }
     
     
     
@@ -81,6 +70,7 @@ class ViewController: UIViewController
 
         //Adds the revealing splash view as a sub view
         self.view.addSubview(revealingSplashView)
+        
         
         //Starts animation
         revealingSplashView.startAnimation(){
@@ -99,11 +89,6 @@ class ViewController: UIViewController
 
             
         }
-        
-        
-        
-
-        
         
     }
     func firebaseAuth(_ credential: FIRAuthCredential)
@@ -140,12 +125,6 @@ class ViewController: UIViewController
          })
     }
     
-    
-    
-    
-    
-    
-
     
 }
 

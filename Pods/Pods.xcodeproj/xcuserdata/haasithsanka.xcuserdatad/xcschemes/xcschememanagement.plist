@@ -39,6 +39,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FacebookCore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FacebookShare.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FontAwesome.swift-FontAwesome.swift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -65,6 +75,11 @@
 			<false/>
 		</dict>
 		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>NVActivityIndicatorView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -107,12 +122,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>069A3886A74859FEB11EE81E8A4EE090</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0986110C346CCD8B21B09932865A869E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>10319F28F88161CDEECA12D69F7C12AF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>22D3C153C2ACA76C6BB319900727F2E9</key>
+		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EDFE4052B5DE7D509935AC0774CB135</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +157,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5D191647700DBB99E60FEC8F8C43DCC5</key>
+		<key>593E9479C06FB200807D11AB29EB50BD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,17 +167,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>850C7B9DFB84E184AF95312CB3081FEE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D824CDF27592BED72314D2CAAE1B5AF</key>
+		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,17 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B774B815F2714A881D831F944724B233</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>BC5000D645EEAF961C85907CDC796FE1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BEF7E6E85DB5CDE5D7A18F4F2EB8494B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,7 +202,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
+		<key>C97E85EE9FB889FAB31B8DFC8546CD98</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -198,6 +223,11 @@
 			<true/>
 		</dict>
 		<key>F2462BA726592BDA9B6792F284C86413</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD1AFBE506E330EE85DED470992817CD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

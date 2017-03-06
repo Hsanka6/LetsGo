@@ -9,6 +9,14 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
   - Cheetah (0.4.1)
+  - FacebookCore (0.2.0):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.15)
+  - FacebookShare (0.2.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.2)
+    - FBSDKCoreKit (~> 4.15)
+    - FBSDKShareKit (~> 4.15)
   - FBSDKCoreKit (4.18.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.18.0):
@@ -62,6 +70,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.7)
   - Hue (2.0.1)
   - Kingfisher (3.2.4)
+  - NVActivityIndicatorView (3.5.1)
   - RevealingSplashView (0.1.0)
   - SCLAlertView (0.7.0)
   - SkyFloatingLabelTextField (2.0.0)
@@ -71,6 +80,7 @@ DEPENDENCIES:
   - Alamofire (~> 4.0)
   - Alamofire-Synchronous (~> 4.0)
   - Cheetah (~> 0.4)
+  - FacebookShare
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -81,6 +91,7 @@ DEPENDENCIES:
   - GoogleMaps
   - Hue
   - Kingfisher (~> 3.0)
+  - NVActivityIndicatorView
   - RevealingSplashView
   - SCLAlertView
   - SkyFloatingLabelTextField (~> 2.0.0)
@@ -91,6 +102,8 @@ SPEC CHECKSUMS:
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Cheetah: 14e1eff625b9e02ffa8d3fd1157236d6f20d71be
+  FacebookCore: 2cb3f0fbff218e9d3119cec84bae983b232412de
+  FacebookShare: 8e9ee8ea06505e6a1d3d719b0cc63e840fb8aaeb
   FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
   FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
   FBSDKShareKit: 0b8d6cc3f103c75297eb3c62caec284a2ccf1b9e
@@ -108,11 +121,12 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   Hue: 354caec055fdc9d38b5ef33ca2e7224721843baf
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
+  NVActivityIndicatorView: 075563b3547445ebcff840e3297ce9dd4a23731f
   RevealingSplashView: 501dd03d975ba2c4165dd463ea1c7c407fb9d13e
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SkyFloatingLabelTextField: a81a0eaed2785d1599f11484c6ebc1c4eb5d1228
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 601a65045252e27216c889ff475d0f738a93ddcf
+PODFILE CHECKSUM: 04ab658f43e8dedfa38b32c06c70211635ba524e
 
 COCOAPODS: 1.1.1
