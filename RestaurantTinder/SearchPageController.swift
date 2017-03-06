@@ -114,12 +114,13 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
         
         let appearance = SCLAlertView.SCLAppearance(
-            kTitleFont: UIFont(name: "HelveticaNeue", size: 20)!,
-            kTextFont: UIFont(name: "HelveticaNeue", size: 14)!,
+            kTitleFont: UIFont(name: "Avenir", size: 20)!,
+            kTextFont: UIFont(name: "Avenir", size: 14)!,
             kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
             showCloseButton: true
         )
         
+       
         
         Alamofire.request("https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=10&radius=\(meters)").responseJSON { response in
                 if((response.result.value) != nil)
@@ -148,6 +149,13 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                 var secondJSON:JSON!
                                 if((response.result.value) != nil)
                                 {
+                                    
+//                                    else if secondJSON["venue"]["response"]["venue"]["popular"]["isOpen"].boolValue == false
+//                                    {
+//                                        print("This restaurant is Closed")
+//                                        print(secondJSON["response"]["venue"]["popular"]["isOpen"])
+//                                    
+//                                    }
                                     secondJSON = JSON(response.result.value!)
                                     if secondJSON["response"]["photos"]["items"].isEmpty
                                     {
@@ -176,11 +184,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                 }
                                 else
                                 {
-                                    let a = UIAlertView()
-                                    a.message = "Failed"
-                                    a.title = "Alert"
-                                    a.addButton(withTitle: "ok")
-                                    a.show()
+                                    let alert = SCLAlertView(appearance: appearance)
+                                    alert.showError("Error", subTitle: "Search Failed. Please try again.")
                                     self.indicator.stopAnimating()
                                 }
                             }
@@ -189,7 +194,9 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                 }
             else
             {
-                print("failed")
+                let alert = SCLAlertView(appearance: appearance)
+                alert.showError("Error", subTitle: "Search Failed. Please try again.")
+                self.indicator.stopAnimating()
             }
         }
         
@@ -234,7 +241,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
         indicator.isHidden = true
         
-      
+        
+        
         scheduledTimerWithTimeInterval()
         //LOCATION CRAP
         locationManager = CLLocationManager()

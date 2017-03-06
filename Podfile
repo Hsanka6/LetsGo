@@ -23,7 +23,7 @@ pod 'Cheetah', '~> 0.4'
 pod 'Hue'
 pod 'RevealingSplashView'
 pod 'SCLAlertView'
-
+pod 'FillableLoaders', '~>1.3.0'
 
 
 

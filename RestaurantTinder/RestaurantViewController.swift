@@ -54,7 +54,6 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var currentLon:Double! = 0.0
     @IBOutlet var restaurantIcon: UIImageView!
     @IBOutlet var nameLabel: UILabel!
-    @IBOutlet var storeOpenClosedLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     @IBOutlet var ratingLabel: UILabel!
     
@@ -146,14 +145,14 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 self.ratingLabel.text = String(json["response"]["venue"]["rating"].doubleValue)
                 
-                if json["response"]["venue"]["popular"]["isOpen"].boolValue == true
-                {
-                    self.storeOpenClosedLabel.text = "Open"
-                }
-                else
-                {
-                    self.storeOpenClosedLabel.text = "Closed"
-                }
+//                if json["response"]["venue"]["popular"]["isOpen"].boolValue == true
+//                {
+//                    self.storeOpenClosedLabel.text = "Open"
+//                }
+//                else
+//                {
+//                    self.storeOpenClosedLabel.text = "Closed"
+//                }
                 while a < 5
                 {
                     var name: String = json["response"]["venue"]["tips"]["groups"][0]["items"][a]["user"]["firstName"].stringValue

@@ -8,6 +8,7 @@
 import UIKit
 import Kingfisher
 import QuartzCore
+import SCLAlertView
 
 class SwipeViewController: UIViewController {
     
@@ -25,6 +26,35 @@ class SwipeViewController: UIViewController {
     var currentLat = 0.0
     var currentLon = 0.0
     
+    @IBAction func endButton(_ sender: Any)
+    {
+        
+        var i = 0
+        while( i < self.yesNoArray.count - 1)
+        {
+            print("hereeeee")
+            
+            if self.verifyUrl(urlString: self.yesNoArray[i]) == false
+            {
+                print("ee")
+                
+                self.yesNoArray[i] = "NO"
+                print(self.yesNoArray[i])
+                
+                
+            }
+            i += 1
+        }
+        print(self.yesNoArray)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5)
+        {
+            
+            print(self.yesNoArray)
+            self.performSegue(withIdentifier: "end", sender: self.yesNoArray)
+        }
+        
+        
+    }
     
     
     
@@ -32,6 +62,7 @@ class SwipeViewController: UIViewController {
     {
         self.performSegue(withIdentifier: "clear", sender: self.imgs)
     }
+    
     
     
     
@@ -43,13 +74,24 @@ class SwipeViewController: UIViewController {
             if let destination = segue.destination as? SearchPageController
             {
                 destination.pics = []
-                print("sender \(sender)")
             }
         }
-        else if segue.identifier == "SendTopData"
+        
+        if segue.identifier == "end"
         {
             if let destination = segue.destination as? TopRestaurantsController
             {
+                destination.yesNo = yesNoArray
+                print("got in there")
+                print(destination.yesNo)
+            }
+            
+        }
+        if segue.identifier == "SendTopData"
+        {
+            if let destination = segue.destination as? TopRestaurantsController
+            {
+                destination.yesNo = yesNoArray
                 if store1 != ""
                 {
                     destination.storeId1 = store1
@@ -90,7 +132,6 @@ class SwipeViewController: UIViewController {
                 {
                     store5 = "NULL"
                 }
-                destination.yesNo = yesNoArray
                 
                 if currentLat == 0
                 {
@@ -181,11 +222,17 @@ class SwipeViewController: UIViewController {
         
         if(imgs.count == 0)
         {
-            let alert = UIAlertView()
-            alert.message = "Failed to find restaurants for your search"
-            alert.title = "Search Error"
-            alert.addButton(withTitle: "OK")
-            alert.show()
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "Avenir", size: 20)!,
+                kTextFont: UIFont(name: "Avenir", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: true
+            )
+            
+            let alert = SCLAlertView(appearance: appearance)
+            
+            alert.showError("Error", subTitle: "No Images Found.")
+            
         }
         else
         {
@@ -241,6 +288,7 @@ class SwipeViewController: UIViewController {
                             }
                             else
                             {
+                                
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
                                 {
 
