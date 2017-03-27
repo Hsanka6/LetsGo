@@ -21,13 +21,9 @@ class FullScreenViewController: UIViewController
     var imgs = [String]()
     var restaurantId:String! = ""
     var miles:Double! = 0.0
-    
+    var numRows:Int = 0
     
     var topRestaurants = [Restaurant]()
-    
-    
-    
-    
     
     
     @IBOutlet var imageView: UIImageView!
@@ -43,8 +39,10 @@ class FullScreenViewController: UIViewController
 
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 5
-        let aString = "350x350"
-        let newString = imgUrl.replacingOccurrences(of: "250x250", with: aString, options: .literal, range: nil)
+        let aString = "300x300"
+        let newString = imgUrl.replacingOccurrences(of: "105x105", with: aString, options: .literal, range: nil)
+        print("new string")
+        print(newString)
         let imgString = URL(string: newString)
         imageView.kf.setImage(with: imgString)
     }
@@ -54,7 +52,7 @@ class FullScreenViewController: UIViewController
         {
             if let destination = segue.destination as? RestaurantViewController
             {
-                if let lat = sender as? Double
+                if (sender as? Double) != nil
                 {
                     destination.currentLat =  currentLat
                     destination.currentLon = currentLon
@@ -63,7 +61,7 @@ class FullScreenViewController: UIViewController
                     destination.restId = restaurantId
                     destination.pics = imgs
                     destination.miles = miles
-                    
+                    destination.numRows = numRows
                     destination.topRestaurants = topRestaurants
                     
                     

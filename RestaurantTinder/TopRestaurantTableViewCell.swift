@@ -2,7 +2,7 @@
 //  TopRestaurantTableViewCell.swift
 //  RestaurantTinder
 //
-//  Created by ganga sanka on 1/4/17.
+//  Created by Haasith Sanka on 1/4/17.
 //  Copyright © 2017 haasith. All rights reserved.
 //
 

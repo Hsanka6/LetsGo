@@ -2,7 +2,7 @@
 //  SwipeViewController.swift
 //  RestaurantTinder
 //
-//  Created by ganga sanka on 12/29/16.
+//  Created by Haasith Sanka on 12/29/16.
 //  Copyright © 2016 haasith. All rights reserved.
 //
 import UIKit
@@ -25,35 +25,41 @@ class SwipeViewController: UIViewController {
     var store5:String! = ""
     var currentLat = 0.0
     var currentLon = 0.0
+    var numRows:Int = 0
     
     @IBAction func endButton(_ sender: Any)
     {
         
-        var i = 0
-        while( i < self.yesNoArray.count - 1)
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        //let alertViewIcon = UIImage(named: "finalLogo")
+        alertView.addButton("Confirm", target:self, selector:#selector(SwipeViewController.End))
+        alertView.addButton("Cancel") {
+            alertView.dismiss(animated: true, completion: nil)
+        }
+        alertView.showWait("Warning", subTitle: "Are you sure you want to skip swiping? Results won't be personalized")
+        
+        
+        
+    }
+    
+    
+    func End() {
+        while(i < yesNoArray.count)
         {
-            print("hereeeee")
-            
-            if self.verifyUrl(urlString: self.yesNoArray[i]) == false
+            if self.verifyUrl(urlString: self.yesNoArray[i]) == true
             {
-                print("ee")
-                
                 self.yesNoArray[i] = "NO"
-                print(self.yesNoArray[i])
-                
-                
+            }
+            else
+            {
+                print("this is a restaurant")
             }
             i += 1
         }
-        print(self.yesNoArray)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5)
-        {
-            
-            print(self.yesNoArray)
-            self.performSegue(withIdentifier: "end", sender: self.yesNoArray)
-        }
-        
-        
+        self.performSegue(withIdentifier: "SendTopData", sender: nil)
     }
     
     
@@ -92,6 +98,9 @@ class SwipeViewController: UIViewController {
             if let destination = segue.destination as? TopRestaurantsController
             {
                 destination.yesNo = yesNoArray
+                destination.numRows = numRows
+                
+                
                 if store1 != ""
                 {
                     destination.storeId1 = store1
@@ -174,18 +183,20 @@ class SwipeViewController: UIViewController {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(wasDragged))
         Picture.addGestureRecognizer(gesture)
         Picture.isUserInteractionEnabled = true
-        if restaurant[0] != "" && restaurant.count > 0
+        print("these are restaurant ids")
+        print(restaurant)
+        
+        
+        
+        if restaurant.count >= 1
         {
             store1 = restaurant[0]
+            
         }
-        else
-        {
-            store1 = "NULL"
-        }
-        
         if restaurant.count >= 2
         {
             store2 = restaurant[1]
+            
         }
         else
         {
@@ -195,6 +206,7 @@ class SwipeViewController: UIViewController {
         if restaurant.count >= 3
         {
             store3 = restaurant[2]
+            
         }
         else
         {
@@ -204,19 +216,23 @@ class SwipeViewController: UIViewController {
         if restaurant.count >= 4
         {
             store4 = restaurant[3]
+            
         }
         else
         {
             store4 = "NULL"
         }
+        
         if restaurant.count >= 5
         {
             store5 = restaurant[4]
+            
         }
         else
         {
             store5 = "NULL"
         }
+        
         
         
         
@@ -350,6 +366,7 @@ class SwipeViewController: UIViewController {
             label.center = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
             
             i = i + 1
+            print(yesNoArray)
         }
         
     }

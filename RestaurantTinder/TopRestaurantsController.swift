@@ -2,10 +2,9 @@
 //  TopRestaurantsController.swift
 //  RestaurantTinder
 //
-//  Created by ganga sanka on 1/3/17.
+//  Created by Haasith Sanka on 1/3/17.
 //  Copyright © 2017 haasith. All rights reserved.
 //
-
 import UIKit
 import GoogleMaps
 import Alamofire
@@ -14,7 +13,7 @@ import CoreLocation
 import Alamofire_Synchronous
 
 class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate{
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -65,6 +64,8 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
     
     var milesAway:Double! = 0.0
     
+    var numRows:Int! = 0
+    
     
     @IBOutlet var transparent: UIView!
     
@@ -74,17 +75,20 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         tableView.delegate = self
         tableView.dataSource = self
         
+        print("this is yesNo")
+        print(yesNo)
         
-//        let gradient = CAGradientLayer()
-//        
-//        gradient.frame = view.bounds
-//        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
-//        
-//        transparent.layer.insertSublayer(gradient, at: 0)
-//        
+        //        let gradient = CAGradientLayer()
+        //
+        //        gradient.frame = view.bounds
+        //        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
+        //
+        //        transparent.layer.insertSublayer(gradient, at: 0)
+        //
         var i = 0
         while i < yesNo.count
         {
+            print("for index")
             if yesNo[i] == storeId1
             {
                 print("index 1 is")
@@ -121,8 +125,10 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         
         if storeId1 != "NULL" && index1 != 0
         {
+            print("success1")
             store1.append(contentsOf: yesNo[0...index1-1])
             score1 = getScore(store: store1)
+            print(score1)
             orderedRestaurant[storeId1] = score1
         }
         else
@@ -136,9 +142,12 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         
         if storeId2 != "NULL" && index2 != 0 && index2 - index1 > 1
         {
+            
+            print("success2")
             store2.append(contentsOf: yesNo[index1+1...index2-1])
             score2 = getScore(store: store2)
             orderedRestaurant[storeId2] = score2
+            print(score2)
         }
         else
         {
@@ -151,6 +160,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         if storeId3 != "NULL" && index3 != 0 && index3 - index2 > 1
         {
             
+            print("success3")
             store3.append(contentsOf: yesNo[index2+1...index3-1])
             score3 = getScore(store: store3)
             
@@ -168,6 +178,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         if storeId4 != "NULL" && index4 != 0 && index4 - index3 > 1
         {
             
+            print("success4")
             store4.append(contentsOf: yesNo[index3+1...index4-1])
             score4 = getScore(store: store4)
             
@@ -183,7 +194,8 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         
         if storeId5 != "NULL" && index5 != 0 && index5 - index4 > 1
         {
-                    
+            
+            print("success5")
             store5.append(contentsOf: yesNo[index4+1...index5-1])
             score5 = getScore(store: store5)
             orderedRestaurant[storeId5] = score5
@@ -199,24 +211,30 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         
         var orderRestaurant = [String]()
         
-        orderRestaurant = putRestaurantsInOrder(dictionary: orderedRestaurant)
-        print(orderRestaurant)
         
+        print(orderedRestaurant)
+        
+        
+        orderRestaurant = putRestaurantsInOrder(dictionary: orderedRestaurant)
+        //topRestaurants =
         
         var o = 0
         
         
-            while o < orderRestaurant.count
-            {
-                self.getRestaurants(id: orderRestaurant[o])
-                o = o + 1
-            }
+        while o < orderRestaurant.count
+        {
+            print("ordering")
+            self.getRestaurants(id: orderRestaurant[o])
+            o = o + 1
+        }
         
+        print("top restaurants")
+        print(topRestaurants)
         
         //curvedView.layer.masksToBounds = true
         //curvedView.layer.cornerRadius = 5
         
-                
+        
     }
     
     
@@ -240,7 +258,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         {
             
             let response = Alamofire.request("https://api.foursquare.com/v2/venues/\(id)?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815", parameters:nil).responseJSON()
-            if let j = response.result.value
+            if response.result.value != nil
             {
                 print("sync")
                 let json = JSON(response.result.value!)
@@ -265,8 +283,8 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 r = Restaurant(name: name,checkIns: check,rating: ratings,milesAway: distanceAway, imageUrl: url, id:restId, lat: lat, lon: lon)
                 
                 self.topRestaurants.append(r)
-               }
-
+            }
+            
         }
         
     }
@@ -279,18 +297,19 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         Store = store
         var StoreInts = [Int]()
         var j = 0
-                while j < store.count
-                {
-                    if store[j] == "NO"
-                    {
-                        Store[j] = "0"
-                    }
-                    else
-                    {
-                        Store[j] = "1"
-                    }
-                    j = j + 1
-                }
+        while j < store.count
+        {
+            print("score limit")
+            if store[j] == "NO"
+            {
+                Store[j] = "0"
+            }
+            else
+            {
+                Store[j] = "1"
+            }
+            j = j + 1
+        }
         var a = 0
         var score:Int = 0
         while a < store.count
@@ -315,7 +334,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         
         let milesAway:Double = distanceInMeters/1609.0
         
-      return milesAway
+        return milesAway
     }
     
     
@@ -325,42 +344,8 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         return 1
     }
     
-    var numRows:Int! = 0
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if (storeId1 != "NULL" && storeId2 == "NULL" && storeId3 == "NULL" && storeId4 == "NULL"  && storeId5 == "NULL")
-        {
-            numRows = 1
-            
-        }
-        
-        else if (storeId1 != "NULL" && storeId2 != "NULL" && storeId3 == "NULL" && storeId4 == "NULL"  && storeId5 == "NULL")
-        {
-            numRows = 2
-            
-        }
-        
-        else if (storeId1 != "NULL" && storeId2 != "NULL" && storeId3 != "NULL" && storeId4 == "NULL"  && storeId5 == "NULL")
-        {
-            numRows = 3
-            
-        }
-        
-        else if (storeId1 != "NULL" && storeId2 != "NULL" && storeId3 != "NULL" && storeId4 != "NULL"  && storeId5 == "NULL")
-        {
-            numRows = 4
-            
-        }
-            
-        else if (storeId1 != "NULL" && storeId2 != "NULL" && storeId3 != "NULL" && storeId4 != "NULL"  && storeId5 != "NULL")
-        {
-            numRows = 5
-            
-        }
-        else
-        {
-            numRows = 0
-        }
         return numRows
         
         
@@ -369,9 +354,10 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TopRestaurantTableViewCell
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//        DispatchQueue.main.async {
+            print("error becuase of cell for")
             cell.setUp(restaurantName: self.topRestaurants[indexPath.row].getName, Rating: self.topRestaurants[indexPath.row].getRating, MilesAway: self.topRestaurants[indexPath.row].getMilesAway, CheckIns: self.topRestaurants[indexPath.row].getCheckIns, ImageUrl: self.topRestaurants[indexPath.row].getImageUrl)/*, lat: self.topRestaurants[indexPath.row].getLat, lon: self.topRestaurants[indexPath.row]*/
-        }
+        //}
         return cell
     }
     
@@ -406,7 +392,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 destination.store5 = storeId5
                 destination.numRows = numRows
                 
-             }
+            }
         }
     }
 }
@@ -419,7 +405,6 @@ extension UIColor {
         if hexString.hasPrefix("#") {
             let start = hexString.index(hexString.startIndex, offsetBy: 1)
             let hexColor = hexString.substring(from: start)
-            
             if hexColor.characters.count == 8 {
                 let scanner = Scanner(string: hexColor)
                 var hexNumber: UInt64 = 0
@@ -439,5 +424,3 @@ extension UIColor {
         return nil
     }
 }
-
-

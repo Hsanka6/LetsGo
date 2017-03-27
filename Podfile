@@ -25,6 +25,9 @@ pod 'Hue'
 pod 'RevealingSplashView'
 pod 'SCLAlertView'
 pod 'NVActivityIndicatorView'
+pod 'ImageSlideshow'
+
+#pod 'TGLParallaxCarousel'
 
 
 

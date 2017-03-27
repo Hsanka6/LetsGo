@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  RestaurantTinder
 //
-//  Created by ganga sanka on 12/28/16.
+//  Created by Haasith Sanka on 12/28/16.
 //  Copyright © 2016 haasith. All rights reserved.
 //
 
@@ -26,16 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyASRZ7-pV8qiCohTZhbTdthrHwthtmGQ_I")
         
         
-//        if let root = UIApplication.shared.windows[0].rootViewController as? UINavigationController {
-//            print("ughhhh")
-//            if (FBSDKAccessToken.current()) == nil {
-//                root.viewControllers = [ViewController()]
-//                print("ugh")
-//            } else {
-//                root.viewControllers = [SearchPageController()]
-//                print("here")
-//            }
-//        }
         return true
     }
 

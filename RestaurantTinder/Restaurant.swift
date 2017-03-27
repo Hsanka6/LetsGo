@@ -2,7 +2,7 @@
 //  Restaurant.swift
 //  RestaurantTinder
 //
-//  Created by ganga sanka on 12/29/16.
+//  Created by Haasith Sanka on 12/29/16.
 //  Copyright © 2016 haasith. All rights reserved.
 //
 
@@ -73,7 +73,8 @@ class Restaurant
 
     var getImageUrl:String
     {
-        if imageUrl.characters.count == 0
+        if imageUrl.characters.count ==
+            0
         {
             imageUrl = ""
         }

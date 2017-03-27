@@ -4,12 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Let&apos;s Go</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<string>NO</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.haasith.letsgo</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -33,6 +33,8 @@
 	<string>224670101314770</string>
 	<key>FacebookDisplayName</key>
 	<string>RestaurantTinder</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<string>NO</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

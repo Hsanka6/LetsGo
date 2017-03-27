@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.haasith.RestaurantTinder</string>
+	<string>com.haasith.letsgo</string>
 	<key>PROJECT_ID</key>
 	<string>restauranttinder</string>
 	<key>STORAGE_BUCKET</key>
@@ -36,5 +36,7 @@
 	<string>1:35884266482:ios:c1faa8a83d33b64e</string>
 	<key>DATABASE_URL</key>
 	<string>https://restauranttinder.firebaseio.com</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 </dict>
 </plist>

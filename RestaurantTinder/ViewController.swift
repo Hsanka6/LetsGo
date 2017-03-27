@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  RestaurantTinder
 //
-//  Created by ganga sanka on 12/28/16.
+//  Created by Haasith Sanka on 12/28/16.
 //  Copyright © 2016 haasith. All rights reserved.
 //
 

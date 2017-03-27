@@ -11,9 +11,7 @@
 		52676025D536B2F5B0BCB5A3 /* Pods_RestaurantTinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC9089FDD15DB40767AC91B6 /* Pods_RestaurantTinderUITests.framework */; };
 		70078C9F1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */; };
 		7037BCD21E2ADBBB00541877 /* TipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */; };
-		703C833C1E6CF3C600E49872 /* NSBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703C833B1E6CF3C600E49872 /* NSBadge.swift */; };
 		707B73921E67F93100EC4B11 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707B73911E67F93100EC4B11 /* FullScreenViewController.swift */; };
-		70D0503D1E61A1A500579C3A /* LFTPulseAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D0503C1E61A1A500579C3A /* LFTPulseAnimation.swift */; };
 		771BFFC31E14B3F500CD53F6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */; };
 		771BFFC41E14B3F500CD53F6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */; };
 		771BFFC51E14B3F500CD53F6 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC21E14B3F500CD53F6 /* FBSDKShareKit.framework */; };
@@ -56,9 +54,7 @@
 		389D56C85EBDCA6D276F210B /* Pods-RestaurantTinderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinderUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinderUITests/Pods-RestaurantTinderUITests.release.xcconfig"; sourceTree = "<group>"; };
 		70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipTableViewCell.swift; sourceTree = "<group>"; };
-		703C833B1E6CF3C600E49872 /* NSBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSBadge.swift; sourceTree = "<group>"; };
 		707B73911E67F93100EC4B11 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
-		70D0503C1E61A1A500579C3A /* LFTPulseAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFTPulseAnimation.swift; sourceTree = "<group>"; };
 		771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		771BFFC21E14B3F500CD53F6 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKShareKit.framework"; sourceTree = "<group>"; };
@@ -136,6 +132,27 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		70EB8D561E851F1000B38D13 /* RestaurantView */ = {
+			isa = PBXGroup;
+			children = (
+				7799735F1E20F63C0039B958 /* RestaurantViewController.swift */,
+				7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */,
+				707B73911E67F93100EC4B11 /* FullScreenViewController.swift */,
+				77F84F0D1E15B230000B3531 /* Restaurant.swift */,
+				70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */,
+			);
+			name = RestaurantView;
+			sourceTree = "<group>";
+		};
+		70EB8D581E851F7E00B38D13 /* TopRestaurant */ = {
+			isa = PBXGroup;
+			children = (
+				77BF8BC11E1DB103005969E3 /* TopRestaurantTableViewCell.swift */,
+				778270751E1BB667008F6E34 /* TopRestaurantsController.swift */,
+			);
+			name = TopRestaurant;
+			sourceTree = "<group>";
+		};
 		772310B21E14AF95003539BA = {
 			isa = PBXGroup;
 			children = (
@@ -161,8 +178,9 @@
 		772310BD1E14AF96003539BA /* RestaurantTinder */ = {
 			isa = PBXGroup;
 			children = (
+				70EB8D581E851F7E00B38D13 /* TopRestaurant */,
+				70EB8D561E851F1000B38D13 /* RestaurantView */,
 				77F84F131E15CEDC000B3531 /* RestaurantTinder.entitlements */,
-				70D0503C1E61A1A500579C3A /* LFTPulseAnimation.swift */,
 				772310BE1E14AF96003539BA /* AppDelegate.swift */,
 				772310C01E14AF96003539BA /* ViewController.swift */,
 				772310C21E14AF96003539BA /* Main.storyboard */,
@@ -171,15 +189,7 @@
 				772310C71E14AF96003539BA /* LaunchScreen.storyboard */,
 				772310CA1E14AF96003539BA /* Info.plist */,
 				771BFFCA1E1509C300CD53F6 /* SearchPageController.swift */,
-				77F84F0D1E15B230000B3531 /* Restaurant.swift */,
 				77F84F0F1E15C6A2000B3531 /* SwipeViewController.swift */,
-				703C833B1E6CF3C600E49872 /* NSBadge.swift */,
-				778270751E1BB667008F6E34 /* TopRestaurantsController.swift */,
-				77BF8BC11E1DB103005969E3 /* TopRestaurantTableViewCell.swift */,
-				7799735F1E20F63C0039B958 /* RestaurantViewController.swift */,
-				7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */,
-				70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */,
-				707B73911E67F93100EC4B11 /* FullScreenViewController.swift */,
 			);
 			path = RestaurantTinder;
 			sourceTree = "<group>";
@@ -509,8 +519,6 @@
 				772310C11E14AF96003539BA /* ViewController.swift in Sources */,
 				772310BF1E14AF96003539BA /* AppDelegate.swift in Sources */,
 				778270761E1BB667008F6E34 /* TopRestaurantsController.swift in Sources */,
-				703C833C1E6CF3C600E49872 /* NSBadge.swift in Sources */,
-				70D0503D1E61A1A500579C3A /* LFTPulseAnimation.swift in Sources */,
 				77BF8BC21E1DB103005969E3 /* TopRestaurantTableViewCell.swift in Sources */,
 				7037BCD21E2ADBBB00541877 /* TipTableViewCell.swift in Sources */,
 				70078C9F1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift in Sources */,
@@ -611,7 +619,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -655,7 +663,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -672,11 +680,12 @@
 				CODE_SIGN_ENTITLEMENTS = RestaurantTinder/RestaurantTinder.entitlements;
 				DEVELOPMENT_TEAM = GNMSVT9QR6;
 				INFOPLIST_FILE = RestaurantTinder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haasith.letsgo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -688,11 +697,12 @@
 				CODE_SIGN_ENTITLEMENTS = RestaurantTinder/RestaurantTinder.entitlements;
 				DEVELOPMENT_TEAM = GNMSVT9QR6;
 				INFOPLIST_FILE = RestaurantTinder/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.haasith.letsgo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

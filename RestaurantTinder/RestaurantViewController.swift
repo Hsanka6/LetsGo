@@ -2,7 +2,7 @@
 //  RestaurantViewController.swift
 //  RestaurantTinder
 //
-//  Created by ganga sanka on 1/7/17.
+//  Created by Haasith sanka on 1/7/17.
 //  Copyright © 2017 haasith. All rights reserved.
 //
 
@@ -13,6 +13,10 @@ import GoogleMaps
 import CoreLocation
 import MessageUI
 import QuartzCore
+import Social
+import FBSDKShareKit
+import QuartzCore
+import SCLAlertView
 
 
 class RestaurantViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,MFMessageComposeViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -29,10 +33,13 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var store4:String! = ""
     var store5:String! = ""
     var numPics:Int! = 0
-    var numRows:Int! = 1
+    var numRows:Int! = 0
     var storePhone:String! = ""
+    @IBOutlet var reviewLabel: UIButton!
     
+    @IBOutlet var cardView: UIView!
     
+    @IBOutlet var transparentView: UIView!
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -57,7 +64,15 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else
         {
-            print("failed")
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "Avenir", size: 20)!,
+                kTextFont: UIFont(name: "Avenir", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: true)
+            
+            let alert = SCLAlertView(appearance: appearance)
+            alert.showError("Error", subTitle: "Calling Restaurant failed. Please Try Again")
+            
         }
         
     }
@@ -65,8 +80,34 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func shareButton(_ sender: Any)
     {
+//        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
+//        {
+//            let fbshare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//            fbshare.setInitialText("share on facebook")
+//            self.present(fbshare,animated:true, completion:nil)
+//           
+//        }
+//        else
+//        {
+//            print("faield")
+//        }
+        
+        
+        
+        let message = "Download Lets Go on the App store now!\n"
+        let image = UIImage(named: "finalLogo")
+        let activityVC = UIActivityViewController(activityItems: [message,image as Any!], applicationActivities: nil)
+        
+        
+        
+        activityVC.popoverPresentationController?.sourceView = self.view
+        self.present(activityVC, animated: true, completion: nil)
+        
+        
+        
     }
     
+    @IBOutlet var Button: UIButton!
     
     var currentLat:Double! = 0.0
     var currentLon:Double! = 0.0
@@ -86,6 +127,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var pics = [String]()
     var imageString:String = ""
     var restName:String! = ""
+    var restAddress:String! = ""
     
     
     @IBAction func goButton(_ sender: Any)
@@ -96,17 +138,28 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else
         {
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "Avenir", size: 20)!,
+                kTextFont: UIFont(name: "Avenir", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: true)
+            
+            let alert = SCLAlertView(appearance: appearance)
+            alert.showError("Error", subTitle: "Failed To Open Google Maps. ")
+            
             NSLog("Can't use comgooglemaps://")
         }
     }
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        reviewLabel.isEnabled = false
+        reviewLabel.updateLayerProperties()
         
         restaurantIcon.layer.masksToBounds = true
         restaurantIcon.layer.cornerRadius = 5
         
-        
+        Button.updateLayerProperties()
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -114,6 +167,8 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        cardView.layer.masksToBounds = true
+        cardView.layer.cornerRadius = 5
         
         print("location current")
         print(currentLat)
@@ -128,6 +183,14 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         milesAway.text = String(format: "%.1f", miles) + " MI"
         doShit()
         
+        let transparent = UIColor(colorLiteralRed: 0/255, green: 0/255, blue: 0/255, alpha: 0.2)
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = transparentView.bounds
+        gradient.colors = [transparent, UIColor.white.cgColor]
+        
+        transparentView.layer.addSublayer(gradient)
+        
         
         
        // Do any additional setup after loading the view.
@@ -140,7 +203,11 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallURL))
             {
-                application.open(phoneCallURL, options: [:], completionHandler: nil)
+                if #available(iOS 10.0, *) {
+                    application.open(phoneCallURL, options: [:], completionHandler: nil)
+                } else {
+                    // Fallback on earlier versions
+                }
             }
         }
     }
@@ -314,7 +381,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                     destination.imgs = pics
                     destination.restaurantId = restId
                     destination.miles = miles
-                    
+                    destination.numRows = numRows
                     destination.topRestaurants = topRestaurants
                     
                     
@@ -328,7 +395,6 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        print("err")
         return numPics
     }
     
@@ -378,3 +444,15 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
 
 
 }
+
+extension UIButton
+{
+    func updateLayerProperties() {
+        self.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 10.0
+        self.layer.masksToBounds = false
+    }
+}
+
