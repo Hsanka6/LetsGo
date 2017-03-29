@@ -384,7 +384,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe Right to Like and Swipe left to Dislike" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHp-Qu-ezE">
-                                <rect key="frame" x="47" y="556" width="282" height="43"/>
+                                <rect key="frame" x="47" y="584" width="282" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="IjC-3S-GiA"/>
                                 </constraints>
@@ -399,7 +399,7 @@
                             <constraint firstItem="EuQ-F7-Ohx" firstAttribute="top" secondItem="De4-GU-1ji" secondAttribute="topMargin" id="7l7-SO-OeB"/>
                             <constraint firstItem="jIN-Xx-BTB" firstAttribute="top" relation="lessThanOrEqual" secondItem="EuQ-F7-Ohx" secondAttribute="bottom" constant="66" id="ICG-Gj-fNR"/>
                             <constraint firstItem="jIN-Xx-BTB" firstAttribute="centerX" secondItem="De4-GU-1ji" secondAttribute="centerX" id="KKI-C3-wQQ"/>
-                            <constraint firstItem="4uo-he-dqv" firstAttribute="top" secondItem="NHp-Qu-ezE" secondAttribute="bottom" constant="68" id="Lix-Lv-348"/>
+                            <constraint firstItem="4uo-he-dqv" firstAttribute="top" secondItem="NHp-Qu-ezE" secondAttribute="bottom" constant="40" id="Lix-Lv-348"/>
                             <constraint firstAttribute="trailing" secondItem="EuQ-F7-Ohx" secondAttribute="trailing" id="PgY-eF-13k"/>
                             <constraint firstItem="jIN-Xx-BTB" firstAttribute="centerY" secondItem="De4-GU-1ji" secondAttribute="centerY" id="YlJ-gK-xeF"/>
                             <constraint firstItem="kcc-9F-6k0" firstAttribute="centerY" secondItem="De4-GU-1ji" secondAttribute="centerY" id="ZvB-1J-8za"/>
