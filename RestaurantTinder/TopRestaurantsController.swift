@@ -354,10 +354,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TopRestaurantTableViewCell
         
-//        DispatchQueue.main.async {
-            print("error becuase of cell for")
             cell.setUp(restaurantName: self.topRestaurants[indexPath.row].getName, Rating: self.topRestaurants[indexPath.row].getRating, MilesAway: self.topRestaurants[indexPath.row].getMilesAway, CheckIns: self.topRestaurants[indexPath.row].getCheckIns, ImageUrl: self.topRestaurants[indexPath.row].getImageUrl)/*, lat: self.topRestaurants[indexPath.row].getLat, lon: self.topRestaurants[indexPath.row]*/
-        //}
         return cell
     }
     

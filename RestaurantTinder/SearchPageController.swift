@@ -27,7 +27,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     var lat:Double!
     var lon:Double!
     var searchQuery:String!
-    var foodArray = ["Pizza", "Chinese food", "Soup", "Mexican", "Burger","indian", "Italian","tacos"]
+    var foodArray = ["Pizza", "Chinese", "Soup", "Mexican", "Burger","indian", "Italian","tacos"]
     var pics = [String]()
     var restaurants = [String]()
     @IBOutlet var searchBar: SkyFloatingLabelTextFieldWithIcon!
@@ -43,8 +43,21 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     var rowNum:Int! = 0
     var alreadyError:Bool = false
     var activeField: UITextField?
-
     
+    
+    @IBAction func logOut(_ sender: Any)
+    {
+        let manager = FBSDKLoginManager()
+        manager.logOut()
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        performSegue(withIdentifier: "logout", sender: nil)
+        
+    }
     
     
     @IBOutlet var indicator: NVActivityIndicatorView!
@@ -110,25 +123,25 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {
             return
         }
-            print("uid coming up")
-            print(uid)
-            let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
+        print("uid coming up")
+        print(uid)
+        let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
         
         let userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches")
         userSearchReference.childByAutoId().setValue(values)
         FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                let value = snapshot.value as? NSDictionary
-                let name = (value?["name"] as? String)!
-                print("name",(name))
-                
-                let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":name] as [String : Any]
-                let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
-                totalSearchReference.childByAutoId().setValue(totalValues)
-                
-            })
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let name = (value?["name"] as? String)!
+            print("name",(name))
+            
+            let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":name] as [String : Any]
+            let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
+            totalSearchReference.childByAutoId().setValue(totalValues)
+            
+        })
         { (error) in
-                print(error.localizedDescription)
+            print(error.localizedDescription)
         }
         
         
@@ -146,49 +159,53 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
         makeRequest(request)
         
-            let appearance = SCLAlertView.SCLAppearance(
-                kTitleFont: UIFont(name: "Avenir", size: 20)!,
-                kTextFont: UIFont(name: "Avenir", size: 14)!,
-                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                showCloseButton: true)
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "Avenir", size: 20)!,
+            kTextFont: UIFont(name: "Avenir", size: 14)!,
+            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+            showCloseButton: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
+        {
+            print("this goes first")
+        if self.noRestBool == true
+        {
             
-            if self.noRestBool == true
-            {
-                
-                print("error")
-                
-                let alert = SCLAlertView(appearance: appearance)
-                alert.showError("Error", subTitle: "No Restaurants were found.3")
-                self.indicator.stopAnimating()
-                self.searchBar.text = ""
-                self.alreadyError = true
-                self.searchRestaurantsButton.isEnabled = true
-                
-                
-            }
+            print("error")
+            
+            let alert = SCLAlertView(appearance: appearance)
+            alert.showError("Error", subTitle: "No Restaurants were found.3")
+            self.indicator.stopAnimating()
+            self.searchBar.text = ""
+            self.alreadyError = true
+            self.searchRestaurantsButton.isEnabled = true
+            
+            
+        }
+        }
         
         if noRestBool == false
         {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2)
-        {
-            let appearance = SCLAlertView.SCLAppearance(
-                kTitleFont: UIFont(name: "Avenir", size: 20)!,
-                kTextFont: UIFont(name: "Avenir", size: 14)!,
-                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                showCloseButton: true)
-            
-            print("initially getting ids")
-            print(self.ids)
-            print(self.ids.count)
-            if self.ids.count <= 5
+            print("this goes second")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2)
             {
-                self.rowNum = self.ids.count
-                print("here yo")
-                for id in self.ids
+                let appearance = SCLAlertView.SCLAppearance(
+                    kTitleFont: UIFont(name: "Avenir", size: 20)!,
+                    kTextFont: UIFont(name: "Avenir", size: 14)!,
+                    kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                    showCloseButton: true)
+                
+                print("initially getting ids")
+                print(self.ids)
+                print(self.ids.count)
+                if self.ids.count <= 5
                 {
-                    print("getting pics")
-                    self.getPhotos(picsForIds: id)
-                }
+                    self.rowNum = self.ids.count
+                    print("here yo")
+                    for id in self.ids
+                    {
+                        print("getting pics")
+                        self.getPhotos(picsForIds: id)
+                    }
                     print("checking")
                     print(self.pics)
                     if self.pics.count > 0
@@ -217,65 +234,65 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                         self.searchRestaurantsButton.isEnabled = true
                         
                     }
-                
-            }
-            else
-            {
-                self.rowNum = 5
-                
-                var newIds = [String]()
-                var randNum = [Int]()
-                print("making random nums")
-                
-                randNum = self.getRandomNums(int: self.ids.count)
-                var f = 0
-                while(f < randNum.count)
-                {
-                    print(randNum[f])
-                    let getInt:Int! = randNum[f]
                     
-                    newIds.append(self.ids[getInt])
-                    print("f is ")
-                    print(f)
-                    f += 1
-                }
-                print("getting photos")
-                for id in newIds
-                {
-                    self.getPhotos(picsForIds: id)
-                }
-                
-                print("checking")
-                print(self.pics)
-                if self.pics.count > 0
-                {
-                    print("success")
-                    self.indicator.stopAnimating()
-                    self.performSegue(withIdentifier: "swipe", sender: self.pics)
-                    
-                }
-                else if self.alreadyError == true
-                {
-                    print("found no pics")
-                    self.searchBar.text = ""
-                    self.searchRestaurantsButton.isEnabled = true
-                    let alert = SCLAlertView(appearance: appearance)
-                    alert.showError("Error", subTitle: "No Restaurants were found. Please widen your search")
-                    self.indicator.stopAnimating()
                 }
                 else
                 {
-                    self.searchBar.text = ""
-                    self.searchRestaurantsButton.isEnabled = true
-                    let alert = SCLAlertView(appearance: appearance)
-                    alert.showError("Error", subTitle: "Please try again")
-                    self.indicator.stopAnimating()
+                    self.rowNum = 5
+                    
+                    var newIds = [String]()
+                    var randNum = [Int]()
+                    print("making random nums")
+                    
+                    randNum = self.getRandomNums(int: self.ids.count)
+                    var f = 0
+                    while(f < randNum.count)
+                    {
+                        print(randNum[f])
+                        let getInt:Int! = randNum[f]
+                        
+                        newIds.append(self.ids[getInt])
+                        print("f is ")
+                        print(f)
+                        f += 1
+                    }
+                    print("getting photos")
+                    for id in newIds
+                    {
+                        self.getPhotos(picsForIds: id)
+                    }
+                    
+                    print("checking")
+                    print(self.pics)
+                    if self.pics.count > 0
+                    {
+                        print("success")
+                        self.indicator.stopAnimating()
+                        self.performSegue(withIdentifier: "swipe", sender: self.pics)
+                        
+                    }
+                    else if self.alreadyError == true
+                    {
+                        print("found no pics")
+                        self.searchBar.text = ""
+                        self.searchRestaurantsButton.isEnabled = true
+                        let alert = SCLAlertView(appearance: appearance)
+                        alert.showError("Error", subTitle: "No Restaurants were found. Please widen your search")
+                        self.indicator.stopAnimating()
+                    }
+                    else
+                    {
+                        self.searchBar.text = ""
+                        self.searchRestaurantsButton.isEnabled = true
+                        let alert = SCLAlertView(appearance: appearance)
+                        alert.showError("Error", subTitle: "Please try again")
+                        self.indicator.stopAnimating()
+                    }
+                    
                 }
-                
             }
         }
-        }
-    
+        
     }
     var locationManager: CLLocationManager!
     
@@ -283,26 +300,26 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     func getPhotos(picsForIds:String)
     {
         let response = Alamofire.request("https://api.foursquare.com/v2/venues/\(picsForIds)/photos?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&limit=3", parameters:nil).responseJSON()
-                if((response.result.value) != nil)
-                {
-                    var secondJSON:JSON!
-                    secondJSON = JSON(response.result.value!)
-                    for (_,subJson):(String, JSON) in secondJSON["response"]["photos"]["items"]
-                    {
-                        var url: String = subJson["prefix"].stringValue
-                        url += "300x300"
-                        url += subJson["suffix"].stringValue
-                        self.pics.append(url)
-                        print("adding urls")
-                    }
-                    self.pics.append(picsForIds)
-                    self.restaurants.append(picsForIds)
-                    print("done adding urls")
-                }
-                else
-                {
-                    
-                }
+        if((response.result.value) != nil)
+        {
+            var secondJSON:JSON!
+            secondJSON = JSON(response.result.value!)
+            for (_,subJson):(String, JSON) in secondJSON["response"]["photos"]["items"]
+            {
+                var url: String = subJson["prefix"].stringValue
+                url += "300x300"
+                url += subJson["suffix"].stringValue
+                self.pics.append(url)
+                print("adding urls")
+            }
+            self.pics.append(picsForIds)
+            self.restaurants.append(picsForIds)
+            print("done adding urls")
+        }
+        else
+        {
+            
+        }
     }
     
     
@@ -313,21 +330,21 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
     {
         
         let response = Alamofire.request(url, parameters:nil).responseJSON()
-            if response.result.value != nil
+        if response.result.value != nil
+        {
+            let json = JSON(response.result.value!)
+            if json["response"]["venues"].isEmpty
             {
-                let json = JSON(response.result.value!)
-                if json["response"]["venues"].isEmpty
+                self.noRestBool = true
+                print("why here")
+            }
+            else
+            {
+                for(_,venueJSON):(String,JSON) in json["response"]["venues"]
                 {
-                    self.noRestBool = true
-                    print("why here")
-                }
-                else
-                {
-                    for(_,venueJSON):(String,JSON) in json["response"]["venues"]
-                    {
-                        let id: String = venueJSON["id"].stringValue
-                        
-                        Alamofire.request("https://api.foursquare.com/v2/venues/\(id)?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815").responseJSON
+                    let id: String = venueJSON["id"].stringValue
+                    
+                    Alamofire.request("https://api.foursquare.com/v2/venues/\(id)?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815").responseJSON
                         { responseJSON in
                             switch responseJSON.result
                             {
@@ -343,14 +360,19 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                                 print("there is an error with internet")
                                 
                             }
-                        }
                     }
                 }
+            }
         }
+        else
+        {
+            print("error")
+        }
+        print("in request")
     }
-
     
-
+    
+    
     
     
     
@@ -368,6 +390,13 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
                 
             }
         }
+        else if segue.identifier == "logout"
+        {
+            if let destination = segue.destination as? ViewController
+            {
+                destination.User = nil
+            }
+        }
         
     }
     
@@ -380,7 +409,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         self.hideKeyboardWhenTappedAround()
         ref = FIRDatabase.database().reference().child("total-searches")
         scheduledTimerWithTimeInterval()
-
+        
         
         
         
@@ -397,7 +426,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
         searchBar.iconFont = UIFont.fontAwesome(ofSize: 15)
         searchBar.iconText = String.fontAwesomeIcon(name: .cutlery)
-
+        
         searchQuery = searchBar.text
         
         searchRestaurantsButton.setImage(UIImage(named:"SurpriseMeButton"), for: .normal)
@@ -419,7 +448,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         
         
         
-
+        
     }
     var randomized = [Int]()
     
@@ -457,7 +486,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
             else if checker(int: someInt) == 2
             {
                 self.randomized.append(someInt)
-
+                
             }
         }
         print("done with getting randomized array")
@@ -511,53 +540,9 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         meters = miles * 1609
         return meters
     }
-//    
-//    func registerForKeyboardNotifications(){
-//        //Adding notifies on keyboard appearing
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//    }
-//    
-//    func deregisterFromKeyboardNotifications(){
-//        //Removing notifies on keyboard appearing
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//    }
-//    
-//    func keyboardWasShown(notification: NSNotification){
-//        //Need to calculate keyboard exact size due to Apple suggestions
-//        var info = notification.userInfo!
-//        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-//        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
-//        
-//        
-//        var aRect : CGRect = self.view.frame
-//        aRect.size.height -= keyboardSize!.height
-//        if let activeField = self.activeField {
-//            if (!aRect.contains(activeField.frame.origin)){
-//            }
-//        }
-//    }
-//    
-//    func keyboardWillBeHidden(notification: NSNotification){
-//        //Once keyboard disappears, restore original positions
-//        var info = notification.userInfo!
-//        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
-//        let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
-//        self.view.endEditing(true)
-//        
-//    }
-//    
-//    func textFieldDidBeginEditing(_ textField: UITextField){
-//        activeField = textField
-//    }
-//    
-//    func textFieldDidEndEditing(_ textField: UITextField){
-//        activeField = nil
-//    }
+       
     
     
-   
 }
 extension Array {
     func randomItem() -> Element {

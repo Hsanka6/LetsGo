@@ -36,9 +36,6 @@ class TopRestaurantTableViewCell: UITableViewCell {
     func setUp(restaurantName: String, Rating: Double, MilesAway: Double, CheckIns: Int, ImageUrl:String) {
         
         
-        let blue1 = hexStringToUIColor(hex: "#1982FF")
-        let yellow = hexStringToUIColor(hex: "#FF8A00")
-        let red = hexStringToUIColor(hex: "#FF165E")
         
 
         
@@ -53,6 +50,9 @@ class TopRestaurantTableViewCell: UITableViewCell {
         //1982FF blue
         
         name.text = restaurantName
+        let blue1 = hexStringToUIColor(hex: "#1982FF")
+        let yellow = hexStringToUIColor(hex: "#FF8A00")
+        let red = hexStringToUIColor(hex: "#FF165E")
         
         if Rating > 0 && Rating < 4
         {

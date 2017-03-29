@@ -48,7 +48,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     {
         let messageVC = MFMessageComposeViewController()
         
-        messageVC.body = "Meet me at " + restName!
+        messageVC.body = "Meet me at " + restName! + " Address:" + restAddress!
         messageVC.recipients = [""]
         messageVC.messageComposeDelegate = self;
         
@@ -156,10 +156,14 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         reviewLabel.isEnabled = false
         reviewLabel.updateLayerProperties()
         
+        ratingLabel.layer.masksToBounds = true
+        ratingLabel.layer.cornerRadius = 5
+        
         restaurantIcon.layer.masksToBounds = true
         restaurantIcon.layer.cornerRadius = 5
         
         Button.updateLayerProperties()
+        Button.isEnabled = false
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -237,12 +241,38 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 let imgUrl = URL(string: url)
                 
+                print("this is adreess")
+                print(json["response"]["venue"]["location"]["formattedAddress"][0].stringValue)
+                self.restAddress = json["response"]["venue"]["location"]["formattedAddress"][0].stringValue
+                
                 self.restaurantIcon.kf.setImage(with: imgUrl)
                 
                 
                 self.priceLabel.text = json["response"]["venue"]["price"]["currency"].stringValue
                 
                 self.ratingLabel.text = String(json["response"]["venue"]["rating"].doubleValue)
+                
+                let blue1 = self.hexStringToUIColor(hex: "#1982FF")
+                let yellow = self.hexStringToUIColor(hex: "#FF8A00")
+                let red = self.hexStringToUIColor(hex: "#FF165E")
+                
+                if json["response"]["venue"]["rating"].doubleValue > 0 && json["response"]["venue"]["rating"].doubleValue < 4
+                {
+                    self.ratingLabel.backgroundColor = red
+                }
+                else if json["response"]["venue"]["rating"].doubleValue >= 4 && json["response"]["venue"]["rating"].doubleValue < 7
+                {
+                    self.ratingLabel.backgroundColor = yellow
+                }
+                else
+                {
+                    self.ratingLabel.backgroundColor = blue1
+                }
+                
+                
+                
+                
+                
                 
 //                if json["response"]["venue"]["popular"]["isOpen"].boolValue == true
 //                {
@@ -284,8 +314,6 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                         var url: String = json["response"]["venue"]["photos"]["groups"][0]["items"][b]["prefix"].stringValue
                         url += "105x105"
                         url += json["response"]["venue"]["photos"]["groups"][0]["items"][b]["suffix"].stringValue
-                        print("b")
-                        print(b)
                         if url.isEmpty
                         {
                             self.pics.append("NULL")
@@ -440,6 +468,29 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         
     }
+    
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.characters.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
 
 
 
