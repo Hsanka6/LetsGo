@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Cheetah.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -65,11 +60,6 @@
 			<false/>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Hue.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -137,16 +127,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>27DBF649F060F27F1D1E1AEFDF4B3794</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2FD586BDF0355063EA0C8F4B8069B428</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
 		<dict>
 			<key>primary</key>
@@ -157,22 +137,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>40DBA7684749F6851229FE12C859E5E1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>576B83A022375DCCBDD99877D339934C</key>
+		<key>4C9576D72B181658A76CD5E990363061</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>593E9479C06FB200807D11AB29EB50BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BE84FF7F4DDEE1C8888876FE6C75022</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -187,17 +167,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8653501E7672B8278A6226F4DF604E13</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B2542602E50EDF091ADB18B4688DF34F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -222,12 +202,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CBD03097758923721F50AFBA8B2B15DB</key>
+		<key>DB232CB52366479FE92A7B77CE92A1E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E17077E1320A02C1A109CE036531A95F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -243,11 +228,6 @@
 			<true/>
 		</dict>
 		<key>F1883A945C236CDCF166DE672D76F89C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F2462BA726592BDA9B6792F284C86413</key>
 		<dict>
 			<key>primary</key>
 			<true/>

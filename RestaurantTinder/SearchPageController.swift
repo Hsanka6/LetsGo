@@ -21,7 +21,7 @@ import ImageSlideshow
 import Alamofire_Synchronous
 
 
-class SearchPageController: UIViewController,CLLocationManagerDelegate {
+class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFieldDelegate {
     var someLabel = UILabel()
     var timer = Timer()
     var lat:Double!
@@ -58,6 +58,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         performSegue(withIdentifier: "logout", sender: nil)
         
     }
+    
+    
     
     
     @IBOutlet var indicator: NVActivityIndicatorView!
@@ -97,7 +99,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         meters = getMeters(miles: sliderValue)
     }
     
-    
+    func getLocation()
+    {
+        UIApplication.shared.openURL(NSURL(string: UIApplicationOpenSettingsURLString)! as URL)
+
+    }
 
     @IBOutlet var searchRestaurantsButton: UIButton!
     
@@ -109,40 +115,205 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         //start animator
         indicator.isHidden = false
         indicator.startAnimating()
-        searchQuery = searchBar.text
-        if searchBar.text?.isEmpty == true
+        
+        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse)
         {
-            searchBar.text = foodArray.randomItem()
-            print(searchBar.text!)
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "Avenir", size: 20)!,
+                kTextFont: UIFont(name: "Avenir", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: false)
+            
+            let alert = SCLAlertView(appearance: appearance)
+            
+            alert.addButton("Go to Settings", target:self, selector:#selector(SearchPageController.getLocation))
+            alert.addButton("Cancel") {
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.showError("Error", subTitle: "Please Enable Location in Settings")
+            indicator.stopAnimating()
+            self.searchRestaurantsButton.isEnabled = true
+            
+            
+        }
+        else
+        {
             searchQuery = searchBar.text
-        }
-        let newString = searchQuery.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
-        
-        
-        //Upload each search to database
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
-            return
-        }
-        print("uid coming up")
-        print(uid)
-        let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
-        
-        let userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches")
-        userSearchReference.childByAutoId().setValue(values)
-        FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            let name = (value?["name"] as? String)!
-            print("name",(name))
+            if searchBar.text?.isEmpty == true
+            {
+                searchBar.text = foodArray.randomItem()
+                print(searchBar.text!)
+                searchQuery = searchBar.text
+            }
+            let newString = searchQuery.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+            //Upload each search to database
+            guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+                return
+            }
+            print("uid coming up")
+            print(uid)
+            let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
             
-            let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":name] as [String : Any]
-            let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
-            totalSearchReference.childByAutoId().setValue(totalValues)
+            let userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches")
+            userSearchReference.childByAutoId().setValue(values)
+            FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                let name = (value?["name"] as? String)!
+                print("name",(name))
+                
+                let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":name] as [String : Any]
+                let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
+                totalSearchReference.childByAutoId().setValue(totalValues)
+                
+            })
+            { (error) in
+                print(error.localizedDescription)
+            }
+            let request:String! = "https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=40&radius=\(meters)"
             
-        })
-        { (error) in
-            print(error.localizedDescription)
+            makeRequest(request)
+            
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "Avenir", size: 20)!,
+                kTextFont: UIFont(name: "Avenir", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: true)
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5)
+            {
+                if self.noRestBool == true
+                {
+                    print("error")
+                    let alert = SCLAlertView(appearance: appearance)
+                    alert.showError("Error", subTitle: "No Restaurants were found.")
+                    self.indicator.stopAnimating()
+                    self.searchBar.text = ""
+                    self.alreadyError = true
+                    self.searchRestaurantsButton.isEnabled = true
+                }
+            }
+            
+            if noRestBool == false
+            {
+                print("this goes second")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2)
+                {
+                    let appearance = SCLAlertView.SCLAppearance(
+                        kTitleFont: UIFont(name: "Avenir", size: 20)!,
+                        kTextFont: UIFont(name: "Avenir", size: 14)!,
+                        kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                        showCloseButton: true)
+                    
+                    print("initially getting ids")
+                    print(self.ids)
+                    print(self.ids.count)
+                    if self.ids.count <= 5
+                    {
+                        self.rowNum = self.ids.count
+                        print("here yo")
+                        for id in self.ids
+                        {
+                            print("getting pics")
+                            self.getPhotos(picsForIds: id)
+                        }
+                        print("checking")
+                        print(self.pics)
+                        if self.pics.count > 0
+                        {
+                            print("success")
+                            print(self.restaurants.count)
+                            self.indicator.stopAnimating()
+                            self.performSegue(withIdentifier: "swipe", sender: self.pics)
+                        }
+                        else if self.alreadyError == true
+                        {
+                            print("found no pics")
+                            self.searchBar.text = ""
+                            let alert = SCLAlertView(appearance: appearance)
+                            alert.showError("Error", subTitle: "No Restaurants were found. Please widen your search")
+                            self.indicator.stopAnimating()
+                            self.searchRestaurantsButton.isEnabled = true
+                            
+                        }
+                        else
+                        {
+                            self.searchBar.text = ""
+                            let alert = SCLAlertView(appearance: appearance)
+                            alert.showError("Error", subTitle: "Please try again")
+                            self.indicator.stopAnimating()
+                            self.searchRestaurantsButton.isEnabled = true
+                            
+                        }
+                        
+                    }
+                    else
+                    {
+                        self.rowNum = 5
+                        
+                        var newIds = [String]()
+                        var randNum = [Int]()
+                        print("making random nums")
+                        
+                        randNum = self.getRandomNums(int: self.ids.count)
+                        var f = 0
+                        while(f < randNum.count)
+                        {
+                            print(randNum[f])
+                            let getInt:Int! = randNum[f]
+                            
+                            newIds.append(self.ids[getInt])
+                            print("f is ")
+                            print(f)
+                            f += 1
+                        }
+                        print("getting photos")
+                        for id in newIds
+                        {
+                            self.getPhotos(picsForIds: id)
+                        }
+                        
+                        print("checking")
+                        print(self.pics)
+                        if self.pics.count > 0
+                        {
+                            print("success")
+                            self.indicator.stopAnimating()
+                            self.performSegue(withIdentifier: "swipe", sender: self.pics)
+                            
+                        }
+                        else if self.alreadyError == true
+                        {
+                            print("found no pics")
+                            self.searchBar.text = ""
+                            self.searchRestaurantsButton.isEnabled = true
+                            let alert = SCLAlertView(appearance: appearance)
+                            alert.showError("Error", subTitle: "No Restaurants were found. Please widen your search")
+                            self.indicator.stopAnimating()
+                        }
+                        else
+                        {
+                            self.searchBar.text = ""
+                            self.searchRestaurantsButton.isEnabled = true
+                            let alert = SCLAlertView(appearance: appearance)
+                            alert.showError("Error", subTitle: "Please try again")
+                            self.indicator.stopAnimating()
+                        }
+                        
+                    }
+                }
+            }
+            
+            
         }
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -153,145 +324,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         //
         //                                    }
         
-        let request:String! = "https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=40&radius=\(meters)"
-        
-        
-        
-        makeRequest(request)
-        
-        let appearance = SCLAlertView.SCLAppearance(
-            kTitleFont: UIFont(name: "Avenir", size: 20)!,
-            kTextFont: UIFont(name: "Avenir", size: 14)!,
-            kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-            showCloseButton: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0)
-        {
-            print("this goes first")
-        if self.noRestBool == true
-        {
-            
-            print("error")
-            
-            let alert = SCLAlertView(appearance: appearance)
-            alert.showError("Error", subTitle: "No Restaurants were found.3")
-            self.indicator.stopAnimating()
-            self.searchBar.text = ""
-            self.alreadyError = true
-            self.searchRestaurantsButton.isEnabled = true
-            
-            
-        }
-        }
-        
-        if noRestBool == false
-        {
-            print("this goes second")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2)
-            {
-                let appearance = SCLAlertView.SCLAppearance(
-                    kTitleFont: UIFont(name: "Avenir", size: 20)!,
-                    kTextFont: UIFont(name: "Avenir", size: 14)!,
-                    kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                    showCloseButton: true)
-                
-                print("initially getting ids")
-                print(self.ids)
-                print(self.ids.count)
-                if self.ids.count <= 5
-                {
-                    self.rowNum = self.ids.count
-                    print("here yo")
-                    for id in self.ids
-                    {
-                        print("getting pics")
-                        self.getPhotos(picsForIds: id)
-                    }
-                    print("checking")
-                    print(self.pics)
-                    if self.pics.count > 0
-                    {
-                        print("success")
-                        print(self.restaurants.count)
-                        self.indicator.stopAnimating()
-                        self.performSegue(withIdentifier: "swipe", sender: self.pics)
-                    }
-                    else if self.alreadyError == true
-                    {
-                        print("found no pics")
-                        self.searchBar.text = ""
-                        let alert = SCLAlertView(appearance: appearance)
-                        alert.showError("Error", subTitle: "No Restaurants were found. Please widen your search")
-                        self.indicator.stopAnimating()
-                        self.searchRestaurantsButton.isEnabled = true
-                        
-                    }
-                    else
-                    {
-                        self.searchBar.text = ""
-                        let alert = SCLAlertView(appearance: appearance)
-                        alert.showError("Error", subTitle: "Please try again")
-                        self.indicator.stopAnimating()
-                        self.searchRestaurantsButton.isEnabled = true
-                        
-                    }
-                    
-                }
-                else
-                {
-                    self.rowNum = 5
-                    
-                    var newIds = [String]()
-                    var randNum = [Int]()
-                    print("making random nums")
-                    
-                    randNum = self.getRandomNums(int: self.ids.count)
-                    var f = 0
-                    while(f < randNum.count)
-                    {
-                        print(randNum[f])
-                        let getInt:Int! = randNum[f]
-                        
-                        newIds.append(self.ids[getInt])
-                        print("f is ")
-                        print(f)
-                        f += 1
-                    }
-                    print("getting photos")
-                    for id in newIds
-                    {
-                        self.getPhotos(picsForIds: id)
-                    }
-                    
-                    print("checking")
-                    print(self.pics)
-                    if self.pics.count > 0
-                    {
-                        print("success")
-                        self.indicator.stopAnimating()
-                        self.performSegue(withIdentifier: "swipe", sender: self.pics)
-                        
-                    }
-                    else if self.alreadyError == true
-                    {
-                        print("found no pics")
-                        self.searchBar.text = ""
-                        self.searchRestaurantsButton.isEnabled = true
-                        let alert = SCLAlertView(appearance: appearance)
-                        alert.showError("Error", subTitle: "No Restaurants were found. Please widen your search")
-                        self.indicator.stopAnimating()
-                    }
-                    else
-                    {
-                        self.searchBar.text = ""
-                        self.searchRestaurantsButton.isEnabled = true
-                        let alert = SCLAlertView(appearance: appearance)
-                        alert.showError("Error", subTitle: "Please try again")
-                        self.indicator.stopAnimating()
-                    }
-                    
-                }
-            }
-        }
         
     }
     var locationManager: CLLocationManager!
@@ -410,6 +442,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         ref = FIRDatabase.database().reference().child("total-searches")
         scheduledTimerWithTimeInterval()
         
+        
+        searchBar.delegate = self
         
         
         
@@ -533,6 +567,13 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate {
         self.view.frame.origin.y += 100
         
     }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     
     func getMeters(miles: Int) -> Int
     {
