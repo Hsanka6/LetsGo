@@ -43,7 +43,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var rowNum:Int! = 0
     var alreadyError:Bool = false
     var activeField: UITextField?
-    var firstLaunchBool: Bool = true
+    var locationBool: Bool = false
+    
     
     
     @IBAction func logOut(_ sender: Any)
@@ -114,8 +115,40 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         //start animator
         indicator.isHidden = false
         indicator.startAnimating()
+        let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
-        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse || CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedAlways)
+        if CLLocationManager.locationServicesEnabled() {
+            switch(CLLocationManager.authorizationStatus()) {
+            case .notDetermined, .restricted, .denied:
+                locationBool = false
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("Access")
+                locationBool = true
+            }
+        }
+        else
+        {
+            print("Location services are not enabled")
+            let appearance = SCLAlertView.SCLAppearance(
+                kTitleFont: UIFont(name: "Avenir", size: 20)!,
+                kTextFont: UIFont(name: "Avenir", size: 14)!,
+                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
+                showCloseButton: false)
+            
+            let alert = SCLAlertView(appearance: appearance)
+            
+            alert.addButton("Go to Settings", target:self, selector:#selector(SearchPageController.getLocation))
+            alert.addButton("Cancel") {
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.showError("Error", subTitle: "Please Enable Location in Settings")
+            indicator.stopAnimating()
+            self.searchRestaurantsButton.isEnabled = true
+
+        }
+        
+        
+        if(locationBool == false)
         {
             let appearance = SCLAlertView.SCLAppearance(
                 kTitleFont: UIFont(name: "Avenir", size: 20)!,
@@ -137,6 +170,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         }
         else
         {
+            print("there is location")
             searchQuery = searchBar.text
             if searchBar.text?.isEmpty == true
             {
@@ -180,11 +214,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                 showCloseButton: true)
             
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0)
             {
                 if self.noRestBool == true
                 {
-                    print("error")
+                    print("error finding rests")
                     let alert = SCLAlertView(appearance: appearance)
                     alert.showError("Error", subTitle: "No Restaurants were found.")
                     self.indicator.stopAnimating()
@@ -366,8 +400,9 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             let json = JSON(response.result.value!)
             if json["response"]["venues"].isEmpty
             {
-                self.noRestBool = true
                 print("why here")
+                self.noRestBool = true
+                
             }
             else
             {
@@ -397,7 +432,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         }
         else
         {
-            print("error")
+            print("request error")
         }
         print("in request")
     }
@@ -445,6 +480,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         self.hideKeyboardWhenTappedAround()
         ref = FIRDatabase.database().reference().child("total-searches")
         scheduledTimerWithTimeInterval()
+        
+        
+       
+        
+        
         
         
         searchBar.delegate = self
