@@ -141,21 +141,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How far?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p6-SH-JYI">
-                                <rect key="frame" x="35" y="521" width="83" height="33"/>
+                                <rect key="frame" x="35" y="521" width="75" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="33" id="HBe-uH-CP7"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="What would you like to eat?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ee8-yy-dyd">
-                                <rect key="frame" x="16" y="434" width="343" height="39"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="What would you like to eat?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ee8-yy-dyd">
+                                <rect key="frame" x="12" y="433" width="350" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="L7v-rc-vIq"/>
-                                    <constraint firstAttribute="width" constant="343" id="avb-u0-ykA"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="27"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -278,6 +277,7 @@
                             <constraint firstItem="y6w-Ht-PpS" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="10" id="KEY-p8-NQS"/>
                             <constraint firstItem="y6w-Ht-PpS" firstAttribute="top" secondItem="9p6-SH-JYI" secondAttribute="bottom" constant="3" id="MJN-h5-QEd"/>
                             <constraint firstItem="9p6-SH-JYI" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="35" id="Njf-d4-l03"/>
+                            <constraint firstItem="Ee8-yy-dyd" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="12" id="PKk-58-klJ"/>
                             <constraint firstItem="ch8-8W-nHa" firstAttribute="top" secondItem="Ee8-yy-dyd" secondAttribute="bottom" constant="2" id="Q5e-lc-RJo"/>
                             <constraint firstItem="y6w-Ht-PpS" firstAttribute="top" secondItem="1DT-PH-y5c" secondAttribute="bottom" constant="3" id="Q6K-aJ-JRo"/>
                             <constraint firstItem="Spp-pY-fwp" firstAttribute="top" secondItem="G7M-gz-OuZ" secondAttribute="bottom" constant="125" id="T2m-LN-HQe"/>
@@ -285,6 +285,7 @@
                             <constraint firstItem="Spp-pY-fwp" firstAttribute="centerX" secondItem="eTK-c8-qDT" secondAttribute="centerX" id="Y82-Ie-z9s"/>
                             <constraint firstItem="Ee8-yy-dyd" firstAttribute="top" relation="lessThanOrEqual" secondItem="eck-IC-wnd" secondAttribute="bottom" constant="25" id="bSl-m3-0W5"/>
                             <constraint firstItem="hbD-vi-T0V" firstAttribute="top" secondItem="G7M-gz-OuZ" secondAttribute="bottom" constant="8" id="cyn-9G-0NE"/>
+                            <constraint firstAttribute="trailing" secondItem="Ee8-yy-dyd" secondAttribute="trailing" constant="12" id="dG4-wa-lEE"/>
                             <constraint firstItem="iL3-Id-UUD" firstAttribute="centerY" secondItem="eTK-c8-qDT" secondAttribute="centerY" id="g2E-bv-5ri"/>
                             <constraint firstItem="p6H-0V-uTa" firstAttribute="top" secondItem="y6w-Ht-PpS" secondAttribute="bottom" constant="5" id="h8y-ty-EL6"/>
                             <constraint firstItem="NyI-13-enJ" firstAttribute="top" secondItem="ch8-8W-nHa" secondAttribute="bottom" constant="7" id="htP-oc-tAB"/>

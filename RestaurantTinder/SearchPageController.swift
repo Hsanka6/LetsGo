@@ -115,7 +115,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         indicator.isHidden = false
         indicator.startAnimating()
         
-        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse)
+        if(CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedWhenInUse || CLLocationManager.authorizationStatus() != CLAuthorizationStatus.authorizedAlways)
         {
             let appearance = SCLAlertView.SCLAppearance(
                 kTitleFont: UIFont(name: "Avenir", size: 20)!,
