@@ -85,7 +85,7 @@ class ViewController: UIViewController
         indicator.isHidden = true
         
         
-        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "LogoType")!,iconInitialSize: CGSize(width: 120, height: 170), backgroundColor: UIColor.white)
+        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "finalLogo")!,iconInitialSize: CGSize(width: 120, height: 170), backgroundColor: UIColor.white)
         
         //revealingSplashView.animationType = SplashAnimationType.rotateOut
 
