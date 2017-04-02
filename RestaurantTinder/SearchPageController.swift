@@ -43,6 +43,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var rowNum:Int! = 0
     var alreadyError:Bool = false
     var activeField: UITextField?
+    var firstLaunchBool: Bool = true
     
     
     @IBAction func logOut(_ sender: Any)
@@ -58,8 +59,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         performSegue(withIdentifier: "logout", sender: nil)
         
     }
-    
-    
     
     
     @IBOutlet var indicator: NVActivityIndicatorView!
@@ -429,6 +428,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                 destination.User = nil
             }
         }
+        else if segue.identifier == "toIntro"
+        {
+            print("in segue")
+           
+        }
         
     }
     
@@ -445,7 +449,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
         searchBar.delegate = self
         
-        
+        //goes to intro screens
         
         //LOCATION CRAP
         locationManager = CLLocationManager()

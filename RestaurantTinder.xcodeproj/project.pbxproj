@@ -11,6 +11,7 @@
 		52676025D536B2F5B0BCB5A3 /* Pods_RestaurantTinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC9089FDD15DB40767AC91B6 /* Pods_RestaurantTinderUITests.framework */; };
 		70078C9F1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */; };
 		7037BCD21E2ADBBB00541877 /* TipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */; };
+		7043C3F61E90B92A0001BC8E /* IntroScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7043C3F51E90B92A0001BC8E /* IntroScreens.swift */; };
 		707B73921E67F93100EC4B11 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707B73911E67F93100EC4B11 /* FullScreenViewController.swift */; };
 		771BFFC31E14B3F500CD53F6 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */; };
 		771BFFC41E14B3F500CD53F6 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */; };
@@ -54,6 +55,7 @@
 		389D56C85EBDCA6D276F210B /* Pods-RestaurantTinderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantTinderUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RestaurantTinderUITests/Pods-RestaurantTinderUITests.release.xcconfig"; sourceTree = "<group>"; };
 		70078C9E1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		7037BCD11E2ADBBB00541877 /* TipTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipTableViewCell.swift; sourceTree = "<group>"; };
+		7043C3F51E90B92A0001BC8E /* IntroScreens.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroScreens.swift; sourceTree = "<group>"; };
 		707B73911E67F93100EC4B11 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		771BFFC01E14B3F500CD53F6 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		771BFFC11E14B3F500CD53F6 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../Downloads/FacebookSDKs-iOS-4.17.0 (1) 2/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				772310CA1E14AF96003539BA /* Info.plist */,
 				771BFFCA1E1509C300CD53F6 /* SearchPageController.swift */,
 				77F84F0F1E15C6A2000B3531 /* SwipeViewController.swift */,
+				7043C3F51E90B92A0001BC8E /* IntroScreens.swift */,
 			);
 			path = RestaurantTinder;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				778270761E1BB667008F6E34 /* TopRestaurantsController.swift in Sources */,
 				77BF8BC21E1DB103005969E3 /* TopRestaurantTableViewCell.swift in Sources */,
 				7037BCD21E2ADBBB00541877 /* TipTableViewCell.swift in Sources */,
+				7043C3F61E90B92A0001BC8E /* IntroScreens.swift in Sources */,
 				70078C9F1E67E8DB00C3A8D4 /* PhotoCollectionViewCell.swift in Sources */,
 				771BFFCB1E1509C300CD53F6 /* SearchPageController.swift in Sources */,
 				707B73921E67F93100EC4B11 /* FullScreenViewController.swift in Sources */,

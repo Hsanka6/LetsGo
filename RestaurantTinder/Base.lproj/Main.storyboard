@@ -98,6 +98,7 @@
                     <navigationItem key="navigationItem" title="Log In" id="b2T-db-sCa"/>
                     <connections>
                         <outlet property="indicator" destination="pXa-c1-g8l" id="Qyk-Yh-iVh"/>
+                        <segue destination="fZ3-ql-XH2" kind="show" identifier="Screens" id="OhM-Mj-Ywe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -256,6 +257,12 @@
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="logout" id="YGq-uv-buq"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="NyI-13-enJ">
+                                <rect key="frame" x="6" y="522" width="29" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="29" id="mRh-DW-ao5"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -280,10 +287,12 @@
                             <constraint firstItem="hbD-vi-T0V" firstAttribute="top" secondItem="G7M-gz-OuZ" secondAttribute="bottom" constant="8" id="cyn-9G-0NE"/>
                             <constraint firstItem="iL3-Id-UUD" firstAttribute="centerY" secondItem="eTK-c8-qDT" secondAttribute="centerY" id="g2E-bv-5ri"/>
                             <constraint firstItem="p6H-0V-uTa" firstAttribute="top" secondItem="y6w-Ht-PpS" secondAttribute="bottom" constant="5" id="h8y-ty-EL6"/>
+                            <constraint firstItem="NyI-13-enJ" firstAttribute="top" secondItem="ch8-8W-nHa" secondAttribute="bottom" constant="7" id="htP-oc-tAB"/>
                             <constraint firstItem="iL3-Id-UUD" firstAttribute="centerX" secondItem="eTK-c8-qDT" secondAttribute="centerX" id="kEm-pd-vsg"/>
                             <constraint firstAttribute="trailing" secondItem="p6H-0V-uTa" secondAttribute="trailing" id="qR3-7F-6tL"/>
                             <constraint firstItem="eck-IC-wnd" firstAttribute="top" secondItem="hbD-vi-T0V" secondAttribute="bottom" constant="10" id="qSF-V8-XTt"/>
                             <constraint firstAttribute="trailing" secondItem="y6w-Ht-PpS" secondAttribute="trailing" constant="10" id="qs5-BW-3op"/>
+                            <constraint firstItem="NyI-13-enJ" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="6" id="r1c-m7-Phx"/>
                             <constraint firstItem="vth-F4-hfP" firstAttribute="top" secondItem="p6H-0V-uTa" secondAttribute="bottom" id="skv-qk-cIe"/>
                             <constraint firstItem="hbD-vi-T0V" firstAttribute="centerX" secondItem="eTK-c8-qDT" secondAttribute="centerX" id="tww-GZ-3cH"/>
                             <constraint firstItem="1DT-PH-y5c" firstAttribute="top" secondItem="ch8-8W-nHa" secondAttribute="bottom" constant="6" id="zyg-VB-Hgb"/>
@@ -299,11 +308,74 @@
                         <outlet property="slideShow" destination="eck-IC-wnd" id="4uC-jH-QDE"/>
                         <outlet property="someView" destination="Spp-pY-fwp" id="xAI-Ed-Eml"/>
                         <segue destination="San-Az-7XX" kind="show" identifier="swipe" id="3DV-aJ-lsh"/>
+                        <segue destination="fZ3-ql-XH2" kind="show" identifier="toIntro" id="8rR-AX-JaD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lpw-uo-S3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3656.8000000000002" y="-634.632683658171"/>
+        </scene>
+        <!--Intro Screens-->
+        <scene sceneID="VxS-X9-UDf">
+            <objects>
+                <viewController id="fZ3-ql-XH2" customClass="IntroScreens" customModule="RestaurantTinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="roA-hv-E8J"/>
+                        <viewControllerLayoutGuide type="bottom" id="nCh-Sk-ovV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2hT-mn-gdx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZK-QU-gi1" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                <rect key="frame" x="0.0" y="73" width="375" height="594"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Introduction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16h-36-Bha">
+                                <rect key="frame" x="140" y="30" width="95" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="95" id="ItD-AI-bXm"/>
+                                    <constraint firstAttribute="height" constant="24" id="uX0-le-aA6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0a9-QT-DBf">
+                                <rect key="frame" x="319" y="30" width="30" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="fey-17-8hy"/>
+                                    <constraint firstAttribute="height" constant="25" id="xRL-X1-gnk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Skip">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="skipToApp:" destination="fZ3-ql-XH2" eventType="touchUpInside" id="kcf-hs-dBq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078431372549019607" green="0.098039215686274508" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="16h-36-Bha" firstAttribute="centerX" secondItem="2hT-mn-gdx" secondAttribute="centerX" id="7oG-df-3qI"/>
+                            <constraint firstItem="sZK-QU-gi1" firstAttribute="top" secondItem="0a9-QT-DBf" secondAttribute="bottom" constant="18" id="9jg-vo-MFr"/>
+                            <constraint firstAttribute="trailing" secondItem="sZK-QU-gi1" secondAttribute="trailing" id="VAP-yd-qe6"/>
+                            <constraint firstItem="sZK-QU-gi1" firstAttribute="leading" secondItem="2hT-mn-gdx" secondAttribute="leading" id="fee-cK-ZXW"/>
+                            <constraint firstItem="16h-36-Bha" firstAttribute="top" secondItem="roA-hv-E8J" secondAttribute="bottom" constant="10" id="hPH-45-ukx"/>
+                            <constraint firstItem="nCh-Sk-ovV" firstAttribute="top" secondItem="sZK-QU-gi1" secondAttribute="bottom" id="nqh-vP-c2z"/>
+                            <constraint firstItem="0a9-QT-DBf" firstAttribute="top" secondItem="roA-hv-E8J" secondAttribute="bottom" constant="10" id="pfL-o7-wty"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0a9-QT-DBf" secondAttribute="trailing" constant="10" id="v6C-gb-tia"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageScreens" destination="sZK-QU-gi1" id="c9Q-PL-RAk"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="Orig" id="tMa-ed-Anl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YIp-Jr-i3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3484" y="204"/>
         </scene>
         <!--Swipe Away!-->
         <scene sceneID="szo-FL-2f7">
@@ -617,7 +689,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u4U-ca-evd" id="psi-9n-jQF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3Q-hL-2UD">
@@ -993,11 +1065,14 @@
         <image name="foursquareLogo" width="477" height="65"/>
         <image name="goButton" width="706" height="133"/>
         <image name="goButtonRest" width="706" height="133"/>
+        <image name="location" width="25" height="25"/>
         <image name="whiteBack" width="29" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="YGq-uv-buq"/>
+        <segue reference="IvJ-8q-Dgd"/>
+        <segue reference="8rR-AX-JaD"/>
         <segue reference="fqB-Ig-OY2"/>
-        <segue reference="QOK-9Y-xQU"/>
         <segue reference="Fro-Az-cuK"/>
     </inferredMetricsTieBreakers>
 </document>

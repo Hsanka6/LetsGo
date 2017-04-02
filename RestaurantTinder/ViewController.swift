@@ -25,7 +25,23 @@ class ViewController: UIViewController
     @IBOutlet var indicator: NVActivityIndicatorView!
     
     var successBool:Bool! = false
+    
+    var firstBool:Bool! = true
     var User:FIRUser!
+    
+    func isAppAlreadyLaunchedOnce()->Bool{
+        let defaults = UserDefaults.standard
+        
+        if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+            print("App already launched : \(isAppAlreadyLaunchedOnce)")
+            return true
+        }else{
+            defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
+            print("App launched first time")
+            return false
+        }
+    }
+    
 
     @IBAction func fbButton(_ sender: Any)
     {
@@ -69,7 +85,7 @@ class ViewController: UIViewController
         indicator.isHidden = true
         
         
-        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "finalLogo")!,iconInitialSize: CGSize(width: 120, height: 170), backgroundColor: UIColor.white)
+        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "LogoType")!,iconInitialSize: CGSize(width: 120, height: 170), backgroundColor: UIColor.white)
         
         //revealingSplashView.animationType = SplashAnimationType.rotateOut
 
@@ -77,28 +93,44 @@ class ViewController: UIViewController
         self.view.addSubview(revealingSplashView)
         
         
+        firstBool = isAppAlreadyLaunchedOnce()
+        
+        
+        
         //Starts animation
         revealingSplashView.startAnimation(){
-            FIRAuth.auth()?.addStateDidChangeListener { auth, user in
-                if let user = user {
-                    if(self.User != user){
-                        self.User = user
-                        print("-> LOGGED IN AS \(user.email)")
-                        self.successBool = true
-                    }
-                    if self.successBool == true
-                    {
-                        self.goToSwipe()
-                    }
-                    
-                    print(user.email!)
-                } else {
-                    // No user is signed in.
-                    print("no user")
-                    
-                }
+            
+            if self.firstBool == false
+            {
+                print("first")
+                self.performSegue(withIdentifier: "Screens", sender: nil)
+                
             }
+            else
+            {
+                FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+                    if let user = user {
+                        if(self.User != user){
+                            self.User = user
+                            print("-> LOGGED IN AS \(user.email)")
+                            self.successBool = true
+                        }
+                        if self.successBool == true
+                        {
+                            self.goToSwipe()
+                        }
+                        
+                        print(user.email!)
+                    } else {
+                        // No user is signed in.
+                        print("no user")
+                        
+                    }
+                }
 
+            }
+            
+           
             
         }
         
