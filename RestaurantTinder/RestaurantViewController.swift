@@ -5,7 +5,6 @@
 //  Created by Haasith sanka on 1/7/17.
 //  Copyright © 2017 haasith. All rights reserved.
 //
-
 import UIKit
 import Alamofire
 import SwiftyJSON
@@ -17,7 +16,7 @@ import Social
 import FBSDKShareKit
 import QuartzCore
 import SCLAlertView
-
+import Alamofire_Synchronous
 
 class RestaurantViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,MFMessageComposeViewControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
@@ -26,7 +25,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var storeLon:Double! = 0.0
     var topRestaurants = [Restaurant]()
     
-        
+    
     var store1:String! = ""
     var store2:String! = ""
     var store3:String! = ""
@@ -35,6 +34,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     var numPics:Int! = 0
     var numRows:Int! = 0
     var storePhone:String! = ""
+    var commentNum:Int = 0
     @IBOutlet var reviewLabel: UIButton!
     
     @IBOutlet var cardView: UIView!
@@ -47,20 +47,21 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func sendText(_ sender: Any)
     {
         let messageVC = MFMessageComposeViewController()
+        let link = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1219918851&mt=8"
         
-        messageVC.body = "Meet me at " + restName! + " Address:" + restAddress!
+        messageVC.body = "Meet me at " + restName! + "\n" + " Address:" + restAddress! + "\n" + "Try Let's Go today!" + "\n" + link
         messageVC.recipients = [""]
         messageVC.messageComposeDelegate = self;
         
         self.present(messageVC, animated: false, completion: nil)
-
+        
     }
     
     @IBAction func callButton(_ sender: Any)
     {
         if self.storePhone != ""
         {
-        self.callNumber(phoneNumber: self.storePhone)
+            self.callNumber(phoneNumber: self.storePhone)
         }
         else
         {
@@ -77,36 +78,27 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    
     @IBAction func shareButton(_ sender: Any)
     {
-//        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
-//        {
-//            let fbshare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-//            fbshare.setInitialText("share on facebook")
-//            self.present(fbshare,animated:true, completion:nil)
-//           
-//        }
-//        else
-//        {
-//            print("faield")
-//        }
-        
-        
-        
+        //        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)
+        //        {
+        //            let fbshare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        //            fbshare.setInitialText("share on facebook")
+        //            self.present(fbshare,animated:true, completion:nil)
+        //
+        //        }
+        //        else
+        //        {
+        //            print("faield")
+        //        }
         let message = "Download Lets Go on the App store now!\n"
         let image = UIImage(named: "finalLogo")
-        let activityVC = UIActivityViewController(activityItems: [message,image as Any!], applicationActivities: nil)
-        
-        
-        
+        let link = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1219918851&mt=8"
+        let activityVC = UIActivityViewController(activityItems: [image as Any!,message,link], applicationActivities: nil)
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
-        
-        
-        
     }
-    
+ 
     @IBOutlet var Button: UIButton!
     
     var currentLat:Double! = 0.0
@@ -132,24 +124,22 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBAction func goButton(_ sender: Any)
     {
-        if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemapsurl://")! as URL))
+        
+        let googleMapsInstalled = UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!)
+        
+        
+        if googleMapsInstalled
         {
             UIApplication.shared.openURL(NSURL(string:"comgooglemapsurl://?saddr=&daddr=\(storeLat!),\(storeLon!)&directionsmode=driving")! as URL)
+            
+            
         }
         else
         {
-            let appearance = SCLAlertView.SCLAppearance(
-                kTitleFont: UIFont(name: "Avenir", size: 20)!,
-                kTextFont: UIFont(name: "Avenir", size: 14)!,
-                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                showCloseButton: true)
-            
-            let alert = SCLAlertView(appearance: appearance)
-            alert.showError("Error", subTitle: "Failed To Open Google Maps. ")
-            
-            NSLog("Can't use comgooglemaps://")
+            UIApplication.shared.openURL(NSURL(string:"http://maps.apple.com/?saddr=&daddr=\(storeLat!),\(storeLon!)")! as URL)
         }
     }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -164,7 +154,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         
         Button.updateLayerProperties()
         Button.isEnabled = false
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -181,7 +171,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         print("store location")
         print(storeLat)
         print(storeLon)
-      
+        
         print("milesss")
         print(miles)
         milesAway.text = String(format: "%.1f", miles) + " MI"
@@ -197,7 +187,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         
-       // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
     }
     
     private func callNumber(phoneNumber:String)
@@ -217,7 +207,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     
-
+    
     func doShit()
     {
         var a = 0
@@ -230,7 +220,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 self.nameLabel.text = json["response"]["venue"]["name"].stringValue
                 self.storePhone = json["response"]["venue"]["contact"]["phone"].stringValue
-                  
+                
                 self.restName = json["response"]["venue"]["name"].stringValue
                 
                 var url:String = json["response"]["venue"]["bestPhoto"]["prefix"].stringValue
@@ -274,14 +264,14 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 
                 
-//                if json["response"]["venue"]["popular"]["isOpen"].boolValue == true
-//                {
-//                    self.storeOpenClosedLabel.text = "Open"
-//                }
-//                else
-//                {
-//                    self.storeOpenClosedLabel.text = "Closed"
-//                }
+                //                if json["response"]["venue"]["popular"]["isOpen"].boolValue == true
+                //                {
+                //                    self.storeOpenClosedLabel.text = "Open"
+                //                }
+                //                else
+                //                {
+                //                    self.storeOpenClosedLabel.text = "Closed"
+                //                }
                 while a < 5
                 {
                     var name: String = json["response"]["venue"]["tips"]["groups"][0]["items"][a]["user"]["firstName"].stringValue
@@ -324,9 +314,9 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                             self.pics.append(url)
                             
                         }
-                            self.collectionView.reloadData()
+                        self.collectionView.reloadData()
                         
-                    
+                        
                         b += 1
                         
                     }
@@ -359,12 +349,19 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.comment.text = ""
         }
         
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            if indexPath.row < 5
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5)
+        {
+            if indexPath.row < self.nameArray.count && self.nameArray.count > 0
             {
-                cell.nameLabel.text = self.nameArray[indexPath.row]
-                cell.comment.text = self.commentArray[indexPath.row]
+                    cell.nameLabel.text = self.nameArray[indexPath.row]
+                    
+                    cell.comment.text = self.commentArray[indexPath.row]
+            }
+            else
+            {
+                cell.nameLabel.text = ""
+                
+                cell.comment.text = ""
             }
         }
         
@@ -417,7 +414,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 
             }
         }
-
+        
     }
     
     
@@ -491,9 +488,9 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         )
     }
     
-
-
-
+    
+    
+    
 }
 
 extension UIButton
@@ -506,4 +503,7 @@ extension UIButton
         self.layer.masksToBounds = false
     }
 }
+
+
+
 

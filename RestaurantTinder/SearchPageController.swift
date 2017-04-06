@@ -44,11 +44,15 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var alreadyError:Bool = false
     var activeField: UITextField?
     var locationBool: Bool = false
+    var userExistsBool: Bool = false
     
+    @IBOutlet var logoutButton: UIButton!
     
     
     @IBAction func logOut(_ sender: Any)
     {
+        if userExistsBool == true
+        {
         let manager = FBSDKLoginManager()
         manager.logOut()
         let firebaseAuth = FIRAuth.auth()
@@ -56,6 +60,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             try firebaseAuth?.signOut()
         } catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
+        }
+        performSegue(withIdentifier: "logout", sender: nil)
         }
         performSegue(withIdentifier: "logout", sender: nil)
         
@@ -116,6 +122,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         indicator.isHidden = false
         indicator.startAnimating()
         let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        
+        
         
         if CLLocationManager.locationServicesEnabled() {
             switch(CLLocationManager.authorizationStatus()) {
@@ -179,33 +187,26 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                 searchQuery = searchBar.text
             }
             let newString = searchQuery.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
-            //Upload each search to database
-            guard let uid = FIRAuth.auth()?.currentUser?.uid else {
-                return
-            }
-            print("uid coming up")
-            print(uid)
-            let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
             
-            let userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches")
-            userSearchReference.childByAutoId().setValue(values)
-            FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                // Get user value
-                let value = snapshot.value as? NSDictionary
-                let name = (value?["name"] as? String)!
-                print("name",(name))
-                
-                let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":name] as [String : Any]
-                let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
-                totalSearchReference.childByAutoId().setValue(totalValues)
-                
-            })
-            { (error) in
-                print(error.localizedDescription)
-            }
             let request:String! = "https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=40&radius=\(meters)"
             
             makeRequest(request)
+            
+            
+            
+            if userExistsBool == true
+            {
+                storeQueryInfo()
+                
+            }
+            else
+            {
+                let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":"N?A"] as [String : Any]
+                let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
+                totalSearchReference.childByAutoId().setValue(totalValues)
+                
+                
+            }
             
             let appearance = SCLAlertView.SCLAppearance(
                 kTitleFont: UIFont(name: "Avenir", size: 20)!,
@@ -362,6 +363,38 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var locationManager: CLLocationManager!
     
     
+    
+    
+    func storeQueryInfo()
+    {
+        //Upload each search to database
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        print("uid coming up")
+        print(uid)
+        let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
+        
+        let userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches")
+        userSearchReference.childByAutoId().setValue(values)
+        FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let name = (value?["name"] as? String)!
+            print("name",(name))
+            
+            let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":name] as [String : Any]
+            let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
+            totalSearchReference.childByAutoId().setValue(totalValues)
+            
+        })
+        { (error) in
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+    
     func getPhotos(picsForIds:String)
     {
         let response = Alamofire.request("https://api.foursquare.com/v2/venues/\(picsForIds)/photos?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&limit=3", parameters:nil).responseJSON()
@@ -482,7 +515,17 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         scheduledTimerWithTimeInterval()
         
         
-       
+        if (FIRAuth.auth()?.currentUser?.uid) != nil
+        {
+            userExistsBool = true
+            
+        }
+        else
+        {
+            userExistsBool = false
+            logoutButton.setTitle("Back", for: .normal)
+        }
+        
         
         
         

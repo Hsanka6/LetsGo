@@ -16,6 +16,7 @@ class TopRestaurantTableViewCell: UITableViewCell {
     @IBOutlet weak var milesAway: UILabel!
     @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var checkIns: UILabel!
+    @IBOutlet var bestOutput: UILabel!
     
     
     @IBOutlet weak var restaurantIcon: UIImageView!
@@ -37,7 +38,6 @@ class TopRestaurantTableViewCell: UITableViewCell {
         
         
         
-
         
         rating.layer.masksToBounds = true
         rating.layer.cornerRadius = 5

@@ -42,7 +42,11 @@ class ViewController: UIViewController
         }
     }
     
-
+    @IBAction func skipLogin(_ sender: Any)
+    {
+        performSegue(withIdentifier: "skipLogin", sender: self)
+    }
+  
     @IBAction func fbButton(_ sender: Any)
     {
         indicator.isHidden = false
