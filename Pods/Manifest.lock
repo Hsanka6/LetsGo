@@ -72,6 +72,7 @@ PODS:
   - ImageSlideshow/Core (1.2.0)
   - Kingfisher (3.2.4)
   - NVActivityIndicatorView (3.5.1)
+  - PopupDialog (0.5.4)
   - RevealingSplashView (0.1.0)
   - SCLAlertView (0.7.0)
   - SkyFloatingLabelTextField (2.0.0)
@@ -92,6 +93,7 @@ DEPENDENCIES:
   - ImageSlideshow
   - Kingfisher (~> 3.0)
   - NVActivityIndicatorView
+  - PopupDialog
   - RevealingSplashView
   - SCLAlertView
   - SkyFloatingLabelTextField (~> 2.0.0)
@@ -121,11 +123,12 @@ SPEC CHECKSUMS:
   ImageSlideshow: c1395dcf33f7dba407fd21df0e8c315e8941e209
   Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   NVActivityIndicatorView: 075563b3547445ebcff840e3297ce9dd4a23731f
+  PopupDialog: 75cf955693590b0cb2fdde00223fb65d99c57247
   RevealingSplashView: 501dd03d975ba2c4165dd463ea1c7c407fb9d13e
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SkyFloatingLabelTextField: a81a0eaed2785d1599f11484c6ebc1c4eb5d1228
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 844f12e0145f12cfdeece03a7ef69df4b2f9c7ce
+PODFILE CHECKSUM: 5c4f207775c648bc3e87bb860bbc4536de3224e3
 
 COCOAPODS: 1.1.1

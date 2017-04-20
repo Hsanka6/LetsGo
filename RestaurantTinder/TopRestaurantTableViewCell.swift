@@ -54,7 +54,7 @@ class TopRestaurantTableViewCell: UITableViewCell {
         let yellow = hexStringToUIColor(hex: "#FF8A00")
         let red = hexStringToUIColor(hex: "#FF165E")
         
-        if Rating > 0 && Rating < 4
+        if Rating >= 0 && Rating < 4
         {
             rating.backgroundColor = red
         }

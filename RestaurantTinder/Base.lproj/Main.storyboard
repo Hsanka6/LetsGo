@@ -334,7 +334,7 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Food"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eck-IC-wnd" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eck-IC-wnd" customClass="ImageSlideshow" customModule="ImageSlideshow">
                                 <rect key="frame" x="0.0" y="83" width="375" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -367,6 +367,17 @@
                                     <constraint firstAttribute="width" constant="29" id="mRh-DW-ao5"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cGs-ud-gOH">
+                                <rect key="frame" x="12" y="394" width="353" height="33"/>
+                                <color key="backgroundColor" red="1" green="0.54117647059999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                <state key="normal" title="Redeem coupon for Boba Fiend!">
+                                    <color key="titleColor" red="0.99215686270000003" green="0.99215686270000003" blue="0.99215686270000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="redeemButton:" destination="te2-3k-5fC" eventType="touchUpInside" id="ft0-u3-oUD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -380,6 +391,7 @@
                             <constraint firstItem="ch8-8W-nHa" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="10" id="Fva-NP-zwV"/>
                             <constraint firstItem="9DU-eS-OCl" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="12" id="J8k-Ym-aGn"/>
                             <constraint firstItem="y6w-Ht-PpS" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="10" id="KEY-p8-NQS"/>
+                            <constraint firstItem="cGs-ud-gOH" firstAttribute="top" secondItem="eck-IC-wnd" secondAttribute="bottom" constant="5" id="KmG-k1-KB4"/>
                             <constraint firstItem="y6w-Ht-PpS" firstAttribute="top" secondItem="9p6-SH-JYI" secondAttribute="bottom" constant="3" id="MJN-h5-QEd"/>
                             <constraint firstItem="9p6-SH-JYI" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="35" id="Njf-d4-l03"/>
                             <constraint firstItem="Ee8-yy-dyd" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="12" id="PKk-58-klJ"/>
@@ -388,13 +400,15 @@
                             <constraint firstItem="Spp-pY-fwp" firstAttribute="top" secondItem="G7M-gz-OuZ" secondAttribute="bottom" constant="125" id="T2m-LN-HQe"/>
                             <constraint firstItem="p6H-0V-uTa" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" id="Wci-Zx-P1m"/>
                             <constraint firstItem="Spp-pY-fwp" firstAttribute="centerX" secondItem="eTK-c8-qDT" secondAttribute="centerX" id="Y82-Ie-z9s"/>
-                            <constraint firstItem="Ee8-yy-dyd" firstAttribute="top" relation="lessThanOrEqual" secondItem="eck-IC-wnd" secondAttribute="bottom" constant="25" id="bSl-m3-0W5"/>
                             <constraint firstItem="hbD-vi-T0V" firstAttribute="top" secondItem="G7M-gz-OuZ" secondAttribute="bottom" constant="8" id="cyn-9G-0NE"/>
                             <constraint firstAttribute="trailing" secondItem="Ee8-yy-dyd" secondAttribute="trailing" constant="12" id="dG4-wa-lEE"/>
                             <constraint firstItem="iL3-Id-UUD" firstAttribute="centerY" secondItem="eTK-c8-qDT" secondAttribute="centerY" id="g2E-bv-5ri"/>
                             <constraint firstItem="p6H-0V-uTa" firstAttribute="top" secondItem="y6w-Ht-PpS" secondAttribute="bottom" constant="5" id="h8y-ty-EL6"/>
                             <constraint firstItem="NyI-13-enJ" firstAttribute="top" secondItem="ch8-8W-nHa" secondAttribute="bottom" constant="7" id="htP-oc-tAB"/>
+                            <constraint firstAttribute="trailing" secondItem="cGs-ud-gOH" secondAttribute="trailing" constant="12" id="ieg-sb-H92"/>
                             <constraint firstItem="iL3-Id-UUD" firstAttribute="centerX" secondItem="eTK-c8-qDT" secondAttribute="centerX" id="kEm-pd-vsg"/>
+                            <constraint firstItem="cGs-ud-gOH" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="12" id="mgQ-EB-Vt5"/>
+                            <constraint firstItem="Ee8-yy-dyd" firstAttribute="top" secondItem="cGs-ud-gOH" secondAttribute="bottom" constant="6" id="nI7-7S-r7V"/>
                             <constraint firstAttribute="trailing" secondItem="p6H-0V-uTa" secondAttribute="trailing" id="qR3-7F-6tL"/>
                             <constraint firstItem="eck-IC-wnd" firstAttribute="top" secondItem="hbD-vi-T0V" secondAttribute="bottom" constant="10" id="qSF-V8-XTt"/>
                             <constraint firstAttribute="trailing" secondItem="y6w-Ht-PpS" secondAttribute="trailing" constant="10" id="qs5-BW-3op"/>
@@ -555,15 +569,15 @@
                                     <constraint firstAttribute="width" constant="304" id="CAy-mu-qQn"/>
                                 </constraints>
                             </view>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Rectangle 5" translatesAutoresizingMaskIntoConstraints="NO" id="jIN-Xx-BTB">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 5" translatesAutoresizingMaskIntoConstraints="NO" id="jIN-Xx-BTB">
                                 <rect key="frame" x="37" y="183" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="GAm-8i-Lws"/>
                                     <constraint firstAttribute="width" constant="300" id="reO-pl-eLQ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Swipe Right to Like and Swipe left to Dislike upto 15 times to get personalized results" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHp-Qu-ezE">
-                                <rect key="frame" x="35" y="584" width="304" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe Right to Like and Swipe left to Dislike up to 15 times to get personalized results." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHp-Qu-ezE">
+                                <rect key="frame" x="37" y="584" width="302" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="IjC-3S-GiA"/>
                                     <constraint firstAttribute="width" constant="302" id="R0V-5M-6P8"/>
@@ -577,7 +591,7 @@
                         <constraints>
                             <constraint firstItem="NHp-Qu-ezE" firstAttribute="centerX" secondItem="De4-GU-1ji" secondAttribute="centerX" id="56c-qp-yVj"/>
                             <constraint firstItem="EuQ-F7-Ohx" firstAttribute="top" secondItem="De4-GU-1ji" secondAttribute="topMargin" id="7l7-SO-OeB"/>
-                            <constraint firstItem="jIN-Xx-BTB" firstAttribute="top" relation="lessThanOrEqual" secondItem="EuQ-F7-Ohx" secondAttribute="bottom" constant="66" id="ICG-Gj-fNR"/>
+                            <constraint firstItem="jIN-Xx-BTB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EuQ-F7-Ohx" secondAttribute="bottom" constant="66" id="ICG-Gj-fNR"/>
                             <constraint firstItem="jIN-Xx-BTB" firstAttribute="centerX" secondItem="De4-GU-1ji" secondAttribute="centerX" id="KKI-C3-wQQ"/>
                             <constraint firstItem="4uo-he-dqv" firstAttribute="top" secondItem="NHp-Qu-ezE" secondAttribute="bottom" constant="40" id="Lix-Lv-348"/>
                             <constraint firstAttribute="trailing" secondItem="EuQ-F7-Ohx" secondAttribute="trailing" id="PgY-eF-13k"/>
@@ -1194,9 +1208,9 @@
         <image name="whiteBack" width="29" height="52"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YGq-uv-buq"/>
-        <segue reference="Oft-Ep-dkt"/>
-        <segue reference="fX7-yI-sv4"/>
+        <segue reference="QOK-9Y-xQU"/>
+        <segue reference="fqB-Ig-OY2"/>
         <segue reference="Fro-Az-cuK"/>
+        <segue reference="YGq-uv-buq"/>
     </inferredMetricsTieBreakers>
 </document>

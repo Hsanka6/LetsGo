@@ -99,6 +99,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PopupDialog.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>RevealingSplashView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -127,7 +132,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>293C27F603EF754576D84840E4C0EFC8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>39E3D81B2F31AD07AFA24AA1BB8CDFE3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,17 +157,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4C9576D72B181658A76CD5E990363061</key>
+		<key>517C0391B37F449A10DE5151616FBE77</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>593E9479C06FB200807D11AB29EB50BD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6BE84FF7F4DDEE1C8888876FE6C75022</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,12 +177,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8653501E7672B8278A6226F4DF604E13</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<key>937ED025FBE18B2C42499CE4D9C95B71</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>94CD5C98B4ADDFBA79E48090963E56E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -202,22 +217,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DB232CB52366479FE92A7B77CE92A1E0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E17077E1320A02C1A109CE036531A95F</key>
+		<key>E7AA23E9F66858EF7C9E19E9769110AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E7AA23E9F66858EF7C9E19E9769110AB</key>
+		<key>EA836697863C7CF67BFF74BDCD889ECC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

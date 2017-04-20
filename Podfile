@@ -24,6 +24,7 @@ pod 'RevealingSplashView'
 pod 'SCLAlertView'
 pod 'NVActivityIndicatorView'
 pod 'ImageSlideshow'
+pod 'PopupDialog'
 
 #pod 'TGLParallaxCarousel'
 

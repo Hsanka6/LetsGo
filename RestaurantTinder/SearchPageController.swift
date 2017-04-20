@@ -19,6 +19,7 @@ import SCLAlertView
 import NVActivityIndicatorView
 import ImageSlideshow
 import Alamofire_Synchronous
+import PopupDialog
 
 
 class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFieldDelegate {
@@ -45,9 +46,86 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var activeField: UITextField?
     var locationBool: Bool = false
     var userExistsBool: Bool = false
+    var keyBoardHeight:CGRect!
+    
+    var couponRedeemed:Bool! = false
     
     @IBOutlet var logoutButton: UIButton!
-    
+    var dialogAppearance = PopupDialogDefaultView.appearance()
+
+    @IBAction func redeemButton(_ sender: Any)
+    {
+        // Prepare the popup assets
+        if(userExistsBool == true)
+        {
+        if(couponRedeemed == false)
+        {
+            let title = "Get $1 Boba"
+            let message = "Show the cashier this to redeem now!"
+            let image = UIImage(named: "boba_fiend")
+        
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message, image: image)
+        
+            // Create buttons
+        
+            let buttonOne = DefaultButton(title:"Redeem Now")
+            {
+                let pop = PopupDialog(title: "Redeemed", message: "Enjoy!")
+                self.present(pop, animated: true, completion:nil)
+                self.couponRedeemed = true
+            }
+        
+            let buttonTwo = DefaultButton(title: "More Info")
+            {
+                print("Ah, maybe next time :)")
+            }
+        
+            let buttonThree = DestructiveButton(title: "Redeem Later")
+            {
+                print("You canceled the car dialog.")
+            }
+            popup.addButtons([buttonOne, buttonTwo, buttonThree])
+        
+        // Present dialog
+        self.present(popup, animated: true, completion: nil)
+        }
+        else
+        {
+            let title = "Already Redeemed!"
+            let message = "Please wait till our next promotion!"
+            
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message)
+            
+            let buttonThree = DestructiveButton(title: "Ok") {
+                print("Ah, maybe next time :)")
+            }
+            
+            
+            self.present(popup, animated: true, completion: nil)
+            
+        }
+        }
+        else
+        {
+            let title = "Please sign in to redeem."
+            let message = "Only users who are signed in can get the coupon!"
+            
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message)
+            
+            let buttonThree = DestructiveButton(title: "Ok") {
+            }
+            popup.addButtons([buttonThree])
+            
+            self.present(popup, animated: true, completion: nil)
+            
+            
+        }
+        
+        
+    }
     
     @IBAction func logOut(_ sender: Any)
     {
@@ -97,6 +175,12 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         // Scheduling timer to Call the function **Countdown** with the interval of 1 seconds
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.checkSearchBar), userInfo: nil, repeats: true)
     }
+    
+//    func scheduledTimerWithTimeInterval(){
+//        // Scheduling timer to Call the function **Countdown** with the interval of 1 seconds
+//        timer = Timer.scheduledTimer(timeInterval: , target: self, selector: #selector(self.checkSearchBar), userInfo: nil, repeats: true)
+//    }
+    
     
     @IBAction func ValueChanged(_ sender: Any)
     {
@@ -557,11 +641,22 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        let blue = hexStringToUIColor(hex: "#40C4FF")
+        
+        dialogAppearance.titleFont            = UIFont.boldSystemFont(ofSize: 20)
+        dialogAppearance.titleColor           = UIColor.black
+        dialogAppearance.titleTextAlignment   = .center
+        dialogAppearance.messageFont          = UIFont.systemFont(ofSize: 16)
+        dialogAppearance.messageColor         = UIColor(white: 0.8, alpha: 1)
+        dialogAppearance.messageTextAlignment = .center
+        
+        
+        
         
         
         slideShow.setImageInputs([
-            ImageSource(image: UIImage(named: "burger")!),
-            ImageSource(image: UIImage(named: "pizza")!), ImageSource(image: UIImage(named: "coffee")!), ImageSource(image: UIImage(named: "noodles")!), ImageSource(image: UIImage(named: "chickenWings")!)])
+            ImageSource(image: UIImage(named: "boba_fiend")!),
+            ImageSource(image: UIImage(named: "pizza")!), ImageSource(image: UIImage(named: "coffee")!), ImageSource(image: UIImage(named: "noodles")!), ImageSource(image: UIImage(named: "burger")!)])
         slideShow.pageControl.currentPageIndicatorTintColor = UIColor.white
         slideShow.pageControl.pageIndicatorTintColor = UIColor.black
         slideShow.contentScaleMode = UIViewContentMode.scaleAspectFill
@@ -644,14 +739,18 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     //View moves up when keyboard is shown
     func keyboardWillShow(sender: NSNotification)
     {
+        let userInfo:NSDictionary = sender.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        keyBoardHeight = keyboardFrame.cgRectValue
+        
         slideShow.isHidden = true
-        self.view.frame.origin.y -= 100
+        self.view.frame.origin.y -= keyBoardHeight.height
     }
     
     //View moves down when keyboard is hiding
     func keyboardWillHide(sender: NSNotification) {
         slideShow.isHidden = false
-        self.view.frame.origin.y += 100
+        self.view.frame.origin.y += keyBoardHeight.height
         
     }
     
@@ -668,6 +767,29 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         meters = miles * 1609
         return meters
     }
+    
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.characters.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
        
     
     
