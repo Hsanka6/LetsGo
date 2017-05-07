@@ -27,9 +27,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var timer = Timer()
     var lat:Double!
     var lon:Double!
+    //var locationManager: CLLocationManager!
     var searchQuery:String!
-    var foodArray = ["Pizza", "Chinese", "Soup", "Mexican", "Burger","indian", "Italian","tacos"]
+    var foodArray = ["Pizza", "Chinese", "Soup", "Mexican", "Burger","Indian", "Italian","Tacos","Desert", "Pasta","Noodles"]
     var pics = [String]()
+    
     var restaurants = [String]()
     @IBOutlet var searchBar: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet var searchImage: UIImageView!
@@ -40,13 +42,29 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var ref: FIRDatabaseReference!
     var noRestBool:Bool! = false
     var ids = [String]()
-    var finalIds = [String]()
+    var finalIds = [String] ()
     var rowNum:Int! = 0
     var alreadyError:Bool = false
     var activeField: UITextField?
     var locationBool: Bool = false
     var userExistsBool: Bool = false
     var keyBoardHeight:CGRect!
+    var checkImg:Bool = false
+    var requestDone = false
+    
+    var googleAPIKey = "AIzaSyASRZ7-pV8qiCohTZhbTdthrHwthtmGQ_I"
+    var picCounter = 0
+    
+    
+    var imgs = [UIImage]()
+    var foodBools = [Bool]()
+    let session = URLSession.shared
+    
+    var label:String! = ""
+    var imageBOOL:Bool! = false
+    
+    
+    
     
     var couponRedeemed:Bool! = false
     
@@ -272,7 +290,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             }
             let newString = searchQuery.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
             
-            let request:String! = "https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=40&radius=\(meters)"
+            let request:String! = "https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=20&radius=\(meters)"
             
             makeRequest(request)
             
@@ -336,7 +354,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                             print("getting pics")
                             self.getPhotos(picsForIds: id)
                         }
-                        print("checking")
+                        print("checking 1")
                         print(self.pics)
                         if self.pics.count > 0
                         {
@@ -392,7 +410,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                             self.getPhotos(picsForIds: id)
                         }
                         
-                        print("checking")
+                        print("checking 2")
                         print(self.pics)
                         if self.pics.count > 0
                         {
@@ -425,16 +443,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             
             
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         //                                    else if secondJSON["venue"]["response"]["venue"]["popular"]["isOpen"].boolValue == false
         //                                    {
         //                                        print("This restaurant is Closed")
@@ -444,11 +452,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
         
     }
-    var locationManager: CLLocationManager!
-    
-    
-    
-    
     func storeQueryInfo()
     {
         //Upload each search to database
@@ -481,7 +484,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     
     func getPhotos(picsForIds:String)
     {
-        let response = Alamofire.request("https://api.foursquare.com/v2/venues/\(picsForIds)/photos?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&limit=3", parameters:nil).responseJSON()
+        let response = Alamofire.request("https://api.foursquare.com/v2/venues/\(picsForIds)/photos?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&limit=6", parameters:nil).responseJSON()
         if((response.result.value) != nil)
         {
             var secondJSON:JSON!
@@ -491,17 +494,67 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                 var url: String = subJson["prefix"].stringValue
                 url += "300x300"
                 url += subJson["suffix"].stringValue
-                self.pics.append(url)
+                
+                //do filtering
+                
+                if url != "300x300"
+                {
+                    let newurl = URL(string: url)
+                    let data = try? Data(contentsOf: newurl!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                    
+                    
+                    let binaryImageData = base64EncodeImage(UIImage(data: data!)!)
+                    createRequest(with: binaryImageData)
+                    print("added")
+                    if self.checkImg == true && self.picCounter <= 3
+                    {
+                        print("got appended")
+                        self.pics.append(url) // urls
+                    }
+                        
+                    
+                    
+                    //self.imgs.append(UIImage(data: data!)!)
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+                
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0)
+//                {
+//                    var b = 0
+//                    while b < self.foodBools.count
+//                    {
+//                        print("sizes")
+//                        print(self.foodBools.count)
+//                        print(self.pics.count)
+//                        if self.foodBools[b] == false
+//                        {
+//                            self.pics[b] = "NULL"
+//                        }
+//                        b += 1
+//                    }
+//                    self.pics = self.pics.filter{$0 != "NULL"}
+//                }
+
+                
+                
                 print("adding urls")
             }
-            self.pics.append(picsForIds)
-            self.restaurants.append(picsForIds)
-            print("done adding urls")
-        }
-        else
-        {
+            
+            
+                self.pics.append(picsForIds)
+                self.restaurants.append(picsForIds)
+                print("done adding urls")
+            
             
         }
+        picCounter = 0
+        
     }
     
     
@@ -515,7 +568,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         if response.result.value != nil
         {
             let json = JSON(response.result.value!)
-            if json["response"]["venues"].isEmpty
+            
+            if json["response"]["venues"].count == 0
             {
                 print("why here")
                 self.noRestBool = true
@@ -551,7 +605,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         {
             print("request error")
         }
-        print("in request")
     }
     
     
@@ -610,24 +663,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             logoutButton.setTitle("Back", for: .normal)
         }
         
-        
-        
-        
-        
         searchBar.delegate = self
         
         //goes to intro screens
         
-        //LOCATION CRAP
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.startUpdatingLocation()
-        }
         
         searchBar.iconFont = UIFont.fontAwesome(ofSize: 15)
         searchBar.iconText = String.fontAwesomeIcon(name: .cutlery)
@@ -728,13 +767,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             }
         }
     }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
-        lat = locValue.latitude as Double!
-        lon = locValue.longitude as Double!
-        
-        
-    }
     
     //View moves up when keyboard is shown
     func keyboardWillShow(sender: NSNotification)
@@ -789,7 +821,132 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             alpha: CGFloat(1.0)
         )
     }
-
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        lat = locValue.latitude as Double!
+        lon = locValue.longitude as Double!
+    }
+    
+    
+    
+    func resizeImage(_ imageSize: CGSize, image: UIImage) -> Data
+    {
+        UIGraphicsBeginImageContext(imageSize)
+        image.draw(in: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        let resizedImage = UIImagePNGRepresentation(newImage!)
+        UIGraphicsEndImageContext()
+        return resizedImage!
+    }
+    func createRequest(with imageBase64: String) {
+        // Build our API request
+        let jsonRequest =
+            [
+                "requests":
+                    [
+                        "image":
+                            [
+                                "content": imageBase64
+                        ],
+                        "features":
+                            [
+                                [
+                                    "type": "LABEL_DETECTION",
+                                    "maxResults": 3
+                                ]
+                        ]
+                ]
+        ]
+        let jsonObject = JSON(jsonDictionary: jsonRequest)
+        // Serialize the JSON
+        guard let data = try? jsonObject.rawData() else {
+            return
+        }
+        if let url = URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(googleAPIKey)") {
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = "POST"
+            urlRequest.httpBody = data
+            
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.addValue(Bundle.main.bundleIdentifier ?? "", forHTTPHeaderField: "X-Ios-Bundle-Identifier")
+            
+            let response = Alamofire.request(urlRequest)
+                .responseJSON()
+            if let j = response.result.value {
+                
+                var json = JSON(response.result.value)
+                print(json)
+                
+                let responses: JSON = json["responses"][0]
+                let labelAnnotations: JSON = responses["labelAnnotations"]
+                let numLabels: Int = labelAnnotations.count
+                var labels: Array<String> = []
+                if numLabels > 0 {
+                    var labelResultsText:String = "Labels found: "
+                    for index in 0..<numLabels
+                    {
+                        let label = labelAnnotations[index]["description"].stringValue
+                        labels.append(label)
+                    }
+                    for label in labels
+                    {
+                        // if it's not the last item add a comma
+                        if labels[labels.count - 1] != label
+                        {
+                            labelResultsText += "\(label), "
+                        }
+                        else
+                        {
+                            labelResultsText += "\(label)"
+                        }
+                    }
+                    self.label = labelResultsText
+                }
+                else
+                {
+                    self.label = "No labels found"
+                }
+                if labels.contains("food") || labels.contains("drink") || labels.contains("dish")
+                {
+                    self.checkImg = true
+                    picCounter += 1
+                    
+                    //self.foodBools.append(true)
+                }
+                else
+                {
+                    self.checkImg = false
+                    //self.foodBools.append(false)
+                    
+                }
+                print(self.label)
+                
+                
+            }
+            
+        }
+        
+        
+        
+        // Run the request on a background thread
+        
+    }
+  
+    func base64EncodeImage(_ image: UIImage) -> String {
+        var imagedata = UIImagePNGRepresentation(image)
+        // Resize the image if it exceeds the 2MB API limit
+        if ((imagedata?.count)! > 2097152) {
+            let oldSize: CGSize = image.size
+            let newSize: CGSize = CGSize(width: 800, height: oldSize.height / oldSize.width * 800)
+            imagedata = resizeImage(newSize, image: image)
+        }
+        
+        return imagedata!.base64EncodedString(options: .endLineWithCarriageReturn)
+    }
+    
+    
        
     
     

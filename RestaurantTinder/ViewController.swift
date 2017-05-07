@@ -10,15 +10,20 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
+import CoreLocation
 import FirebaseAuth
 import RevealingSplashView
 import NVActivityIndicatorView
 import SystemConfiguration
 import SCLAlertView
 
-class ViewController: UIViewController
+class ViewController: UIViewController, CLLocationManagerDelegate
 {
 
+    var lat:Double!
+    var lon:Double!
+    var locationManager: CLLocationManager!
+    
     var loginButton = FBSDKLoginButton()
     var fbcredential:String = ""
     
@@ -29,7 +34,8 @@ class ViewController: UIViewController
     var firstBool:Bool! = true
     var User:FIRUser!
     
-    func isAppAlreadyLaunchedOnce()->Bool{
+    func isAppAlreadyLaunchedOnce()->Bool
+    {
         let defaults = UserDefaults.standard
         
         if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
@@ -144,11 +150,32 @@ class ViewController: UIViewController
             
         }
         
+        //LOCATION CRAP
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
+        
         
         
         
         
     }
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let locValue:CLLocationCoordinate2D = manager.location!.coordinate
+        lat = locValue.latitude as Double!
+        lon = locValue.longitude as Double!
+    }
+    
     
     
     
@@ -191,6 +218,29 @@ class ViewController: UIViewController
 
             }
          })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "Screens"
+        {
+            if let destination = segue.destination as? IntroScreens
+            {
+                destination.lat = lat
+                destination.lon = lon
+           }
+        }
+        else if segue.identifier == "skipLogin" || segue.identifier == "ToSearch"
+        {
+            if let destination = segue.destination as? SearchPageController
+            {
+                destination.lat = lat
+                destination.lon = lon
+            }
+        }
+
+        
+        
     }
     
     

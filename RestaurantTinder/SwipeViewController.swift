@@ -257,6 +257,10 @@ class SwipeViewController: UIViewController {
             
         }
         
+        Picture.image = UIImage(named:"Rectangle 5")
+        
+        
+        
         
         
     }
@@ -264,7 +268,7 @@ class SwipeViewController: UIViewController {
     
     func wasDragged(gesture: UIPanGestureRecognizer)
     {
-        
+        Picture.image = UIImage(named:"Rectangle 5")
         let translation = gesture.translation(in: self.view)
         let label = gesture.view!
         
