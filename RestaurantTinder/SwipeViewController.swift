@@ -26,7 +26,11 @@ class SwipeViewController: UIViewController {
     var currentLat = 0.0
     var currentLon = 0.0
     var numRows:Int = 0
+    var totalImgs = 0
+    var timer = Timer()
     
+    
+    @IBOutlet var remainSwipes: UILabel!
     @IBAction func endButton(_ sender: Any)
     {
         
@@ -193,6 +197,17 @@ class SwipeViewController: UIViewController {
         print("these are restaurant ids")
         print(restaurant)
         
+        var height = 0
+        var width = 0
+        height = Int(Picture.frame.height)
+        width = Int(Picture.frame.width)
+        var p = 0
+        while(p < imgs.count)
+        {
+            imgs[p] = imgs[p].replacingOccurrences(of: "300x300", with: "\(height)x\(width)", options: .literal, range: nil)
+            p += 1
+        }
+        
         
         
         if restaurant.count >= 1
@@ -241,28 +256,17 @@ class SwipeViewController: UIViewController {
         }
         
         
+        totalImgs = imgs.count - restaurant.count
+        
+        remainSwipes.text = String(i) + "/\(totalImgs)"
         
         
-        if(imgs.count == 0)
-        {
-            let appearance = SCLAlertView.SCLAppearance(
-                kTitleFont: UIFont(name: "Avenir", size: 20)!,
-                kTextFont: UIFont(name: "Avenir", size: 14)!,
-                kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
-                showCloseButton: true
-            )
-            
-            let alert = SCLAlertView(appearance: appearance)
-            
-            alert.showError("Error", subTitle: "No Images Found.")
-            
-        }
-        else
-        {
+        
+        
+        
+       
             let ur = URL(string: imgs[0])
             self.Picture.kf.setImage(with: ur)
-            
-        }
         
         
     
@@ -270,6 +274,17 @@ class SwipeViewController: UIViewController {
         
         
     }
+    
+//    func scheduledTimerWithTimeInterval(){
+//        // Scheduling timer to Call the function **Countdown** with the interval of 1 seconds
+//        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.change), userInfo: nil, repeats: true)
+//    }
+//    func change()
+//    {
+//        print(i)
+//        
+//    }
+//    
     
     
     func wasDragged(gesture: UIPanGestureRecognizer)
@@ -380,7 +395,10 @@ class SwipeViewController: UIViewController {
             {
                 Picture.image = UIImage(named:"Rectangle 5")
             }
+            
+            remainSwipes.text = String(i) + "/\(totalImgs)"
         }
+        
         
         
     }

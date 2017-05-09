@@ -194,11 +194,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.checkSearchBar), userInfo: nil, repeats: true)
     }
     
-//    func scheduledTimerWithTimeInterval(){
-//        // Scheduling timer to Call the function **Countdown** with the interval of 1 seconds
-//        timer = Timer.scheduledTimer(timeInterval: , target: self, selector: #selector(self.checkSearchBar), userInfo: nil, repeats: true)
-//    }
-    
     
     @IBAction func ValueChanged(_ sender: Any)
     {
