@@ -48,7 +48,7 @@ public enum SCLAlertViewStyle {
         case .edit:
             return 0xA429FF
         case .wait:
-            return 0xD62DA5
+            return 0xFF9800
         }
         
     }

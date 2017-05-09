@@ -32,14 +32,17 @@ class SwipeViewController: UIViewController {
         
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
+            //circleBackgroundColor: UIColor.black.cgColor
         )
         let alertView = SCLAlertView(appearance: appearance)
         //let alertViewIcon = UIImage(named: "finalLogo")
-        alertView.addButton("Confirm", target:self, selector:#selector(SwipeViewController.End))
-        alertView.addButton("Cancel") {
+        alertView.addButton("Confirm",backgroundColor: hexStringToUIColor(hex: "#FF9800"), target:self,selector:#selector(SwipeViewController.End))
+        alertView.addButton("Cancel",backgroundColor: hexStringToUIColor(hex: "#FF9800")) {
             alertView.dismiss(animated: true, completion: nil)
         }
         alertView.showWait("Warning", subTitle: "Are you sure you want to skip swiping? Results won't be personalized")
+        
+        
         
         
         
@@ -80,6 +83,8 @@ class SwipeViewController: UIViewController {
             if let destination = segue.destination as? SearchPageController
             {
                 destination.pics = []
+                destination.lat = currentLat
+                destination.lon = currentLon
             }
         }
         
@@ -90,6 +95,8 @@ class SwipeViewController: UIViewController {
                 destination.yesNo = yesNoArray
                 print("got in there")
                 print(destination.yesNo)
+                
+                
             }
             
         }
@@ -257,9 +264,8 @@ class SwipeViewController: UIViewController {
             
         }
         
-        Picture.image = UIImage(named:"Rectangle 5")
         
-        
+    
         
         
         
@@ -268,7 +274,6 @@ class SwipeViewController: UIViewController {
     
     func wasDragged(gesture: UIPanGestureRecognizer)
     {
-        Picture.image = UIImage(named:"Rectangle 5")
         let translation = gesture.translation(in: self.view)
         let label = gesture.view!
         
@@ -371,7 +376,12 @@ class SwipeViewController: UIViewController {
             
             i = i + 1
             print(yesNoArray)
+            if i < imgs.count - 1
+            {
+                Picture.image = UIImage(named:"Rectangle 5")
+            }
         }
+        
         
     }
     

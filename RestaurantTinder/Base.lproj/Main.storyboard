@@ -653,7 +653,6 @@
                                                                 <constraint firstAttribute="height" constant="15" id="QkV-KH-9dO"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                            <color key="textColor" red="1" green="0.54117647058823526" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -740,6 +739,7 @@
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration" identifier="cell"/>
                                         <connections>
+                                            <outlet property="backView" destination="3NY-fY-eMs" id="TLZ-YX-ubJ"/>
                                             <outlet property="bestOutput" destination="Qnf-L3-HqH" id="xf7-dt-HPI"/>
                                             <outlet property="checkIns" destination="hAC-8H-HAi" id="7qB-C6-EfB"/>
                                             <outlet property="milesAway" destination="npK-3K-meC" id="fd9-Tw-Pod"/>
@@ -755,7 +755,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4b-ko-G0e">
-                                <rect key="frame" x="134" y="26" width="107" height="28"/>
+                                <rect key="frame" x="134" y="28" width="107" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="107" id="gBv-2S-dGR"/>
                                     <constraint firstAttribute="height" constant="28" id="gSL-I6-7Mi"/>
@@ -765,14 +765,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7h2-Eu-J5R">
-                                <rect key="frame" x="10" y="22" width="25" height="35"/>
+                                <rect key="frame" x="10" y="25" width="25" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="GhN-hX-YQK"/>
                                     <constraint firstAttribute="width" constant="25" id="Jxv-6R-5zu"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="blackBack"/>
                                 <connections>
-                                    <segue destination="te2-3k-5fC" kind="show" id="Oft-Ep-dkt"/>
+                                    <segue destination="te2-3k-5fC" kind="show" identifier="SearchTime" id="Oft-Ep-dkt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -781,11 +781,11 @@
                             <constraint firstItem="7h2-Eu-J5R" firstAttribute="leading" secondItem="Vxc-Xx-qq1" secondAttribute="leading" constant="10" id="7dQ-sx-zMo"/>
                             <constraint firstItem="hEl-3t-D0S" firstAttribute="top" secondItem="nta-mF-dK2" secondAttribute="bottom" id="8bq-Ss-4a2"/>
                             <constraint firstItem="nta-mF-dK2" firstAttribute="leading" secondItem="Vxc-Xx-qq1" secondAttribute="leading" id="ChB-ol-2Mw"/>
-                            <constraint firstItem="Q4b-ko-G0e" firstAttribute="top" secondItem="Vxc-Xx-qq1" secondAttribute="top" constant="26" id="eBG-tX-hlR"/>
+                            <constraint firstItem="Q4b-ko-G0e" firstAttribute="top" secondItem="Vxc-Xx-qq1" secondAttribute="top" constant="28" id="eBG-tX-hlR"/>
                             <constraint firstItem="Q4b-ko-G0e" firstAttribute="centerX" secondItem="Vxc-Xx-qq1" secondAttribute="centerX" id="gNd-bg-Wys"/>
                             <constraint firstAttribute="trailing" secondItem="nta-mF-dK2" secondAttribute="trailing" id="tXJ-pA-lun"/>
                             <constraint firstItem="nta-mF-dK2" firstAttribute="top" secondItem="7h2-Eu-J5R" secondAttribute="bottom" constant="15" id="ulU-bH-FZw"/>
-                            <constraint firstItem="7h2-Eu-J5R" firstAttribute="top" secondItem="Vxc-Xx-qq1" secondAttribute="top" constant="22" id="vtB-b8-Orb"/>
+                            <constraint firstItem="7h2-Eu-J5R" firstAttribute="top" secondItem="Vxc-Xx-qq1" secondAttribute="top" constant="25" id="vtB-b8-Orb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -923,9 +923,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Od2-65-eKh">
-                                <rect key="frame" x="15" y="22" width="25" height="40"/>
+                                <rect key="frame" x="15" y="22" width="35" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="fH6-yG-rI8"/>
+                                    <constraint firstAttribute="width" constant="35" id="fH6-yG-rI8"/>
                                     <constraint firstAttribute="height" constant="40" id="gMN-To-2YC"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="blackBack"/>
@@ -1210,7 +1210,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YGq-uv-buq"/>
-        <segue reference="IvJ-8q-Dgd"/>
+        <segue reference="QOK-9Y-xQU"/>
         <segue reference="fX7-yI-sv4"/>
         <segue reference="Fro-Az-cuK"/>
     </inferredMetricsTieBreakers>

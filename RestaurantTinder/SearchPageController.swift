@@ -290,6 +290,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             }
             let newString = searchQuery.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
             
+            print("loc")
+            print(self.lat!)
+            print(self.lon!)
+            
             let request:String! = "https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=20&radius=\(meters)"
             
             makeRequest(request)
@@ -798,28 +802,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         var meters:Int = 0
         meters = miles * 1609
         return meters
-    }
-    
-    func hexStringToUIColor (hex:String) -> UIColor {
-        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-        
-        if (cString.hasPrefix("#")) {
-            cString.remove(at: cString.startIndex)
-        }
-        
-        if ((cString.characters.count) != 6) {
-            return UIColor.gray
-        }
-        
-        var rgbValue:UInt32 = 0
-        Scanner(string: cString).scanHexInt32(&rgbValue)
-        
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
     }
     
     

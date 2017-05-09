@@ -357,6 +357,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         if indexPath.row == 0
         {
             cell.bestOutput.text = "#1 Choice for you"
+            cell.backView.backgroundColor = hexStringToUIColor(hex: "#98FB98")
         }
         
         
@@ -396,6 +397,15 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
                 destination.store4 = storeId4
                 destination.store5 = storeId5
                 destination.numRows = numRows
+                
+            }
+        }
+        else if segue.identifier == "SearchTime"
+        {
+            if let destination = segue.destination as? SearchPageController
+            {
+                destination.lat = currentLat
+                destination.lon = currentLon
                 
             }
         }
