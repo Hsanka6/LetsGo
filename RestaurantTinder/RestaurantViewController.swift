@@ -47,9 +47,9 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func sendText(_ sender: Any)
     {
         let messageVC = MFMessageComposeViewController()
-        let link = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=1219918851&mt=8"
+        let link = "http://foodiesapp.io"
         
-        messageVC.body = "Meet me at " + restName! + "\n" + " Address:" + restAddress! + "\n" + "Try Let's Go today!" + "\n" + link
+        messageVC.body = "Meet me at " + restName! + "\n" + "Address:" + restAddress! + "\n" + "Try Foodies today!" + "\nDownload on " + link
         messageVC.recipients = [""]
         messageVC.messageComposeDelegate = self;
         

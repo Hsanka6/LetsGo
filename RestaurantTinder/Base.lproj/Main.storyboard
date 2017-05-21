@@ -51,7 +51,7 @@
                                     <segue destination="te2-3k-5fC" kind="show" identifier="ToSearch" id="IvJ-8q-Dgd"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's Go" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jV-Pk-EdW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Foodies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jV-Pk-EdW">
                                 <rect key="frame" x="113" y="275" width="149" height="142"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="149" id="BPo-sS-zTC"/>
@@ -263,38 +263,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iL3-Id-UUD" customClass="CircleProgressBar">
-                                <rect key="frame" x="127" y="274" width="120" height="120"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="OdX-Rd-xwS"/>
-                                    <constraint firstAttribute="height" constant="120" id="y5Z-CA-qg5"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="progressBarProgressColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="progressBarTrackColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="hintTextColor">
-                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="hintViewBackgroundColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="hintViewSpacing">
-                                        <real key="value" value="50"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="progressBarWidth">
-                                        <real key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hintHidden" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="y6w-Ht-PpS">
                                 <rect key="frame" x="14" y="556" width="347" height="31"/>
                                 <constraints>
@@ -353,10 +321,6 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="title" value="Food"/>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eck-IC-wnd" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                <rect key="frame" x="0.0" y="78" width="375" height="305"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbD-vi-T0V">
                                 <rect key="frame" x="92" y="28" width="190" height="30"/>
                                 <constraints>
@@ -398,6 +362,10 @@
                                     <action selector="redeemButton:" destination="te2-3k-5fC" eventType="touchUpInside" id="ft0-u3-oUD"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eck-IC-wnd" customClass="ImageSlideshow" customModule="ImageSlideshow">
+                                <rect key="frame" x="0.0" y="66" width="375" height="323"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -423,11 +391,9 @@
                             <constraint firstItem="Spp-pY-fwp" firstAttribute="centerX" secondItem="eTK-c8-qDT" secondAttribute="centerX" id="Y82-Ie-z9s"/>
                             <constraint firstItem="hbD-vi-T0V" firstAttribute="top" secondItem="G7M-gz-OuZ" secondAttribute="bottom" constant="8" id="cyn-9G-0NE"/>
                             <constraint firstAttribute="trailing" secondItem="Ee8-yy-dyd" secondAttribute="trailing" constant="12" id="dG4-wa-lEE"/>
-                            <constraint firstItem="iL3-Id-UUD" firstAttribute="centerY" secondItem="eTK-c8-qDT" secondAttribute="centerY" id="g2E-bv-5ri"/>
                             <constraint firstItem="p6H-0V-uTa" firstAttribute="top" secondItem="y6w-Ht-PpS" secondAttribute="bottom" constant="5" id="h8y-ty-EL6"/>
                             <constraint firstItem="NyI-13-enJ" firstAttribute="top" secondItem="ch8-8W-nHa" secondAttribute="bottom" constant="7" id="htP-oc-tAB"/>
                             <constraint firstAttribute="trailing" secondItem="cGs-ud-gOH" secondAttribute="trailing" constant="12" id="ieg-sb-H92"/>
-                            <constraint firstItem="iL3-Id-UUD" firstAttribute="centerX" secondItem="eTK-c8-qDT" secondAttribute="centerX" id="kEm-pd-vsg"/>
                             <constraint firstItem="cGs-ud-gOH" firstAttribute="leading" secondItem="eTK-c8-qDT" secondAttribute="leading" constant="12" id="mgQ-EB-Vt5"/>
                             <constraint firstItem="Ee8-yy-dyd" firstAttribute="top" secondItem="cGs-ud-gOH" secondAttribute="bottom" constant="6" id="nI7-7S-r7V"/>
                             <constraint firstItem="eck-IC-wnd" firstAttribute="top" secondItem="hbD-vi-T0V" secondAttribute="bottom" constant="10" id="qSF-V8-XTt"/>
@@ -1233,7 +1199,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vqh-Dp-HRT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7014" y="-635"/>
+            <point key="canvasLocation" x="5972" y="-635"/>
         </scene>
     </scenes>
     <resources>
@@ -1256,6 +1222,6 @@
         <segue reference="YGq-uv-buq"/>
         <segue reference="QOK-9Y-xQU"/>
         <segue reference="fqB-Ig-OY2"/>
-        <segue reference="Mao-i0-sWn"/>
+        <segue reference="c1d-zw-DDg"/>
     </inferredMetricsTieBreakers>
 </document>

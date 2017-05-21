@@ -99,8 +99,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         {
         if(self.coupon == false)
         {
-            let title = "Get $1 Boba"
-            let message = "Show the cashier your post to redeem your coupon"
+            let title = "Get $1 regular size boba"
+            let message = "Show the cashier your post on facebook, like foodies app page and Boba Fiend Riverside page to redeem your coupon. Please do this when you are at the store."
             let image = UIImage(named: "boba_fiend")
         
             // Create the dialog

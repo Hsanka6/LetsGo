@@ -342,7 +342,7 @@ class SwipeViewController: UIViewController {
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
                                 {
-                                    self.indicator.stopAnimating()
+                                  //  self.indicator.stopAnimating()
                                     self.performSegue(withIdentifier: "SendTopData", sender: nil)
                                 }
                                 
@@ -374,7 +374,7 @@ class SwipeViewController: UIViewController {
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
                                 {
-                                    self.indicator.stopAnimating()
+                                 //   self.indicator.stopAnimating()
                                     self.performSegue(withIdentifier: "SendTopData", sender: nil)
                                 }
                                 
