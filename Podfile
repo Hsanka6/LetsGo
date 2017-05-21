@@ -8,8 +8,9 @@ target 'RestaurantTinder' do
 
 pod 'Firebase/Core'
 pod 'Firebase/Database'
-pod ‘Firebase/Auth’
+pod 'Firebase/Auth'
 pod 'FBSDKCoreKit'
+pod 'CircleProgressBar', '~> 0.32’
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'FacebookShare'
@@ -25,6 +26,7 @@ pod 'SCLAlertView'
 pod 'NVActivityIndicatorView'
 pod 'ImageSlideshow'
 pod 'PopupDialog'
+pod 'KeychainSwift', '~> 8.0'
 
 #pod 'TGLParallaxCarousel'
 

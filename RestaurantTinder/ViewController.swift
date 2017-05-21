@@ -16,6 +16,7 @@ import RevealingSplashView
 import NVActivityIndicatorView
 import SystemConfiguration
 import SCLAlertView
+import KeychainSwift
 
 class ViewController: UIViewController, CLLocationManagerDelegate
 {
@@ -38,10 +39,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     {
         let defaults = UserDefaults.standard
         
-        if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce"){
+        if let isAppAlreadyLaunchedOnce = defaults.string(forKey: "isAppAlreadyLaunchedOnce")
+        {
             print("App already launched : \(isAppAlreadyLaunchedOnce)")
             return true
-        }else{
+        }
+        else
+        {
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
             print("App launched first time")
             return false
@@ -106,6 +110,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate
         firstBool = isAppAlreadyLaunchedOnce()
         
         
+        let keychain = KeychainSwift()
+        let defaults = UserDefaults.standard
+        
+        print("bobafiend bool is \(keychain.getBool("BobaFiend"))")
+        if(keychain.getBool("BobaFiend") == true)
+        {
+            
+            defaults.set(true, forKey: "isRedeemed")
+            
+            
+        }
+        else
+        {
+            defaults.set(false, forKey: "isRedeemed")
+            
+        }
+        
         
         //Starts animation
         revealingSplashView.startAnimation(){
@@ -127,7 +148,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate
                         }
                         if self.successBool == true
                         {
-                            self.goToSwipe()
+                            self.performSegue(withIdentifier: "ToSearch", sender: self)
                         }
                         
                         print(user.email!)
@@ -161,11 +182,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate
             locationManager.startUpdatingLocation()
         }
         
-        
-        
-        
-        
-        
     }
     
     
@@ -180,12 +196,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     
     
     
-    func goToSwipe()
-    {
-        
-        self.performSegue(withIdentifier: "ToSearch", sender: self)
-        
-    }
     func firebaseAuth(_ credential: FIRAuthCredential)
     {
         FIRAuth.auth()?.signIn(with: credential, completion:{ (user, error) in
@@ -222,15 +232,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if segue.identifier == "Screens"
-        {
-            if let destination = segue.destination as? IntroScreens
-            {
-                destination.lat = lat
-                destination.lon = lon
-           }
-        }
-        else if segue.identifier == "skipLogin" || segue.identifier == "ToSearch"
+//        if segue.identifier == "Screens"
+//        {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
+//            {
+//                if let destination = segue.destination as? IntroScreens
+//                {
+//                    destination.lat = self.lat
+//                    destination.lon = self.lon
+//                }
+//            }
+//        }
+        if segue.identifier == "skipLogin" || segue.identifier == "ToSearch"
         {
             if let destination = segue.destination as? SearchPageController
             {

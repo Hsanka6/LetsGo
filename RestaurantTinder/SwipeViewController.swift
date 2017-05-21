@@ -9,6 +9,7 @@ import UIKit
 import Kingfisher
 import QuartzCore
 import SCLAlertView
+import NVActivityIndicatorView
 
 class SwipeViewController: UIViewController {
     
@@ -28,7 +29,9 @@ class SwipeViewController: UIViewController {
     var numRows:Int = 0
     var totalImgs = 0
     var timer = Timer()
+    var currentImage = 0
     
+    @IBOutlet var indicator: NVActivityIndicatorView!
     
     @IBOutlet var remainSwipes: UILabel!
     @IBAction func endButton(_ sender: Any)
@@ -197,6 +200,9 @@ class SwipeViewController: UIViewController {
         print("these are restaurant ids")
         print(restaurant)
         
+        view.bringSubview(toFront: indicator)
+        indicator.isHidden = true
+        
         var height = 0
         var width = 0
         height = Int(Picture.frame.height)
@@ -258,7 +264,10 @@ class SwipeViewController: UIViewController {
         
         totalImgs = imgs.count - restaurant.count
         
-        remainSwipes.text = String(i) + "/\(totalImgs)"
+        
+        
+        
+        remainSwipes.text = "Pictures Remaining: " + String(i) + "/\(totalImgs)"
         
         
         
@@ -328,10 +337,12 @@ class SwipeViewController: UIViewController {
                             }
                             else
                             {
+                                indicator.isHidden = false
+                                indicator.startAnimating()
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
                                 {
-
+                                    self.indicator.stopAnimating()
                                     self.performSegue(withIdentifier: "SendTopData", sender: nil)
                                 }
                                 
@@ -358,9 +369,12 @@ class SwipeViewController: UIViewController {
                             }
                             else
                             {
+                                indicator.isHidden = false
+                                indicator.startAnimating()
+                                
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
                                 {
-                                    
+                                    self.indicator.stopAnimating()
                                     self.performSegue(withIdentifier: "SendTopData", sender: nil)
                                 }
                                 
@@ -389,6 +403,7 @@ class SwipeViewController: UIViewController {
             
             label.center = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height/2)
             
+            currentImage += 1
             i = i + 1
             print(yesNoArray)
             if i < imgs.count - 1
@@ -396,7 +411,14 @@ class SwipeViewController: UIViewController {
                 Picture.image = UIImage(named:"Rectangle 5")
             }
             
-            remainSwipes.text = String(i) + "/\(totalImgs)"
+            if currentImage > totalImgs
+            {
+                currentImage = currentImage - 1
+            }
+            
+            remainSwipes.text = "Pictures Remaining: " + String(currentImage) + "/\(totalImgs)"
+            
+            
         }
         
         

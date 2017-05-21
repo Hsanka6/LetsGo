@@ -18,11 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    override init() {
+        FIRApp.configure()
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        FIRApp.configure()
+        //FIRApp.configure()
         GMSServices.provideAPIKey("AIzaSyASRZ7-pV8qiCohTZhbTdthrHwthtmGQ_I")
         
         

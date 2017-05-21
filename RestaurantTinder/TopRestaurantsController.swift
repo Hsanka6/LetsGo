@@ -363,7 +363,7 @@ class TopRestaurantsController: UIViewController, UITableViewDelegate, UITableVi
         
         
         
-            cell.setUp(restaurantName: self.topRestaurants[indexPath.row].getName, Rating: self.topRestaurants[indexPath.row].getRating, MilesAway: self.topRestaurants[indexPath.row].getMilesAway, CheckIns: self.topRestaurants[indexPath.row].getCheckIns, ImageUrl: self.topRestaurants[indexPath.row].getImageUrl)/*, lat: self.topRestaurants[indexPath.row].getLat, lon: self.topRestaurants[indexPath.row]*/
+        cell.setUp(restaurantName: self.topRestaurants[indexPath.row].getName, Rating: self.topRestaurants[indexPath.row].getRating, MilesAway: self.topRestaurants[indexPath.row].getMilesAway, CheckIns: self.topRestaurants[indexPath.row].getCheckIns, ImageUrl: self.topRestaurants[indexPath.row].getImageUrl)/*, lat: self.topRestaurants[indexPath.row].getLat, lon: self.topRestaurants[indexPath.row]*/
         return cell
     }
     

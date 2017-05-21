@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -263,17 +263,36 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iL3-Id-UUD" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="157" y="304" width="60" height="60"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iL3-Id-UUD" customClass="CircleProgressBar">
+                                <rect key="frame" x="127" y="274" width="120" height="120"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="OdX-Rd-xwS"/>
-                                    <constraint firstAttribute="height" constant="60" id="y5Z-CA-qg5"/>
+                                    <constraint firstAttribute="width" constant="120" id="OdX-Rd-xwS"/>
+                                    <constraint firstAttribute="height" constant="120" id="y5Z-CA-qg5"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="progressBarProgressColor">
                                         <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="progressBarTrackColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="hintTextColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="hintViewBackgroundColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="hintViewSpacing">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progressBarWidth">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="hintHidden" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="y6w-Ht-PpS">
@@ -335,7 +354,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eck-IC-wnd" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                <rect key="frame" x="0.0" y="83" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="78" width="375" height="305"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbD-vi-T0V">
@@ -423,13 +442,12 @@
                     <connections>
                         <outlet property="Miles" destination="1DT-PH-y5c" id="f6M-el-Emw"/>
                         <outlet property="MilesSlider" destination="y6w-Ht-PpS" id="gSM-LW-7Xk"/>
-                        <outlet property="indicator" destination="iL3-Id-UUD" id="unE-Sb-AZo"/>
                         <outlet property="logoutButton" destination="9DU-eS-OCl" id="0ed-dH-6hi"/>
                         <outlet property="searchBar" destination="ch8-8W-nHa" id="l12-SO-U6e"/>
                         <outlet property="searchRestaurantsButton" destination="p6H-0V-uTa" id="txX-04-mQQ"/>
                         <outlet property="slideShow" destination="eck-IC-wnd" id="4uC-jH-QDE"/>
-                        <outlet property="someView" destination="Spp-pY-fwp" id="xAI-Ed-Eml"/>
                         <segue destination="San-Az-7XX" kind="show" identifier="swipe" id="3DV-aJ-lsh"/>
+                        <segue destination="ZdH-10-e3g" kind="show" identifier="goToRest" id="Mao-i0-sWn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lpw-uo-S3i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -550,9 +568,9 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8HN-sr-a4F">
-                                        <rect key="frame" x="162" y="94" width="51" height="25"/>
+                                        <rect key="frame" x="78" y="94" width="219" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="51" id="S9L-bq-NDb"/>
+                                            <constraint firstAttribute="width" constant="219" id="S9L-bq-NDb"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -573,12 +591,12 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcc-9F-6k0">
-                                <rect key="frame" x="10" y="197" width="355" height="331"/>
+                                <rect key="frame" x="10" y="177" width="355" height="351"/>
                                 <color key="backgroundColor" red="0.89411764705882346" green="0.94509803921568625" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.030723050670020756" green="0.0" blue="0.24000634517766495" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Rectangle 5" translatesAutoresizingMaskIntoConstraints="NO" id="jIN-Xx-BTB">
-                                <rect key="frame" x="14" y="198" width="347" height="327"/>
+                                <rect key="frame" x="14" y="180" width="347" height="342"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe Right to Like and Swipe left to Dislike!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHp-Qu-ezE">
                                 <rect key="frame" x="37" y="584" width="302" height="43"/>
@@ -590,15 +608,33 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="FV6-Zj-OWZ">
+                                <rect key="frame" x="177" y="395" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ro0-QG-hNX" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="138" y="283" width="100" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballScaleMultiple"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.13333333333333333" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="NHp-Qu-ezE" firstAttribute="centerX" secondItem="De4-GU-1ji" secondAttribute="centerX" id="56c-qp-yVj"/>
                             <constraint firstItem="EuQ-F7-Ohx" firstAttribute="top" secondItem="De4-GU-1ji" secondAttribute="topMargin" id="7l7-SO-OeB"/>
-                            <constraint firstItem="kcc-9F-6k0" firstAttribute="top" secondItem="EuQ-F7-Ohx" secondAttribute="bottom" constant="82" id="FFC-Tt-Ver"/>
+                            <constraint firstItem="kcc-9F-6k0" firstAttribute="top" secondItem="EuQ-F7-Ohx" secondAttribute="bottom" constant="62" id="FFC-Tt-Ver"/>
                             <constraint firstItem="jIN-Xx-BTB" firstAttribute="leading" secondItem="De4-GU-1ji" secondAttribute="leading" constant="14" id="FHk-fQ-kl5"/>
                             <constraint firstItem="kcc-9F-6k0" firstAttribute="leading" secondItem="De4-GU-1ji" secondAttribute="leading" constant="10" id="GK8-bj-lum"/>
-                            <constraint firstItem="jIN-Xx-BTB" firstAttribute="top" secondItem="EuQ-F7-Ohx" secondAttribute="bottom" constant="85" id="ICG-Gj-fNR"/>
+                            <constraint firstItem="jIN-Xx-BTB" firstAttribute="top" secondItem="EuQ-F7-Ohx" secondAttribute="bottom" constant="65" id="ICG-Gj-fNR"/>
                             <constraint firstItem="4uo-he-dqv" firstAttribute="top" secondItem="NHp-Qu-ezE" secondAttribute="bottom" constant="40" id="Lix-Lv-348"/>
                             <constraint firstAttribute="trailing" secondItem="EuQ-F7-Ohx" secondAttribute="trailing" id="PgY-eF-13k"/>
                             <constraint firstItem="NHp-Qu-ezE" firstAttribute="top" secondItem="jIN-Xx-BTB" secondAttribute="bottom" constant="60" id="RW6-vM-nMT"/>
@@ -614,6 +650,7 @@
                     <connections>
                         <outlet property="Picture" destination="jIN-Xx-BTB" id="7fy-av-xDE"/>
                         <outlet property="background" destination="kcc-9F-6k0" id="Im2-kt-swF"/>
+                        <outlet property="indicator" destination="ro0-QG-hNX" id="FYc-9p-uco"/>
                         <outlet property="remainSwipes" destination="8HN-sr-a4F" id="PC4-Os-bo8"/>
                         <segue destination="rZ0-ly-IGX" kind="show" identifier="SendTopData" id="FyO-Sd-m9G"/>
                         <segue destination="rZ0-ly-IGX" kind="show" identifier="end" id="fqB-Ig-OY2"/>
@@ -835,7 +872,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u4U-ca-evd" id="psi-9n-jQF">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="82.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3Q-hL-2UD">
@@ -1140,7 +1177,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dzd-tE-3em" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6120.8000000000002" y="-635.53223388305855"/>
+            <point key="canvasLocation" x="4364" y="-1316"/>
         </scene>
         <!--Full Screen View Controller-->
         <scene sceneID="J11-Rc-RQb">
@@ -1219,6 +1256,6 @@
         <segue reference="YGq-uv-buq"/>
         <segue reference="QOK-9Y-xQU"/>
         <segue reference="fqB-Ig-OY2"/>
-        <segue reference="Fro-Az-cuK"/>
+        <segue reference="Mao-i0-sWn"/>
     </inferredMetricsTieBreakers>
 </document>

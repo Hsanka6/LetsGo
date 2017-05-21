@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CircleProgressBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -70,6 +75,11 @@
 			<false/>
 		</dict>
 		<key>ImageSlideshow.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>KeychainSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -132,7 +142,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>293C27F603EF754576D84840E4C0EFC8</key>
+		<key>2F44D06A691EBC5F7A98D8243D1186A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +152,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>39E3D81B2F31AD07AFA24AA1BB8CDFE3</key>
+		<key>38ACA430605AFB4229712A18BDDF5086</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3BC6817DCBFF09120A366E27985B9D9C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,11 +168,6 @@
 			<true/>
 		</dict>
 		<key>44CAD6CE523055ED339E87154473A254</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>517C0391B37F449A10DE5151616FBE77</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -182,17 +192,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>937ED025FBE18B2C42499CE4D9C95B71</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>94CD5C98B4ADDFBA79E48090963E56E6</key>
+		<key>A3F7F2587D52416BF797CEB9FC3BEE9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>A7FEAA14E89971698ACA148F7F7202F2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABCEB63A2518A467436C7112584819E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B545B48FA0CEE58E0B8D9309EE4CFF7C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -207,6 +222,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C12DEA359CAB0AB8893C544CEF30D1FA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C4944FEC314D1A66588651D006273ADE</key>
 		<dict>
 			<key>primary</key>
@@ -217,17 +237,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CEE98FE6845AA4CAD587DC8EBAE21B77</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>DDBCFDE490CDFDABF6F16A26F346932D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E7AA23E9F66858EF7C9E19E9769110AB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EA836697863C7CF67BFF74BDCD889ECC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

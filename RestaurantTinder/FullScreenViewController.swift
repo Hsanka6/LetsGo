@@ -5,14 +5,13 @@
 //  Created by Haasith Sanka on 3/1/17.
 //  Copyright © 2017 haasith. All rights reserved.
 //
-
 import UIKit
 import Kingfisher
 import QuartzCore
 
 class FullScreenViewController: UIViewController
 {
-
+    
     var imgUrl:String! = ""
     var currentLat:Double! = 0.0
     var currentLon:Double! = 0.0
@@ -35,8 +34,8 @@ class FullScreenViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-
+        
+        
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 5
         let aString = "300x300"
@@ -70,5 +69,5 @@ class FullScreenViewController: UIViewController
             }
         }
     }
-
+    
 }

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3BC6817DCBFF09120A366E27985B9D9C'
-               BlueprintName = 'SCLAlertView'
+               BlueprintIdentifier = 'B545B48FA0CEE58E0B8D9309EE4CFF7C'
+               BlueprintName = 'CircleProgressBar'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SCLAlertView.framework'>
+               BuildableName = 'CircleProgressBar.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

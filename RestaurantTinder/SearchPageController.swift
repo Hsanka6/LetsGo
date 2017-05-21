@@ -12,14 +12,18 @@ import SwiftyJSON
 import CoreLocation
 import FirebaseDatabase
 import Firebase
+import FirebaseAuth
 import SkyFloatingLabelTextField
 import FontAwesome_swift
 import FBSDKLoginKit
 import SCLAlertView
+import Social
 import NVActivityIndicatorView
 import ImageSlideshow
 import Alamofire_Synchronous
 import PopupDialog
+import QuartzCore
+import KeychainSwift
 
 
 class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFieldDelegate {
@@ -40,6 +44,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     @IBOutlet var MilesSlider: UISlider!
     var meters:Int = 8045
     var ref: FIRDatabaseReference!
+    var ref2: FIRDatabaseReference!
     var noRestBool:Bool! = false
     var ids = [String]()
     var finalIds = [String] ()
@@ -51,6 +56,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var keyBoardHeight:CGRect!
     var checkImg:Bool = false
     var requestDone = false
+    
+    var onlineCheck = false
+    
+    var coupon = false
+    
     
     var googleAPIKey = "AIzaSyASRZ7-pV8qiCohTZhbTdthrHwthtmGQ_I"
     var picCounter = 0
@@ -64,22 +74,33 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var imageBOOL:Bool! = false
     
     
-    
+    var uid: String! = ""
     
     var couponRedeemed:Bool! = false
     
     @IBOutlet var logoutButton: UIButton!
     var dialogAppearance = PopupDialogDefaultView.appearance()
 
+    
+    var checkCoupon = false
+    
+    
     @IBAction func redeemButton(_ sender: Any)
     {
+        
+        self.checkCouponRedeemed()
+        
         // Prepare the popup assets
-        if(userExistsBool == true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
         {
-        if(couponRedeemed == false)
+            print("coupona is \(self.coupon)")
+            
+        if(self.userExistsBool == true)
+        {
+        if(self.coupon == false)
         {
             let title = "Get $1 Boba"
-            let message = "Show the cashier this to redeem now!"
+            let message = "Show the cashier your post to redeem your coupon"
             let image = UIImage(named: "boba_fiend")
         
             // Create the dialog
@@ -87,23 +108,56 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
             // Create buttons
         
-            let buttonOne = DefaultButton(title:"Redeem Now")
+            let buttonOne = DefaultButton(title:"Share Now to get Coupon!")
             {
-                let pop = PopupDialog(title: "Redeemed", message: "Enjoy!")
-                self.present(pop, animated: true, completion:nil)
-                self.couponRedeemed = true
-            }
+                
+//                let title = "Please sign in to redeem."
+//                let message = "Only users who are signed in can get the coupon!"
+//                
+//                // Create the dialog
+//                let popup = PopupDialog(title: title, message: message)
+//                
+                
+                
+                
+                let fbShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                //fbShare.add(_url:URL!)
+                fbShare.setInitialText("Download Foodies today!")
+                fbShare.add(URL(string: "http://foodiesapp.io"))
+                self.present(fbShare, animated: true, completion: nil)
+                
+                fbShare.completionHandler = { (result:SLComposeViewControllerResult) -> Void in
+                    switch result {
+                    case SLComposeViewControllerResult.cancelled:
+                        print("Cancelled")
+                    case SLComposeViewControllerResult.done:
+                        print("posted successfully")
+                        self.couponRedeemed = true
+                        let defaults = UserDefaults.standard
+                        
+                        //self.coupon = true
+                        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+                            return
+                        }
+                        self.ref = FIRDatabase.database().reference()
+                        
+                        self.ref.child("BobaFiend").child(uid).setValue(["redeemed": true])
+                        
+
+                    }
+                }
+                
+                
+                
         
-            let buttonTwo = DefaultButton(title: "More Info")
-            {
-                print("Ah, maybe next time :)")
+                
+                
             }
-        
             let buttonThree = DestructiveButton(title: "Redeem Later")
             {
                 print("You canceled the car dialog.")
             }
-            popup.addButtons([buttonOne, buttonTwo, buttonThree])
+            popup.addButtons([buttonOne, buttonThree])
         
         // Present dialog
         self.present(popup, animated: true, completion: nil)
@@ -143,29 +197,37 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         }
         
         
+        
+        }
+        
+        
     }
     
     @IBAction func logOut(_ sender: Any)
     {
         if userExistsBool == true
         {
-        let manager = FBSDKLoginManager()
-        manager.logOut()
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-        performSegue(withIdentifier: "logout", sender: nil)
+            let manager = FBSDKLoginManager()
+            manager.logOut()
+            let firebaseAuth = FIRAuth.auth()
+            do
+            {
+                try firebaseAuth?.signOut()
+            }
+            catch let signOutError as NSError
+            {
+                print ("Error signing out: %@", signOutError)
+            }
+            performSegue(withIdentifier: "logout", sender: nil)
         }
         performSegue(withIdentifier: "logout", sender: nil)
         
     }
     
     
-    @IBOutlet var indicator: NVActivityIndicatorView!
     var randomIds = [String]()
+    var checkRef: FIRDatabaseReference!
+
     
     
     @IBOutlet var slideShow: ImageSlideshow!
@@ -187,6 +249,27 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
          
         }
         
+        
+        
+        
+        
+        
+        
+        if self.coupon == true && self.couponRedeemed == true
+        {
+            let pop = PopupDialog(title: "Redeemed", message: "Enjoy!")
+            self.present(pop, animated: true, completion:nil)
+            self.couponRedeemed = false
+        }
+        
+        //print("this is coupon \(self.coupon)")
+        
+
+        
+        
+        
+        
+        
     }
     
     func scheduledTimerWithTimeInterval(){
@@ -207,18 +290,34 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         UIApplication.shared.openURL(NSURL(string: UIApplicationOpenSettingsURLString)! as URL)
 
     }
-
+    
+    var appearance = SCLAlertView.SCLAppearance(
+        showCloseButton: false)
+    
+    
+    
+   
     @IBOutlet var searchRestaurantsButton: UIButton!
     
     @IBAction func searchRestaurantsButton(_ sender: Any)
     {
-        self.view.bringSubview(toFront: indicator)
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false)
+        
+        
+        let waitView:SCLAlertViewResponder = SCLAlertView(appearance:appearance).showWait("Please Wait...", subTitle: "Sorting Images... the wait may take upto 30 seconds")
+
+        
+        
+        
+        //self.view.bringSubview(toFront: indicator)
         self.searchRestaurantsButton.isEnabled = false
         
         //start animator
-        indicator.isHidden = false
-        indicator.startAnimating()
-        let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        //indicator.isHidden = false
+        
+        
+        
         
         
         
@@ -247,7 +346,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                 alert.dismiss(animated: true, completion: nil)
             }
             alert.showError("Error", subTitle: "Please Enable Location in Settings")
-            indicator.stopAnimating()
             self.searchRestaurantsButton.isEnabled = true
 
         }
@@ -268,7 +366,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                 alert.dismiss(animated: true, completion: nil)
             }
             alert.showError("Error", subTitle: "Please Enable Location in Settings")
-            indicator.stopAnimating()
+            waitView.close()
+            
             self.searchRestaurantsButton.isEnabled = true
             
             
@@ -285,13 +384,17 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             }
             let newString = searchQuery.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
             
-            print("loc")
-            print(self.lat!)
-            print(self.lon!)
             
             let request:String! = "https://api.foursquare.com/v2/venues/search?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&ll=\(self.lat!),\(self.lon!)&query=\(newString)&limit=20&radius=\(meters)"
             
             makeRequest(request)
+            
+            requestDone = true
+            
+//            waitView.setTitle("Finding Restaurants")
+//            waitView.setSubTitle("Sorting restaurants...")
+//            
+            //TimerWithTimeInterval()
             
             
             
@@ -302,7 +405,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             }
             else
             {
-                let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":"N?A"] as [String : Any]
+                let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":"N/A"] as [String : Any]
                 let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
                 totalSearchReference.childByAutoId().setValue(totalValues)
                 
@@ -316,50 +419,70 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                 showCloseButton: true)
             
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0)
-            {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0)
+//            {
                 if self.noRestBool == true
                 {
                     print("error finding rests")
                     let alert = SCLAlertView(appearance: appearance)
-                    alert.showError("Error", subTitle: "No Restaurants were found.")
-                    self.indicator.stopAnimating()
+                    alert.showError("Error", subTitle: "No Restaurants were found. Please check your internet connection.")
+                    waitView.close()
+                    
                     self.searchBar.text = ""
                     self.alreadyError = true
                     self.searchRestaurantsButton.isEnabled = true
                 }
-            }
+            //}
             
             if noRestBool == false
             {
-                print("this goes second")
+                
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2)
                 {
+                    
+                    waitView.close()
+                    print("this goes third")
+                    
+                    
+                    
+                    
+                    
                     let appearance = SCLAlertView.SCLAppearance(
                         kTitleFont: UIFont(name: "Avenir", size: 20)!,
                         kTextFont: UIFont(name: "Avenir", size: 14)!,
                         kButtonFont: UIFont(name: "HelveticaNeue-Bold", size: 14)!,
                         showCloseButton: true)
                     
-                    print("initially getting ids")
-                    print(self.ids)
-                    print(self.ids.count)
+                    
+                    
                     if self.ids.count <= 5
                     {
+                        
+                        print("case 1")
                         self.rowNum = self.ids.count
                         print("here yo")
-                        for id in self.ids
+                        
+                        print("this goes third")
+                        
+                        waitView.setSubTitle("Sorting images...")
+                        
+                        var p = 0
+                        while p < self.ids.count
                         {
-                            print("getting pics")
-                            self.getPhotos(picsForIds: id)
+                            self.getPhotos(picsForIds: self.ids[p])
+                            p += 1
                         }
-                        print("checking 1")
-                        print(self.pics)
+                        
+                        
+                        
+                        
+                        
                         if self.pics.count > 0
                         {
                             print("success")
-                            print(self.restaurants.count)
-                            self.indicator.stopAnimating()
+                            waitView.close()
+                            
                             self.performSegue(withIdentifier: "swipe", sender: self.pics)
                         }
                         else if self.alreadyError == true
@@ -368,8 +491,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                             self.searchBar.text = ""
                             let alert = SCLAlertView(appearance: appearance)
                             alert.showError("Error", subTitle: "No Restaurants were found. Please widen your search")
-                            self.indicator.stopAnimating()
+                            
                             self.searchRestaurantsButton.isEnabled = true
+                            waitView.close()
+                            
                             
                         }
                         else
@@ -377,8 +502,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                             self.searchBar.text = ""
                             let alert = SCLAlertView(appearance: appearance)
                             alert.showError("Error", subTitle: "Please try again")
-                            self.indicator.stopAnimating()
+                            
                             self.searchRestaurantsButton.isEnabled = true
+                            waitView.close()
+                            
                             
                         }
                         
@@ -393,28 +520,39 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                         
                         randNum = self.getRandomNums(int: self.ids.count)
                         var f = 0
+                        print(randNum)
                         while(f < randNum.count)
                         {
                             print(randNum[f])
                             let getInt:Int! = randNum[f]
-                            
+                            print(self.ids[getInt])
                             newIds.append(self.ids[getInt])
-                            print("f is ")
-                            print(f)
                             f += 1
                         }
-                        print("getting photos")
-                        for id in newIds
+                        
+                        
+                        print("case 2")
+                        
+                        print("this goes third")
+                        waitView.setSubTitle("Sorting images...")
+                        
+                        
+                        var p = 0
+                        while p < newIds.count
                         {
-                            self.getPhotos(picsForIds: id)
+                            self.getPhotos(picsForIds: newIds[p])
+                           
+                            p += 1
+                            
                         }
                         
-                        print("checking 2")
-                        print(self.pics)
+                        
+                        
+                        
                         if self.pics.count > 0
                         {
                             print("success")
-                            self.indicator.stopAnimating()
+                            waitView.close()
                             self.performSegue(withIdentifier: "swipe", sender: self.pics)
                             
                         }
@@ -425,7 +563,9 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                             self.searchRestaurantsButton.isEnabled = true
                             let alert = SCLAlertView(appearance: appearance)
                             alert.showError("Error", subTitle: "No Restaurants were found. Please widen your search")
-                            self.indicator.stopAnimating()
+                            waitView.close()
+                            
+                            
                         }
                         else
                         {
@@ -433,7 +573,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                             self.searchRestaurantsButton.isEnabled = true
                             let alert = SCLAlertView(appearance: appearance)
                             alert.showError("Error", subTitle: "Please try again")
-                            self.indicator.stopAnimating()
+                            waitView.close()
+                            
                         }
                         
                     }
@@ -468,7 +609,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             let value = snapshot.value as? NSDictionary
             let name = (value?["name"] as? String)!
             print("name",(name))
-            
+        
             let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":name] as [String : Any]
             let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
             totalSearchReference.childByAutoId().setValue(totalValues)
@@ -483,82 +624,85 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     
     func getPhotos(picsForIds:String)
     {
+        
         let response = Alamofire.request("https://api.foursquare.com/v2/venues/\(picsForIds)/photos?client_id=FDVNPZWJ1QZ3EUMVAXHYTB2ISVV2UUD0A2H01PUGYGESXDAX&client_secret=JIHLRBPYRI2ZKHB4MBRCGL2HLDLHVTDPKDFOJFVVXIFC5BWR&v=20130815&limit=6", parameters:nil).responseJSON()
         if((response.result.value) != nil)
         {
             var secondJSON:JSON!
             secondJSON = JSON(response.result.value!)
-            for (_,subJson):(String, JSON) in secondJSON["response"]["photos"]["items"]
+            if self.picCounter < 3
             {
-                var url: String = subJson["prefix"].stringValue
-                url += "300x300"
-                url += subJson["suffix"].stringValue
                 
-                //do filtering
-                
-                if url != "300x300"
+                for (_,subJson):(String, JSON) in secondJSON["response"]["photos"]["items"]
                 {
-                    let newurl = URL(string: url)
-                    let data = try? Data(contentsOf: newurl!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                    var url: String = subJson["prefix"].stringValue
+                    url += "300x300"
+                    url += subJson["suffix"].stringValue
+                
+                    //do filtering
                     
                     
-                    let binaryImageData = base64EncodeImage(UIImage(data: data!)!)
-                    createRequest(with: binaryImageData)
-                    print("added")
-                    if self.checkImg == true && self.picCounter <= 3
+                
+                    if url != "300x300"
                     {
-                        print("got appended")
-                        self.pics.append(url) // urls
-                    }
+                        let newurl = URL(string: url)
+                        let data = try? Data(contentsOf: newurl!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                    
+                        let binaryImageData = base64EncodeImage(UIImage(data: data!)!)
                         
                     
+                        
+                            print("this is pic counter")
+                            print(picCounter)
+                        if self.picCounter < 3
+                        {
+                            createRequest(with: binaryImageData)
+                            
+                        }
+                        
+                        
                     
-                    //self.imgs.append(UIImage(data: data!)!)
-                    
-                    
-                    
-                }
-                
-                
-                
-                
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0)
-//                {
-//                    var b = 0
-//                    while b < self.foodBools.count
-//                    {
-//                        print("sizes")
-//                        print(self.foodBools.count)
-//                        print(self.pics.count)
-//                        if self.foodBools[b] == false
-//                        {
-//                            self.pics[b] = "NULL"
-//                        }
-//                        b += 1
-//                    }
-//                    self.pics = self.pics.filter{$0 != "NULL"}
-//                }
+                        if self.checkImg == true && self.picCounter < 3
+                        {
+                            print("got appended")
+                            self.pics.append(url) // urls
+                        }
+                        
+                    }
 
-                
-                
-                print("adding urls")
+                }
             }
-            
-            
                 self.pics.append(picsForIds)
                 self.restaurants.append(picsForIds)
-                print("done adding urls")
             
             
+            picCounter = 0
+          
         }
-        picCounter = 0
+        
+        
         
     }
     
     
     
-    
+    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0)
+    //                {
+    //                    var b = 0
+    //                    while b < self.foodBools.count
+    //                    {
+    //                        print("sizes")
+    //                        print(self.foodBools.count)
+    //                        print(self.pics.count)
+    //                        if self.foodBools[b] == false
+    //                        {
+    //                            self.pics[b] = "NULL"
+    //                        }
+    //                        b += 1
+    //                    }
+    //                    self.pics = self.pics.filter{$0 != "NULL"}
+    //                }
+
     
     func makeRequest(_ url:String)
     {
@@ -589,7 +733,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                                 checker = JSON(responseJSON.result.value!)
                                 if checker["response"]["venue"]["photos"]["count"].intValue >= 3
                                 {
-                                    print("this will be added")
                                     self.ids.append(id)
                                 }
                             case .failure:
@@ -640,11 +783,40 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
     }
     
+    func checkCouponRedeemed()
+    {
+        
+        
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+            return
+        }
+        
+        FIRDatabase.database().reference().child("BobaFiend").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let couponBool = (value?["redeemed"] as? Bool)!
+            if couponBool == true
+            {
+                self.coupon = true
+            }
+            print("coupon2 is \(self.coupon)")
+            
+            
+        })
+        { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
+    }
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        indicator.isHidden = true
+        //indicator.isHidden = true
+    //    FIRApp.configure()
+        
+        
         
         self.hideKeyboardWhenTappedAround()
         ref = FIRDatabase.database().reference().child("total-searches")
@@ -660,6 +832,31 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         {
             userExistsBool = false
             logoutButton.setTitle("Back", for: .normal)
+        }
+        
+        
+        if userExistsBool == true
+        {
+            uid = FIRAuth.auth()?.currentUser?.uid
+            let keychain = KeychainSwift()
+            
+            
+            
+            
+            let defaults = UserDefaults.standard
+            
+            
+            print("bobafiend bool is \(keychain.getBool("BobaFiend"))")
+            
+            if((defaults.bool(forKey: "isRedeemed")) == false)
+            {
+                keychain.set(true, forKey: "BobaFiend")
+                guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+                    return
+                }
+                self.ref = FIRDatabase.database().reference()
+                self.ref.child("BobaFiend").child(uid).setValue(["redeemed": false])
+            }
         }
         
         searchBar.delegate = self
@@ -687,7 +884,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         dialogAppearance.messageFont          = UIFont.systemFont(ofSize: 16)
         dialogAppearance.messageColor         = UIColor(white: 0.8, alpha: 1)
         dialogAppearance.messageTextAlignment = .center
-        
         
         
         
@@ -735,7 +931,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             }
             else if checker(int: someInt) == 1
             {
-                print("got false")
+                
             }
             else if checker(int: someInt) == 2
             {
@@ -854,8 +1050,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             if let j = response.result.value {
                 
                 var json = JSON(response.result.value)
-                print(json)
-                
                 let responses: JSON = json["responses"][0]
                 let labelAnnotations: JSON = responses["labelAnnotations"]
                 let numLabels: Int = labelAnnotations.count
@@ -899,14 +1093,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                     
                 }
                 print(self.label)
-                
-                
             }
-            
         }
-        
-        
-        
         // Run the request on a background thread
         
     }
@@ -922,9 +1110,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
         return imagedata!.base64EncodedString(options: .endLineWithCarriageReturn)
     }
-    
-    
-       
     
     
 }

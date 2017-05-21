@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>35884266482-kp3vja8dqnk82metf7vsaff1onmb6h9m.apps.googleusercontent.com</string>
+	<string>35884266482-l4mqgibrdiir224mrokd7habsbte5mht.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.35884266482-kp3vja8dqnk82metf7vsaff1onmb6h9m</string>
+	<string>com.googleusercontent.apps.35884266482-l4mqgibrdiir224mrokd7habsbte5mht</string>
 	<key>API_KEY</key>
 	<string>AIzaSyASRZ7-pV8qiCohTZhbTdthrHwthtmGQ_I</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.haasith.letsgo</string>
+	<string>com.haasith.Foodies</string>
 	<key>PROJECT_ID</key>
 	<string>restauranttinder</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,10 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:35884266482:ios:c1faa8a83d33b64e</string>
+	<string>1:35884266482:ios:2609c62e008301ca</string>
 	<key>DATABASE_URL</key>
 	<string>https://restauranttinder.firebaseio.com</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
 </dict>
 </plist>

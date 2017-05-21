@@ -98,7 +98,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         activityVC.popoverPresentationController?.sourceView = self.view
         self.present(activityVC, animated: true, completion: nil)
     }
- 
+    
     @IBOutlet var Button: UIButton!
     
     var currentLat:Double! = 0.0
@@ -246,7 +246,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
                 let yellow = self.hexStringToUIColor(hex: "#FF8A00")
                 let red = self.hexStringToUIColor(hex: "#FF165E")
                 
-                if json["response"]["venue"]["rating"].doubleValue > 0 && json["response"]["venue"]["rating"].doubleValue < 4
+                if json["response"]["venue"]["rating"].doubleValue >= 0 && json["response"]["venue"]["rating"].doubleValue < 4
                 {
                     self.ratingLabel.backgroundColor = red
                 }
@@ -353,9 +353,9 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         {
             if indexPath.row < self.nameArray.count && self.nameArray.count > 0
             {
-                    cell.nameLabel.text = self.nameArray[indexPath.row]
-                    
-                    cell.comment.text = self.commentArray[indexPath.row]
+                cell.nameLabel.text = self.nameArray[indexPath.row]
+                
+                cell.comment.text = self.commentArray[indexPath.row]
             }
             else
             {
@@ -467,7 +467,7 @@ class RestaurantViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         
     }
-
+    
     
     
     
@@ -484,7 +484,5 @@ extension UIButton
         self.layer.masksToBounds = false
     }
 }
-
-
 
 
