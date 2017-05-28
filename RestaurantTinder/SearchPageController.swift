@@ -99,12 +99,17 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         {
         if(self.coupon == false)
         {
-            let title = "Get $1 regular size boba"
-            let message = "Show the cashier your post on facebook, like foodies app page and Boba Fiend Riverside page to redeem your coupon. Please do this when you are at the store."
+            let title = "Get $1 regular size drink with one topping of your choice!"
+            let message = "Show the cashier your post on facebook, like the foodies app page and Boba Fiend Riverside page to redeem your coupon. Please do this when you are at the store.Except on mondays"
             let image = UIImage(named: "boba_fiend")
         
             // Create the dialog
             let popup = PopupDialog(title: title, message: message, image: image)
+            var dialogAppearance = PopupDialogDefaultView.appearance()
+
+            
+            dialogAppearance.titleFont = UIFont.systemFont(ofSize: 15)
+            dialogAppearance.messageFont = UIFont.systemFont(ofSize: 11)
         
             // Create buttons
         
@@ -235,7 +240,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     func checkSearchBar()
     {
         let image = UIImage(named: "goButton") as UIImage?
-        let image1 = UIImage(named: "SurpriseMeButton") as UIImage?
+        let image1 = UIImage(named: "PickForMeButton") as UIImage?
         
         //Changes pic for button depending on the search text field
         if searchBar.text?.isEmpty == true
@@ -305,7 +310,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             showCloseButton: false)
         
         
-        let waitView:SCLAlertViewResponder = SCLAlertView(appearance:appearance).showWait("Please Wait...", subTitle: "Sorting Images... the wait may take upto 30 seconds")
+        let waitView:SCLAlertViewResponder = SCLAlertView(appearance:appearance).showWait("Please Wait...", subTitle: "Sorting images... the wait may take up to 30 seconds")
 
         
         

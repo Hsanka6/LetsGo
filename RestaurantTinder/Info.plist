@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3.0</string>
+	<string>1.5.2</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -53,9 +53,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Lets Go needs location to find restaurants nearby!</string>
+	<string>Foodies needs location to find restaurants nearby!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Lets Go needs location to find restaurants nearby!</string>
+	<string>Foodies needs location to find restaurants nearby!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need photo access</string>
 	<key>UIAppFonts</key>

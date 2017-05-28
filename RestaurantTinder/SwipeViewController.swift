@@ -267,7 +267,7 @@ class SwipeViewController: UIViewController {
         
         
         
-        remainSwipes.text = "Pictures Remaining: " + String(i) + "/\(totalImgs)"
+        remainSwipes.text = "Current Picture: " + String(i) + "/\(totalImgs)"
         
         
         
@@ -416,7 +416,7 @@ class SwipeViewController: UIViewController {
                 currentImage = currentImage - 1
             }
             
-            remainSwipes.text = "Pictures Remaining: " + String(currentImage) + "/\(totalImgs)"
+            remainSwipes.text = "Current Picture: " + String(currentImage) + "/\(totalImgs)"
             
             
         }
