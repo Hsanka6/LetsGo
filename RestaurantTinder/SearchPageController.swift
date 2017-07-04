@@ -23,6 +23,7 @@ import ImageSlideshow
 import Alamofire_Synchronous
 import PopupDialog
 import QuartzCore
+import Crashlytics
 import KeychainSwift
 
 
@@ -43,8 +44,8 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     @IBOutlet var someView: UIView!
     @IBOutlet var MilesSlider: UISlider!
     var meters:Int = 8045
-    var ref: FIRDatabaseReference!
-    var ref2: FIRDatabaseReference!
+    var ref: DatabaseReference!
+    var ref2: DatabaseReference!
     var noRestBool:Bool! = false
     var ids = [String]()
     var finalIds = [String] ()
@@ -82,142 +83,126 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     var dialogAppearance = PopupDialogDefaultView.appearance()
 
     
+    @IBOutlet var redeemButton: UIButton!
     var checkCoupon = false
     
+//    @IBAction func CrashButton(_ sender: Any)
+//    {
+//           Crashlytics.sharedInstance().crash()
+//    }
     
-    @IBAction func redeemButton(_ sender: Any)
-    {
-        
-        self.checkCouponRedeemed()
-        
-        // Prepare the popup assets
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
-        {
-            print("coupona is \(self.coupon)")
-            
-        if(self.userExistsBool == true)
-        {
-        if(self.coupon == false)
-        {
-            let title = "Get $1 regular size drink with one topping of your choice!"
-            let message = "Show the cashier your post on facebook, like the foodies app page and Boba Fiend Riverside page to redeem your coupon. Please do this when you are at the store.Except on mondays"
-            let image = UIImage(named: "boba_fiend")
-        
-            // Create the dialog
-            let popup = PopupDialog(title: title, message: message, image: image)
-            var dialogAppearance = PopupDialogDefaultView.appearance()
-
-            
-            dialogAppearance.titleFont = UIFont.systemFont(ofSize: 15)
-            dialogAppearance.messageFont = UIFont.systemFont(ofSize: 11)
-        
-            // Create buttons
-        
-            let buttonOne = DefaultButton(title:"Share Now to get Coupon!")
-            {
-                
-//                let title = "Please sign in to redeem."
-//                let message = "Only users who are signed in can get the coupon!"
+//    @IBAction func redeemButton(_ sender: Any)
+//    {
+//        
+//        self.checkCouponRedeemed()
+//        
+//        // Prepare the popup assets
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)
+//        {
+//            print("coupona is \(self.coupon)")
+//            
+//        if(self.userExistsBool == true)
+//        {
+//        if(self.coupon == false)
+//        {
+//            let title = "Get $1 regular size drink with one topping of your choice!"
+//            let message = "Show the cashier your post on facebook, like the foodies app page and Boba Fiend Riverside page to redeem your coupon. Please do this when you are at the store.Except on mondays"
+//            let image = UIImage(named: "boba_fiend")
+//        
+//            // Create the dialog
+//            let popup = PopupDialog(title: title, message: message, image: image)
+//            var dialogAppearance = PopupDialogDefaultView.appearance()
+//
+//            
+//            dialogAppearance.titleFont = UIFont.systemFont(ofSize: 15)
+//            dialogAppearance.messageFont = UIFont.systemFont(ofSize: 11)
+//        
+//            // Create buttons
+//        
+//            let buttonOne = DefaultButton(title:"Share Now to get Coupon!")
+//            {
+//                let fbShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//                //fbShare.add(_url:URL!)
+//                fbShare.setInitialText("Download Foodies today!")
+//                fbShare.add(URL(string: "http://foodiesapp.io"))
+//                self.present(fbShare, animated: true, completion: nil)
 //                
-//                // Create the dialog
-//                let popup = PopupDialog(title: title, message: message)
-//                
-                
-                
-                
-                let fbShare:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-                //fbShare.add(_url:URL!)
-                fbShare.setInitialText("Download Foodies today!")
-                fbShare.add(URL(string: "http://foodiesapp.io"))
-                self.present(fbShare, animated: true, completion: nil)
-                
-                fbShare.completionHandler = { (result:SLComposeViewControllerResult) -> Void in
-                    switch result {
-                    case SLComposeViewControllerResult.cancelled:
-                        print("Cancelled")
-                    case SLComposeViewControllerResult.done:
-                        print("posted successfully")
-                        self.couponRedeemed = true
-                        let defaults = UserDefaults.standard
-                        
-                        //self.coupon = true
-                        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
-                            return
-                        }
-                        self.ref = FIRDatabase.database().reference()
-                        
-                        self.ref.child("BobaFiend").child(uid).setValue(["redeemed": true])
-                        
-
-                    }
-                }
-                
-                
-                
-        
-                
-                
-            }
-            let buttonThree = DestructiveButton(title: "Redeem Later")
-            {
-                print("You canceled the car dialog.")
-            }
-            popup.addButtons([buttonOne, buttonThree])
-        
-        // Present dialog
-        self.present(popup, animated: true, completion: nil)
-        }
-        else
-        {
-            let title = "Already Redeemed!"
-            let message = "Please wait till our next promotion!"
-            
-            // Create the dialog
-            let popup = PopupDialog(title: title, message: message)
-            
-            let buttonThree = DestructiveButton(title: "Ok") {
-                print("Ah, maybe next time :)")
-            }
-            
-            
-            self.present(popup, animated: true, completion: nil)
-            
-        }
-        }
-        else
-        {
-            let title = "Please sign in to redeem."
-            let message = "Only users who are signed in can get the coupon!"
-            
-            // Create the dialog
-            let popup = PopupDialog(title: title, message: message)
-            
-            let buttonThree = DestructiveButton(title: "Ok") {
-            }
-            popup.addButtons([buttonThree])
-            
-            self.present(popup, animated: true, completion: nil)
-            
-            
-        }
-        
-        
-        
-        }
-        
-        
-    }
-    
+//                fbShare.completionHandler = { (result:SLComposeViewControllerResult) -> Void in
+//                    switch result {
+//                    case SLComposeViewControllerResult.cancelled:
+//                        print("Cancelled")
+//                    case SLComposeViewControllerResult.done:
+//                        print("posted successfully")
+//                        self.couponRedeemed = true
+//                        let defaults = UserDefaults.standard
+//                        
+//                        //self.coupon = true
+//                        guard let uid = Auth.auth().currentUser?.uid else {
+//                            return
+//                        }
+//                        self.ref = Database.database().reference()
+//                        
+//                        self.ref.child("BobaFiend").child(uid).setValue(["redeemed": true])
+//                        
+//
+//                    }
+//                }
+//            }
+//            let buttonThree = DestructiveButton(title: "Redeem Later")
+//            {
+//                print("You canceled the car dialog.")
+//            }
+//            popup.addButtons([buttonOne, buttonThree])
+//        
+//        // Present dialog
+//        self.present(popup, animated: true, completion: nil)
+//        }
+//        else
+//        {
+//            let title = "Already Redeemed!"
+//            let message = "Please wait till our next promotion!"
+//            
+//            // Create the dialog
+//            let popup = PopupDialog(title: title, message: message)
+//            
+//            let buttonThree = DestructiveButton(title: "Ok") {
+//                print("Ah, maybe next time :)")
+//            }
+//            
+//            
+//            self.present(popup, animated: true, completion: nil)
+//            
+//        }
+//        }
+//        else
+//        {
+//            let title = "Please sign in to redeem."
+//            let message = "Only users who are signed in can get the coupon!"
+//            
+//            // Create the dialog
+//            let popup = PopupDialog(title: title, message: message)
+//            
+//            let buttonThree = DestructiveButton(title: "Ok") {
+//            }
+//            popup.addButtons([buttonThree])
+//            
+//            self.present(popup, animated: true, completion: nil)
+//            
+//            
+//        }
+//        }
+//    }
+//    
     @IBAction func logOut(_ sender: Any)
     {
         if userExistsBool == true
         {
             let manager = FBSDKLoginManager()
             manager.logOut()
-            let firebaseAuth = FIRAuth.auth()
+            let firebaseAuth = Auth.auth()
             do
             {
-                try firebaseAuth?.signOut()
+                try firebaseAuth.signOut()
             }
             catch let signOutError as NSError
             {
@@ -231,7 +216,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     
     
     var randomIds = [String]()
-    var checkRef: FIRDatabaseReference!
+    var checkRef: DatabaseReference!
 
     
     
@@ -270,6 +255,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         //print("this is coupon \(self.coupon)")
         
 
+        if slideShow.pageControl.currentPage == 2
+        {
+            print("1")
+        }
         
         
         
@@ -411,7 +400,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             else
             {
                 let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":"N/A"] as [String : Any]
-                let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
+                let totalSearchReference = Database.database().reference().child("total-searches")
                 totalSearchReference.childByAutoId().setValue(totalValues)
                 
                 
@@ -600,23 +589,23 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     func storeQueryInfo()
     {
         //Upload each search to database
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+        guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
         print("uid coming up")
         print(uid)
         let values = ["query": searchQuery!, "lat": lat!, "lon": lon!] as [String : Any]
         
-        let userSearchReference = FIRDatabase.database().reference().child("users").child(uid).child("searches")
+        let userSearchReference = Database.database().reference().child("users").child(uid).child("searches")
         userSearchReference.childByAutoId().setValue(values)
-        FIRDatabase.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
             let name = (value?["name"] as? String)!
             print("name",(name))
         
             let totalValues = ["query": self.searchQuery!, "lat": self.lat!, "lon": self.lon!, "name":name] as [String : Any]
-            let totalSearchReference = FIRDatabase.database().reference().child("total-searches")
+            let totalSearchReference = Database.database().reference().child("total-searches")
             totalSearchReference.childByAutoId().setValue(totalValues)
             
         })
@@ -691,23 +680,6 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     
     
     
-    //                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0)
-    //                {
-    //                    var b = 0
-    //                    while b < self.foodBools.count
-    //                    {
-    //                        print("sizes")
-    //                        print(self.foodBools.count)
-    //                        print(self.pics.count)
-    //                        if self.foodBools[b] == false
-    //                        {
-    //                            self.pics[b] = "NULL"
-    //                        }
-    //                        b += 1
-    //                    }
-    //                    self.pics = self.pics.filter{$0 != "NULL"}
-    //                }
-
     
     func makeRequest(_ url:String)
     {
@@ -792,11 +764,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
     {
         
         
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+        guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
         
-        FIRDatabase.database().reference().child("BobaFiend").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        Database.database().reference().child("BobaFiend").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             let couponBool = (value?["redeemed"] as? Bool)!
             if couponBool == true
@@ -823,12 +795,15 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
         
         
+        redeemButton.isHidden = true
+        
+        
         self.hideKeyboardWhenTappedAround()
-        ref = FIRDatabase.database().reference().child("total-searches")
+        ref = Database.database().reference().child("total-searches")
         scheduledTimerWithTimeInterval()
         
         
-        if (FIRAuth.auth()?.currentUser?.uid) != nil
+        if (Auth.auth().currentUser?.uid) != nil
         {
             userExistsBool = true
             
@@ -842,7 +817,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
         if userExistsBool == true
         {
-            uid = FIRAuth.auth()?.currentUser?.uid
+            uid = Auth.auth().currentUser?.uid
             let keychain = KeychainSwift()
             
             
@@ -856,10 +831,10 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
             if((defaults.bool(forKey: "isRedeemed")) == false)
             {
                 keychain.set(true, forKey: "BobaFiend")
-                guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+                guard let uid = Auth.auth().currentUser?.uid else {
                     return
                 }
-                self.ref = FIRDatabase.database().reference()
+                self.ref = Database.database().reference()
                 self.ref.child("BobaFiend").child(uid).setValue(["redeemed": false])
             }
         }
@@ -870,7 +845,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
         
         searchBar.iconFont = UIFont.fontAwesome(ofSize: 15)
-        searchBar.iconText = String.fontAwesomeIcon(name: .cutlery)
+        searchBar.iconText = String.fontAwesomeIcon(name: .search)
         
         searchQuery = searchBar.text
         
@@ -894,12 +869,11 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
         
         
         slideShow.setImageInputs([
-            ImageSource(image: UIImage(named: "boba_fiend")!),
+            /*ImageSource(image: UIImage(named: "boba_fiend")!),*/
             ImageSource(image: UIImage(named: "pizza")!), ImageSource(image: UIImage(named: "coffee")!), ImageSource(image: UIImage(named: "noodles")!), ImageSource(image: UIImage(named: "burger")!)])
         slideShow.pageControl.currentPageIndicatorTintColor = UIColor.white
         slideShow.pageControl.pageIndicatorTintColor = UIColor.black
         slideShow.contentScaleMode = UIViewContentMode.scaleAspectFill
-        
         
         
         
@@ -1084,7 +1058,7 @@ class SearchPageController: UIViewController,CLLocationManagerDelegate, UITextFi
                 {
                     self.label = "No labels found"
                 }
-                if labels.contains("food") || labels.contains("drink") || labels.contains("dish")
+                if labels.contains("food") || labels.contains("drink") || labels.contains("dish") || labels.contains("cuisine")
                 {
                     self.checkImg = true
                     picCounter += 1

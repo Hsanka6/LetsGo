@@ -6,11 +6,12 @@ use_frameworks!
 
 target 'RestaurantTinder' do
 
+pod 'Fabric'
+pod 'Crashlytics'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'FBSDKCoreKit'
-pod 'CircleProgressBar', '~> 0.32’
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'FacebookShare'
@@ -27,9 +28,13 @@ pod 'NVActivityIndicatorView'
 pod 'ImageSlideshow'
 pod 'PopupDialog'
 pod 'KeychainSwift', '~> 8.0'
+pod 'Batch', '~> 1.9'
 
 #pod 'TGLParallaxCarousel'
-
+#pod 'OneSignal', '~> 2'
+#target 'OneSignalNotificationServiceExtension' do
+#        pod 'OneSignal', '~> 2'
+#end
 
 
 

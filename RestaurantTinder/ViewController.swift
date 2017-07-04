@@ -33,7 +33,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     var successBool:Bool! = false
     
     var firstBool:Bool! = true
-    var User:FIRUser!
+    var User:User!
     
     func isAppAlreadyLaunchedOnce()->Bool
     {
@@ -79,7 +79,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate
                 
                 self.fbcredential = FBSDKAccessToken.current().tokenString
                 
-                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 self.firebaseAuth(credential)
                 self.indicator.stopAnimating()
                 self.performSegue(withIdentifier: "ToSearch", sender: self)
@@ -139,7 +139,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate
             }
             else
             {
-                FIRAuth.auth()?.addStateDidChangeListener { auth, user in
+                Auth.auth().addStateDidChangeListener { auth, user in
                     if let user = user {
                         if(self.User != user){
                             self.User = user
@@ -196,9 +196,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate
     
     
     
-    func firebaseAuth(_ credential: FIRAuthCredential)
+    func firebaseAuth(_ credential: AuthCredential)
     {
-        FIRAuth.auth()?.signIn(with: credential, completion:{ (user, error) in
+        Auth.auth().signIn(with: credential, completion:{ (user, error) in
             if error != nil
             {
                 print("fail")
@@ -213,14 +213,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate
                 let name = user?.displayName as String!
                 let url = user?.photoURL?.absoluteString
                 
-                guard let uid = FIRAuth.auth()?.currentUser?.uid else {
+                guard let uid = Auth.auth().currentUser?.uid else {
                     return
                 }
                 
                 
                 let values = ["email": email!, "name": name!, "profileImageUrl": url!] as [String : Any]
                 
-                let userReference = FIRDatabase.database().reference().child("users").child(uid)
+                let userReference = Database.database().reference().child("users").child(uid)
                 
                 
                 userReference.setValue(values)

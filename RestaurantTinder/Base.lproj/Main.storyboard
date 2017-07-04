@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -280,7 +280,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="5tY-zb-wFT"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="PickForMeButton"/>
+                                <state key="normal" backgroundImage="goButton"/>
                                 <connections>
                                     <action selector="searchRestaurantsButton:" destination="te2-3k-5fC" eventType="touchUpInside" id="5eS-R6-6EI"/>
                                 </connections>
@@ -409,6 +409,7 @@
                         <outlet property="Miles" destination="1DT-PH-y5c" id="f6M-el-Emw"/>
                         <outlet property="MilesSlider" destination="y6w-Ht-PpS" id="gSM-LW-7Xk"/>
                         <outlet property="logoutButton" destination="9DU-eS-OCl" id="0ed-dH-6hi"/>
+                        <outlet property="redeemButton" destination="cGs-ud-gOH" id="eHM-je-qWd"/>
                         <outlet property="searchBar" destination="ch8-8W-nHa" id="l12-SO-U6e"/>
                         <outlet property="searchRestaurantsButton" destination="p6H-0V-uTa" id="txX-04-mQQ"/>
                         <outlet property="slideShow" destination="eck-IC-wnd" id="4uC-jH-QDE"/>
@@ -1203,13 +1204,13 @@
         <image name="FBlogin" width="633" height="113"/>
         <image name="Logotype" width="114" height="154"/>
         <image name="Phone" width="35" height="35"/>
-        <image name="PickForMeButton" width="1438" height="244"/>
         <image name="Rectangle 5" width="1182" height="1260"/>
         <image name="Share" width="35" height="35"/>
         <image name="Stylish" width="621" height="183"/>
         <image name="background" width="759" height="1350"/>
         <image name="blackBack" width="29" height="52"/>
         <image name="foursquareLogo" width="477" height="65"/>
+        <image name="goButton" width="706" height="133"/>
         <image name="goButtonRest" width="706" height="133"/>
         <image name="location" width="25" height="25"/>
         <image name="whiteBack" width="29" height="52"/>

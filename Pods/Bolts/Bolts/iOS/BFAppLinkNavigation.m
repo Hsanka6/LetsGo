@@ -126,7 +126,8 @@ static id<BFAppLinkResolving> defaultResolver;
             if (error) {
                 *error = encodingError;
             }
-        } else if ([[UIApplication sharedApplication] openURL:appLinkBrowserURL]) {
+        }
+        else if ([[UIApplication sharedApplication] openURL:appLinkBrowserURL]) {
             // This was a browser navigation.
             retType = BFAppLinkNavigationTypeBrowser;
             openedURL = appLinkBrowserURL;

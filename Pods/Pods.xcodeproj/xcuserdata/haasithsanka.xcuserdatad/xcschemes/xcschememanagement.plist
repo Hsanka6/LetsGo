@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CircleProgressBar.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -142,22 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F44D06A691EBC5F7A98D8243D1186A6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>332F91393FB1DE033D370B4CEDDD5FCF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>38ACA430605AFB4229712A18BDDF5086</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3BC6817DCBFF09120A366E27985B9D9C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,7 +157,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>50E8411C29CAF07061104EB190469964</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>50F9439EB6940670E699711622532609</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>593E9479C06FB200807D11AB29EB50BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72A197B4F7BE635FBAFA6C56F6222541</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -192,7 +192,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A3F7F2587D52416BF797CEB9FC3BEE9D</key>
+		<key>94C32E754FAAAEA46CD71FC5EE136E57</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -202,12 +202,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ABCEB63A2518A467436C7112584819E7</key>
+		<key>ABB2C7332625B1D7DC688AD502E40EAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B545B48FA0CEE58E0B8D9309EE4CFF7C</key>
+		<key>BA1E7159E7D299102FFC0557BA2923D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -222,22 +222,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C12DEA359CAB0AB8893C544CEF30D1FA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C4944FEC314D1A66588651D006273ADE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C74D47B051BF84CA30E0723F127F42AD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CEE98FE6845AA4CAD587DC8EBAE21B77</key>
 		<dict>
 			<key>primary</key>
 			<true/>
